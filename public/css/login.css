@@ -1,0 +1,38 @@
+body {
+    background: #eee;
+}
+
+#login {
+    background: #fff;
+    max-width: 300px;
+    padding: 20px;
+    text-align: center;
+    margin: 30px auto 0;
+}
+
+#login .logo img{
+    margin-bottom: 20px;
+    max-width: 200px;
+}
+
+input {
+    font-size: 14px;
+    border-radius: 3px;
+}
+
+#inputs input {
+    background: #f2f2f2;
+    border: 1px solid #f2f2f2;
+    margin: 0 0 15px 0;
+    padding: 15px 20px;
+    width: calc(100% - 44px);
+}
+
+#actions input{
+    background: #2b559f;
+    border: 1px solid #2b559f;
+    color: #fff;
+    cursor: pointer;
+    padding: 15px 20px;
+    width: 100%;
+}
