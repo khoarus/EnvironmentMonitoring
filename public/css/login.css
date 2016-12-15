@@ -14,10 +14,10 @@ a:hover {
 }
 
 a, input {
-    -webkit-transition: .3s ease-in-out;
-    -moz-transition: .3s ease-in-out;
-    -ms-transition: .3s ease-in-out;
-    transition: .3s ease-in-out;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    -ms-transition: .3s;
+    transition: .3s;
 }
 
 .pull-left {
