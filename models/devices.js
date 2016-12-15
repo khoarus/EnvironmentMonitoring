@@ -12,7 +12,12 @@ function Device() {
         });
     };
     this.getAllDevice = function() {
-
-    }
+        db.acquire((err, conn) => {
+            conn.query("SELECT * FROM devicetbl", (err, result) => {
+                if (err)
+                    throw err;
+            });
+        });
+    };
 };
 module.exports = new Device();
