@@ -8,10 +8,21 @@ module.exports = (app, router) => {
     });
 
 
-    router.route('/users').post((req, res) => {
+    router.route('/users/regiser').post((req, res) => {
+        var users = require("./models/users");
         var username = req.body.username;
-        var email = req.body.email;
         var password = req.body.password;
+        var firstname = req.body.firstname;
+        var lastname = req.body.lastname;
+        var result = users.register(username, password, firstname, lastname);
+        if (result > 0) {
+            res.json({ status: 1, message: "Account was registed successfully!" });
+        } else {
+            res.json({
+                status: 0,
+                message: "An error occured when create account!"
+            });
+        }
     });
 
     app.use("/api/v1/", router);
