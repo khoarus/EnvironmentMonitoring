@@ -3,6 +3,10 @@ module.exports = (app, router) => {
         res.json({ message: "Welcome to Environment Monitoring API", version: "1.0" });
     });
 
+    router.route('/users').post((req, res) => {
+
+    });
+
     app.use("/api/v1/", router);
 
 }
