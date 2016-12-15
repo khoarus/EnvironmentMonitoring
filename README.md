@@ -1,2 +1,2 @@
 # EnvironmentMonitoring
-Project monitoring envirionmental parameters
+Project monitoring environmental parameters

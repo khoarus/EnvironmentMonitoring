@@ -11,9 +11,6 @@ module.exports = function(app) {
 
     var router = express.Router();
 
-    router.get("/", (req, res) => {
-        res.json({ message: "Welcome to Environment Monitoring API", version: "1.0" });
-    });
+    require('./api')(app, router);
 
-    app.use("/api/v1/", router);
 };
