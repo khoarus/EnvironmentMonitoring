@@ -1,17 +1,21 @@
 var mysql = require('mysql');
-module.exports = () => {
-    global.mysql_conn = mysql.createConnection({
-        host: "localhost",
-        user: "",
-        password: "",
-        database: ""
-    });
 
-    mysql_conn.connect((err) => {
-        if (!err) {
-            console.log("Database connection established");
-        } else {
-            console.log("Error occurred when connecting to database server");
-        }
-    });
+function Database() {
+    this.initial = () => {
+        this.pool = mysql.createPool({
+            connectionLimit = 10,
+            host: 'localhost',
+            user: 'root',
+            password: '',
+            database: 'enviromentMonitoring'
+        });
+    };
+
+    this.acquire = (callback) => {
+        this.pool.getConnection((err, connection) => {
+            callback(err, connection);
+        });
+    };
 };
+
+module.exports = new Database();
