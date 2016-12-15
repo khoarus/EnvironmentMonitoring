@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 module.exports = () => {
-    var mysql_conn = mysql.createConnection({
+    global.mysql_conn = mysql.createConnection({
         host: "localhost",
         user: "",
         password: "",
@@ -14,8 +14,4 @@ module.exports = () => {
             console.log("Error occurred when connecting to database server");
         }
     });
-
-    function doLogin(username, password) {
-
-    }
 };
