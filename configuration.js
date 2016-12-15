@@ -9,11 +9,11 @@ module.exports = function(app) {
     app.use(bodyparser.json());
     app.use(bodyparser.urlencoded({ extended: true }));
 
-    var router = express.Router();
+    /*var router = express.Router();
 
     router.get("/", (req, res) => {
         res.json({ message: "Welcome to Environment Monitoring API", version: "1.0" });
     });
 
-    app.use("/api/v1/", router);
+    app.use("/api/v1/", router);*/
 };
