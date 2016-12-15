@@ -1,5 +1,6 @@
 var express = require("express");
 var bodyparser = require("body-parser");
+var session = require('express-session');
 module.exports = function(app) {
     app.set("view engine", "html");
     app.engine('html', require('ejs').renderFile);
@@ -11,9 +12,7 @@ module.exports = function(app) {
         secret: 'keyboard cat',
         resave: false,
         saveUninitialized: true
-    }))
+    }));
     var router = express.Router();
-
     require('./api')(app, router);
-
 };

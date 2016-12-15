@@ -16,12 +16,12 @@ module.exports = (app, router) => {
         var result = users.register(username, password, firstname, lastname);
         if (result) {
             res.json({
-                status: 1,
+                status: '1',
                 message: "Account was created successfully!"
             });
         } else {
             res.json({
-                status: 0,
+                status: '0',
                 message: "An error occured when creat an account!"
             });
         }
