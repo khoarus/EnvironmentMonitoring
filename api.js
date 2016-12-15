@@ -22,7 +22,7 @@ module.exports = (app, router) => {
         } else {
             res.json({
                 status: '0',
-                message: "An error occured when creat an account!"
+                message: "An error occured when create an account!"
             });
         }
     });
