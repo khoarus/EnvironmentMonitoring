@@ -1,3 +1,32 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #F56A35;
+    text-decoration: underline;
+}
+
+a, input {
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
 body {
     background: #eee;
 }
@@ -6,8 +35,11 @@ body {
     background: #fff;
     max-width: 300px;
     padding: 20px;
-    text-align: center;
     margin: 30px auto 0;
+}
+
+#login .logo {
+    text-align: center;
 }
 
 #login .logo img{
@@ -18,21 +50,40 @@ body {
 input {
     font-size: 14px;
     border-radius: 3px;
+    margin: 5px 0 15px 0;
+}
+
+input:focus {
+  box-shadow: 0 0 5px #F56A35;
+  border: 1px solid #F56A35;
 }
 
 #inputs input {
     background: #f2f2f2;
     border: 1px solid #f2f2f2;
-    margin: 0 0 15px 0;
     padding: 15px 20px;
     width: calc(100% - 44px);
 }
 
 #actions input{
     background: #2b559f;
-    border: 1px solid #2b559f;
+    border: 1px solid #fff;
     color: #fff;
     cursor: pointer;
     padding: 15px 20px;
     width: 100%;
+}
+
+#actions input:hover {
+    background: #F56A35;
+}
+
+.input label {
+    font-size: 12px;
+    text-align: left;
+}
+
+.footer {
+    margin-top: 20px;
+    overflow: hidden;
 }
