@@ -11,7 +11,7 @@ function User() {
     this.register = function(username, password, firstname, lastname) {
         var res = null;
         db.acquire((err, con) => {
-            con.query("insert into usertbl", (err, result) => {
+            con.query("insert into userstbl", (err, result) => {
                 con.release();
                 res = result;
             });
@@ -20,11 +20,17 @@ function User() {
     };
 
     this.login = function(username, password) {
+        var res = false;
         db.acquire((err, con) => {
-            con.query("select * from usertbl", (err, result) => {
-
+            con.query("select count(*) as userCount from userstbl where Username = ? and Password = ?", [username, password], (err, result) => {
+                if (!err) {
+                    if (result[0].userCount > 0) {
+                        res = true;
+                    } else res = false;
+                } else res = false;
             });
         });
+        return res;
     };
 
     function generateSalt() {
