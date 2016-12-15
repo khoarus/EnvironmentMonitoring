@@ -6,4 +6,4 @@ module.exports = function(app) {
     app.set("views", __dirname + "/views");
 
     app.use('/public', express.static(__dirname + '/public'));
-}
+};

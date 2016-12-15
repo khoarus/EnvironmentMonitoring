@@ -12,11 +12,16 @@
         "monitor",
         "iot"
     ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/khoarus/EnvironmentMonitoring.git"
+    },
     "author": "Hueic",
-    "license": "GPLv2",
+    "license": "GPL-3.0",
 
     "dependencies": {
         "ejs": "^1.0.0",
-        "express": "^4.8.2"
+        "express": "^4.8.2",
+        "mysql": "2.12.0"
     }
 }
