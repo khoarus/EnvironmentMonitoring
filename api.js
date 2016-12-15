@@ -1,5 +1,7 @@
 module.exports = (app, router) => {
+
     var users = require("./models/users");
+
     router.get("/", (req, res) => {
         res.json({ message: "Welcome to Environment Monitoring API", version: "1.0" });
     });
