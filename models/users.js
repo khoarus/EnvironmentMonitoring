@@ -33,24 +33,11 @@ function User() {
         return res;
     };
 
-    function generateSalt() {
-        return crypto.randomBytes(Math.ceil(8 / 2)).toString("hex").slice(0, 8);
-    };
-
-    function get512hash(password, salt) {
-        var hash = crypto.createHmac('sha512', salt);
-        hash.update(password);
-        var value = hash.digest("hex");
-        return {
-            salt: salt,
-            passwordHash: value
-        };
-    };
-
-    function getPasswordHash(userPassword) {
-        var salt = generateSalt();
-        passwordData = get512hash(userPassword, salt);
-        return passwordData.passwordHash;
+    function encrypt(text) {
+        var cipher = crypto.createCipher("sha512", 'd6F3Efeq')
+        var crypted = cipher.update(text, 'utf8', 'hex')
+        crypted += cipher.final('hex');
+        return crypted;
     }
 
     this.changePassword = function(username, password) {
