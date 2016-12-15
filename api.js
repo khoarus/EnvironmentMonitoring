@@ -5,7 +5,9 @@ module.exports = (app, router) => {
     router.get("/", (req, res) => {
         res.json({ message: "Welcome to Environment Monitoring API", version: "1.0", statusCode: res.statusCode });
     });
-
+    router.route('/test/post').post((req, res) => {
+        res.json({ message: "Hello! This is test!", statusCode: res.statusCode });
+    });
     router.use((req, res, next) => {
         next();
     });

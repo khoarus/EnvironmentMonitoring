@@ -11,11 +11,11 @@
 </head>
 
 <body>
-	<form id="login">
-		<div class="logo">
-			<a href="/" title="Trang Chủ"><img src="../public/images/logo.png" alt="logo"></a>
-		</div>
-		<div id="inputs">
+    <form id="login">
+        <div class="logo">
+            <a href="/" title="Trang Chủ"><img src="../public/images/logo.png" alt="logo"></a>
+        </div>
+        <div id="inputs">
             <div class="input">
                 <label for="lastName">Họ đệm</label>
                 <input id="lastName" type="text" placeholder="Họ đệm">
@@ -32,25 +32,36 @@
                 <label for="email">Địa chỉ Email</label>
                 <input id="email" type="email" placeholder="example@email.com" required>
             </div>-->
-			<div class="input">
+            <div class="input">
                 <label for="password">Mật khẩu</label>
                 <input id="password" type="password" placeholder="Mật khẩu" required>
             </div>
-			<div class="input">
+            <div class="input">
                 <label for="password-repeat">Nhập lại mật khẩu</label>
                 <input id="password-repeat" type="password" placeholder="Nhập lại mật khẩu" required>
             </div>
-		</div>
-		<div id="actions">
-			<input type="submit" id="submit" value="Đăng Ký">
-		</div>
-	</form>
-
+        </div>
+        <div id="actions">
+            <input type="submit" id="submit" value="Đăng Ký">
+        </div>
+    </form>
+    <script src="../public/javascript/jquery-2.2.4.min.js"></script>
     <script>
-
         // check password
 
-        var password = document.getElementById("password")
+        $("#password-repeat").keyup(function(e) {
+            if ($(this).val() != $("#password")) {
+                console.log("Mật khẩu chưa đúng!");
+            }
+        });
+
+        $("#password").keyup(function(e) {
+            if ($(this).val() != $("#password-repeat")) {
+                console.log("Mật khẩu chưa đúng!");
+            }
+        });
+
+        /*var password = document.getElementById("password")
         , confirm_password = document.getElementById("password-repeat");
 
         function validatePassword(){
@@ -59,10 +70,10 @@
             } else {
                 confirm_password.setCustomValidity('');
             }
-        }
+        }*/
 
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
+        //password.onchange = validatePassword;
+        //confirm_password.onkeyup = validatePassword;
     </script>
 </body>
 
