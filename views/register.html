@@ -26,7 +26,7 @@
             </div>
             <div class="input">
                 <label for="username">Tên tài khoản</label>
-                <input id="username" type="text" placeholder="Tên tài khoản" required>
+                <input id="username" pattern=".{6,16}" type="text" placeholder="Tên tài khoản" required>
             </div>
             <!--<div class="input">
                 <label for="email">Địa chỉ Email</label>
@@ -39,6 +39,7 @@
             <div class="input">
                 <label for="password-repeat">Nhập lại mật khẩu</label>
                 <input id="password-repeat" type="password" placeholder="Nhập lại mật khẩu" required>
+                <span id="message"></span>
             </div>
         </div>
         <div id="actions">
@@ -49,17 +50,22 @@
     <script>
         // check password
 
-        $("#password-repeat").keyup(function(e) {
-            if ($(this).val() != $("#password")) {
-                console.log("Mật khẩu chưa đúng!");
-            }
+        $('#password-repeat').on('keyup', function () {
+            if ($(this).val() == $('#password').val()) {
+                $('#message').html('Ok').css('color', 'green');
+            } else $('#message').html('Mật khẩu nhập lại không khớp').css('color', 'red');
         });
 
-        $("#password").keyup(function(e) {
-            if ($(this).val() != $("#password-repeat")) {
-                console.log("Mật khẩu chưa đúng!");
-            }
-        });
+        // $("#password-repeat").keyup(function(e) {
+        //     if ($(this).val() != $("#password")) {
+        //         console.log("Mật khẩu chưa đúng!");
+        //     }
+        // });
+        // $("#password").keyup(function(e) {
+        //     if ($(this).val() != $("#password-repeat")) {
+        //         console.log("Mật khẩu chưa đúng!");
+        //     }
+        // });
 
         /*var password = document.getElementById("password")
         , confirm_password = document.getElementById("password-repeat");
