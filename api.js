@@ -16,7 +16,7 @@ module.exports = (app, router) => {
         var lastname = req.body.lastname;
         var result = users.register(username, password, firstname, lastname);
         if (result > 0) {
-            res.json({ status: 1, message: "Account was registed successfully!" });
+            res.json({ status: 1, message: "Account was created successfully!" });
         } else {
             res.json({
                 status: 0,
