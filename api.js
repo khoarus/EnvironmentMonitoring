@@ -8,14 +8,13 @@ module.exports = (app, router) => {
         next();
     });
 
-
     router.route('/users/regiser').post((req, res) => {
         var username = req.body.username;
         var password = req.body.password;
         var firstname = req.body.firstname;
         var lastname = req.body.lastname;
         var result = users.register(username, password, firstname, lastname);
-        if (result > 0) {
+        if (result) {
             res.json({
                 status: 1,
                 message: "Account was created successfully!"
@@ -38,6 +37,21 @@ module.exports = (app, router) => {
                 message: "Login Successfully!"
             });
         }
+    });
+
+    router.route('/users/:id').get((req, res) => {
+        var id = req.params.id;
+        var result = users.getUserById(id);
+        if (!result) {
+            var data = JSON.stringify(result);
+            res.json(data);
+        } else {
+            res.json({
+                Error: "Unable to get user information! Data is null!",
+                ErrorCode: 0
+            });
+        }
+
     });
     app.use("/api/v1/", router);
 

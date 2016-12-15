@@ -14,7 +14,7 @@ function User() {
             var passwordhash = encrypt(password);
             con.query("insert into userstbl(FirstName, LastName, Username, Password) values(?, ?, ?, ?)", [firstname, lastname, username, passwordhash], (err, result) => {
                 con.release();
-                res = result.affectedRows;
+                res = result.affectedRows > 0;
             });
         });
         return res;
@@ -43,6 +43,19 @@ function User() {
         return crypted;
     }
 
+    this.getUserById = function(userId) {
+        var res;
+        db.acquire((err, conn) => {
+            conn.query("select * from userstbl where IdUser = ?", userId, (err, result) => {
+                if (!err) {
+                    res = result;
+                } else {
+                    throw err;
+                }
+            });
+        });
+        return res;
+    }
     this.changePassword = function(username, password) {
         db.acquire((err, conn) => {
             var passwordhash = encrypt(password);
