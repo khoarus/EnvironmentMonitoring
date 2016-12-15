@@ -7,7 +7,11 @@ module.exports = function(app) {
     app.use('/public', express.static(__dirname + '/public'));
     app.use(bodyparser.json());
     app.use(bodyparser.urlencoded({ extended: true }));
-
+    app.use(session({
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: true
+    }))
     var router = express.Router();
 
     require('./api')(app, router);
