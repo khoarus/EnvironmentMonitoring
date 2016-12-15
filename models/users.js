@@ -11,9 +11,10 @@ function User() {
     this.register = function(username, password, firstname, lastname) {
         var res = null;
         db.acquire((err, con) => {
-            con.query("insert into userstbl", (err, result) => {
+            var passwordhash = encrypt(password);
+            con.query("insert into userstbl(FirstName, LastName, Username, Password) values(?, ?, ?, ?)", [firstname, lastname, username, passwordhash], (err, result) => {
                 con.release();
-                res = result;
+                res = result.affectedRows;
             });
         });
         return res;
@@ -22,7 +23,9 @@ function User() {
     this.login = function(username, password) {
         var res = false;
         db.acquire((err, con) => {
-            con.query("select count(*) as userCount from userstbl where Username = ? and Password = ?", [username, password], (err, result) => {
+            var passwordhash = encrypt(password);
+            con.query("select count(*) as userCount from userstbl where Username = ? and Password = ?", [username, passwordhash], (err, result) => {
+                con.release();
                 if (!err) {
                     if (result[0].userCount > 0) {
                         res = true;
@@ -42,7 +45,8 @@ function User() {
 
     this.changePassword = function(username, password) {
         db.acquire((err, conn) => {
-            conn.query("update ", (err, result) => {
+            var passwordhash = encrypt(password);
+            conn.query("update userstbl set Password = ? where Username = ?", [passwordhash, username], (err, result) => {
 
             });
         });

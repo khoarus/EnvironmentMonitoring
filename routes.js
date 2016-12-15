@@ -10,4 +10,7 @@ module.exports = function(app) {
         res.render("register");
     });
 
+    app.get('/forgot', (req, res) => {
+        res.render('forgot');
+    });
 };
