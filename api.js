@@ -9,26 +9,6 @@ module.exports = (app, router) => {
         res.json({ message: "Hello! This is test!", statusCode: res.statusCode });
     });
 
-
-    router.route('/users/regiser').post((req, res) => {
-        var username = req.body.username;
-        var password = req.body.password;
-        var firstname = req.body.firstname;
-        var lastname = req.body.lastname;
-        var result = users.register(username, password, firstname, lastname);
-        if (result) {
-            res.json({
-                status: '1',
-                message: "Account was created successfully!"
-            });
-        } else {
-            res.json({
-                status: '0',
-                message: "An error occured when create an account!"
-            });
-        }
-    });
-
     router.route('/users/login').post((req, res) => {
         var username = req.body.username,
             password = req.body.password;

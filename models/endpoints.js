@@ -3,7 +3,7 @@ function EndPoint() {
 
     this.addEndPoint = function() {
         var res = false;
-        db.acquire((err, conn) => {
+        db.connection.query("", (err, result) => {
 
         });
     }
