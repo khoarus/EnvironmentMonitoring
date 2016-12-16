@@ -5,6 +5,7 @@
     <title>Trang chủ</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../public/images/favicon.ico" rel="icon">
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
     <link href="../public/css/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=vietnamese" rel="stylesheet">
@@ -13,79 +14,86 @@
 
 <body>
 
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><span>Environment Monitoring</span>Admin</a>
-				<ul class="user-menu">
-					<li class="dropdown pull-right">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Username <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a></li>
-							<li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Cài đặt</a></li>
-							<li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div><!-- /.container-fluid -->
-	</nav> <!-- /.nav -->
+                <a class="navbar-brand" href="#"><span>Environment Monitoring</span>Admin</a>
+                <ul class="user-menu">
+                    <li class="dropdown pull-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Username <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a></li>
+                            <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Cài đặt</a></li>
+                            <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- /.nav -->
 
-	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-		<form role="search">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search">
-			</div>
-		</form>
-		<ul class="nav menu">
-			<li class="active"><a href="/index"><i class="fa fa-area-chart" aria-hidden="true"></i> Dashboard</a></li>
-			<li role="presentation" class="divider"></li>
-			<li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login Page</a></li>
-		</ul>
-		
-	</div><!--/.sidebar-->
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <form role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+        </form>
+        <ul class="nav menu">
+            <li class="active"><a href="index"><i class="fa fa-area-chart" aria-hidden="true"></i> Dashboard</a></li>
+            <li role="presentation" class="divider"></li>
+            <li><a href="login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login Page</a></li>
+        </ul>
 
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
-		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-				<li class="active">Dashboard</li>
-			</ol>
-		</div><!--/.row-->
-		
-		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header">Dashboard</h1>
+    </div>
+    <!--/.sidebar-->
 
-			</div>
-		</div><!--/.row-->
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+        <!--/.row-->
 
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">Chart</div>
-					<div class="panel-body">
-						<div class="canvas-wrapper">
-							<canvas id="myChart" height="200" width="600"></canvas>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/.row-->
-											
-	</div>	<!--/.main-->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Dashboard</h1>
+
+            </div>
+        </div>
+        <!--/.row-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Chart</div>
+                    <div class="panel-body">
+                        <div class="canvas-wrapper">
+                            <canvas id="myChart" height="200" width="600"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.row-->
+
+    </div>
+    <!--/.main-->
 
     <script src="../public/javascript/jquery-2.2.4.min.js"></script>
     <script src="../public/javascript/jquery-ui.min.js"></script>
     <script src="../public/javascript/bootstrap.min.js"></script>
-	<script src="../public/javascript/Chart.min.js"></script>
-	<script src="../public/javascript/Chart-data.js"></script>
+    <script src="../public/javascript/Chart.min.js"></script>
+    <script src="../public/javascript/Chart-data.js"></script>
 </body>
 
 </html>

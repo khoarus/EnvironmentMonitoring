@@ -4,6 +4,7 @@
 <head>
     <title>Đăng Ký</title>
     <meta charset="UTF-8">
+    <link href="../public/images/favicon.ico" rel="icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../public/css/login.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=vietnamese" rel="stylesheet">
@@ -50,7 +51,7 @@
     <script>
         // check password
 
-        $('#password-repeat').on('keyup', function () {
+        $('#password-repeat').on('keyup', function() {
             if ($(this).val() == $('#password').val()) {
                 $('#message').html('Ok').css('color', 'green');
             } else $('#message').html('Mật khẩu nhập lại không khớp').css('color', 'red');

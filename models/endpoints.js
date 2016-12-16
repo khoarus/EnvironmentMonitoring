@@ -1,8 +1,18 @@
 function EndPoint() {
-    this.IdEndPoint;
-    this.Name;
-    this.Description;
-    this.Address;
+    var db = require("../database");
+
+    this.addEndPoint = function() {
+        var res = false;
+        db.connection.query("", (err, result) => {
+
+        });
+    }
+    this.getEndPoint = function() {
+
+    }
+    this.getEndPointById = function(IdEndPoint) {
+
+    }
 };
 
 module.exports = new EndPoint();
