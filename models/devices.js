@@ -19,5 +19,16 @@ function Device() {
             });
         });
     };
+    this.addDevice = function(idEndPoint, name, description, unit, minthreshold, maxthreshold) {
+        var res = false;
+        db.acquire((err, conn) => {
+            conn.query("insert into devicetbl(id_endpoint, name, description, unit, minthreshold, maxthreshold) values(?, ?, ?, ?, ?, ?)", [idEndPoint, name, description, unit, minthreshold, maxthreshold], (err, result) => {
+                if (err) throw err;
+                if (result.rowsAffected > 0) res = true;
+                else res = false
+            });
+        });
+        return res;
+    }
 };
 module.exports = new Device();
