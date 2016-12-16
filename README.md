@@ -24,7 +24,7 @@ To login, we will use ``HTTP POST`` method to send request ``username`` and ``pa
 </br>
 You need add 2 parameters to body request: ``username`` and ``password``.
 ### Register account
-To have an account, user must create an account. An account simple required ``username``, ``password``, ``firstname`` and ``lastname``. We also use ``HTTP POST` method to send request create an account.
+To have an account, user must create an account. An account simple required ``username``, ``password``, ``firstname`` and ``lastname``. We also use ``HTTP POST`` method to send request create an account.
 </br>
 </br>
 ``POST /users/register``
