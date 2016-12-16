@@ -2,7 +2,7 @@ module.exports = (app, router) => {
 
     var users = require("../models/users");
 
-    router.get("/", (req, res) => {
+    router.get("/welcome", (req, res) => {
         res.json({ message: "Welcome to Environment Monitoring API", version: "1.0", statusCode: res.statusCode });
     });
 
@@ -13,11 +13,11 @@ module.exports = (app, router) => {
         if (username == null || password == null) {
             res.json({ statusCode: 500, message: "Required fields not null" });
         }
-        users.login(username, password, (result) => {
+        users.login(username, password, (result, status) => {
             if (result != null) {
                 res.json(result);
             } else {
-                res.json({ message: "Invalid Username or Password!", ErrorCode: 400 });
+                res.json({ message: "Invalid Username or Password!", ErrorCode: 400, Status: status });
             }
         });
     });
@@ -72,7 +72,7 @@ module.exports = (app, router) => {
 
     });
 
-    router.route('/devices/create').get((req, res) => {
+    router.route('/devices/create').post((req, res) => {
 
     });
 
@@ -107,6 +107,10 @@ module.exports = (app, router) => {
 
     //Endpoints
     router.route('/endpoints/:id').get((req, res) => {
+
+    });
+
+    router.route('/endpoints/search').get((req, res) => {
 
     });
 
