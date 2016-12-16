@@ -1,5 +1,5 @@
 function Values() {
-    var db = require("../database");
+    var db = require("../controllers/database");
 
     this.putValue = (value, time, idDevice, callback) => {
         db.connection.query("INSERT valuetbl(id_device, time, value) VALUE(?, ?, ?)", [idDevice, time, value], (err, result) => {
