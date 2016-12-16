@@ -1,6 +1,8 @@
+var crypto = require("crypto");
+var db = require("../database.js");
+
 function User() {
-    var crypto = require("crypto");
-    var db = require("../database.js");
+
 
     this.register = function(username, password, firstname, lastname) {
         var res = null;
@@ -40,6 +42,7 @@ function User() {
         });
         return res;
     }
+
     this.changePassword = function(username, password) {
         var passwordhash = encrypt(password);
         db.connection.query("update userstbl set Password = ? where Username = ?", [passwordhash, username], (err, result) => {
@@ -47,5 +50,6 @@ function User() {
         });
     };
 };
+
 
 module.exports = new User();
