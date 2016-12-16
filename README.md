@@ -9,12 +9,9 @@ This API including 4 parts:
 * Endpoints
 * Values
 ```
-</br>
 ## Users
-</br>
 #### Login
-</br>
 User must login to access all services provided by this API. An users account have ```username```, ```password```, ```lastname``` and ```firstname```.</br>
-To login, we will use ``HTTP POST`` method to send request ``username`` and ``password`` to API.</br>
-``POST /users/login``</br>
+To login, we will use ``HTTP POST`` method to send request ``username`` and ``password`` to API.</br></br>
+``POST /users/login``</br><br>
 We need add 2 parameters to body: ``username`` and ``password``.
