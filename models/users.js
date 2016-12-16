@@ -2,12 +2,6 @@ function User() {
     var crypto = require("crypto");
     var db = require("../database.js");
 
-    this.idUser;
-    this.username;
-    this.password;
-    this.firstname;
-    this.lastname;
-
     this.register = function(username, password, firstname, lastname) {
         var res = null;
         db.acquire((err, con) => {
