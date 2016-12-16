@@ -1,5 +1,5 @@
 # Environment Monitoring API Documentation
-This is documentation using for Environment Monitoring.
+This is documentation using for Environment Monitoring API.
 
 This API including 4 parts:
 </br>
