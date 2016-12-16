@@ -21,4 +21,7 @@ module.exports = function(app) {
     app.get('/logout', (req, res) => {
         req.session.destroy();
     });
+    app.get('/create', (req, res) => {
+        req.render("create");
+    });
 };
