@@ -5,8 +5,9 @@ function Database() {
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'environmentmonitoring'
-    }).connect();
+        database: 'enviromentmonitoring'
+    })
+    this.connection.connect();
 };
 
 module.exports = new Database();

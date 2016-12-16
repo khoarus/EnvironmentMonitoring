@@ -3,10 +3,8 @@ function Values() {
 
     this.putValue = function(value, time, idDevice) {
         var res = false;
-        db.acquire((err, conn) => {
-            conn.query("insert valuetbl(id_device, time, value) values(?, ?, ?)", [idDevice, time, value], (err, conn) => {
+        db.connection.query("insert valuetbl(id_device, time, value) values(?, ?, ?)", [idDevice, time, value], (err, conn) => {
 
-            });
         });
     }
 

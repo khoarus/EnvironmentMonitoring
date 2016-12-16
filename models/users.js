@@ -25,11 +25,8 @@ function User() {
         return res;
     };
 
-    function encrypt(text) {
-        var cipher = crypto.createCipher("sha512", 'd6F3Efeq')
-        var crypted = cipher.update(text, 'utf8', 'hex')
-        crypted += cipher.final('hex');
-        return crypted;
+    function encrypt(data) {
+        return crypto.createHash('md5').update(data).digest("hex");
     }
 
     this.getUserById = function(userId) {

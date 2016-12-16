@@ -12,12 +12,30 @@ module.exports = (app, router) => {
     router.route('/users/login').post((req, res) => {
         var username = req.body.username,
             password = req.body.password;
+        if (username == null || password == null) {
+            res.json({ statusCode: 500, message: "Required fields not null" });
+        }
         var result = users.login(username, password);
         if (result) {
             res.json({
                 status: 1,
                 message: "Login Successfully!"
             });
+        }
+    });
+    router.route('/users/register').post((req, res) => {
+        var username = req.body.username;
+        var password = req.body.password;
+        var firstname = req.body.firstname;
+        var lastname = req.body.lastname;
+        if (firstname == null || lastname == null || username == null || password == null) {
+            res.json({ statusCode: 500, message: "Required fields not null" });
+        }
+        var result = users.register(username, password, firstname, lastname);
+        if (result) {
+            res.json({ statusCode: res.statusCode, message: "Success: An account was created Successfully!!" });
+        } else {
+            res.json({ statusCode: res.statusCode, message: "Error: Unable to create this account!" });
         }
     });
 
