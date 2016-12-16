@@ -18,11 +18,7 @@ function User() {
 
         var passwordhash = encrypt(password);
         db.connection.query("select count(*) as userCount from userstbl where Username = ? and Password = ?", [username, passwordhash], (err, result) => {
-            if (!err) {
-                if (result[0].userCount > 0) {
-                    res = true;
-                } else res = false;
-            } else res = false;
+            if (err) throw err;
         });
         return res;
     };
