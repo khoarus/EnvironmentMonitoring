@@ -1,5 +1,5 @@
 var crypto = require("crypto");
-var db = require("../database.js");
+var db = require("../controllers/database");
 
 function User() {
     this.register = function(username, password, firstname, lastname, callback) {

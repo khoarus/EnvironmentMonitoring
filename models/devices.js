@@ -1,6 +1,6 @@
 function Device() {
 
-    var db = require("../database");
+    var db = require("../controllers/database");
 
     this.getDevice = function(idDevice, callback) {
 
