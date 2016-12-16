@@ -517,6 +517,10 @@ a.bg-danger:hover {
 	margin-bottom: 20px;
 }
 
+.sidebar .fa {
+	margin: 10px;
+}
+
 @media (min-width: 768px) {
 	.sidebar {
 		display: block;
