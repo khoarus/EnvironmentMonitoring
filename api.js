@@ -42,7 +42,7 @@ module.exports = (app, router) => {
     router.route('/users/:id').get((req, res) => {
         var id = req.params.id;
         var result = users.getUserById(id);
-        if (!result) {
+        if (result != null) {
             var data = JSON.stringify(result);
             res.json(data);
         } else {
