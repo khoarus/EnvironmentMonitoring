@@ -8,9 +8,7 @@ module.exports = (app, router) => {
     router.route('/test/post').post((req, res) => {
         res.json({ message: "Hello! This is test!", statusCode: res.statusCode });
     });
-    router.use((req, res, next) => {
-        next();
-    });
+
 
     router.route('/users/regiser').post((req, res) => {
         var username = req.body.username;
@@ -56,6 +54,9 @@ module.exports = (app, router) => {
             });
         }
 
+    });
+    router.use((req, res, next) => {
+        next(new Error("Not implemented"));
     });
     app.use("/api/v1/", router);
 
