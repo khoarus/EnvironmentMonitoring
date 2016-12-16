@@ -2,47 +2,46 @@ var crypto = require("crypto");
 var db = require("../database.js");
 
 function User() {
-
-
-    this.register = function(username, password, firstname, lastname) {
-        var res = null;
+    this.register = function(username, password, firstname, lastname, callback) {
         var passwordhash = encrypt(password);
-        db.connection.query("insert into userstbl(FirstName, LastName, Username, Password) values(?, ?, ?, ?)", [firstname, lastname, username, passwordhash], (err, result) => {
-            res = result.affectedRows > 0;
+        db.connection.query("INSERT INTO userstbl(FirstName, LastName, Username, Password) VALUE(?, ?, ?, ?)", [firstname, lastname, username, passwordhash], (err, result) => {
+            callback(result.affectedRows > 0);
         });
-        return res;
     };
 
-    this.login = function(username, password) {
-        var res = false;
-
+    this.login = function(username, password, callback) {
         var passwordhash = encrypt(password);
-        db.connection.query("select count(*) as userCount from userstbl where Username = ? and Password = ?", [username, passwordhash], (err, result) => {
+        db.connection.query("SELECT * FROM userstbl WHERE Username = ? AND Password = ?", [username, passwordhash], (err, result) => {
             if (err) throw err;
+            if (result.length > 0) {
+                callback(result);
+            } else {
+                callback(null);
+            }
         });
-        return res;
     };
 
     function encrypt(data) {
         return crypto.createHash('md5').update(data).digest("hex");
     }
 
-    this.getUserById = function(userId) {
-        var res;
-        db.connection.query("select * from userstbl where IdUser = ?", userId, (err, result) => {
+    this.getUserById = function(userId, callback) {
+        db.connection.query("SELECT * FROM userstbl WHERE IdUser = ?", userId, (err, result) => {
             if (!err) {
-                res = result;
+                callback(result);
             } else {
                 throw err;
             }
         });
-        return res;
     }
 
-    this.changePassword = function(username, password) {
+    this.changePassword = function(username, password, callback) {
         var passwordhash = encrypt(password);
-        db.connection.query("update userstbl set Password = ? where Username = ?", [passwordhash, username], (err, result) => {
-
+        db.connection.query("UPDATE userstbl SET Password = ? WHERE Username = ?", [passwordhash, username], (err, result) => {
+            if (err) throw err;
+            if (result.affectedRows > 0) {
+                callback(true);
+            } else callback(false);
         });
     };
 };

@@ -13,13 +13,13 @@ module.exports = (app, router) => {
         if (username == null || password == null) {
             res.json({ statusCode: 500, message: "Required fields not null" });
         }
-        var result = users.login(username, password);
-        if (result) {
-            res.json({
-                statusCode: 200,
-                message: "Login Successfully!"
-            });
-        }
+        users.login(username, password, (result) => {
+            if (result != null) {
+                res.json(result);
+            } else {
+                res.json({ message: "Invalid Username or Password!", ErrorCode: 400 });
+            }
+        });
     });
     router.route('/users/register').post((req, res) => {
         var username = req.body.username;
@@ -29,31 +29,38 @@ module.exports = (app, router) => {
         if (firstname == null || lastname == null || username == null || password == null) {
             res.json({ statusCode: 400, message: "Required fields not null" });
         }
-        var result = users.register(username, password, firstname, lastname);
-        if (result) {
-            res.json({ statusCode: res.statusCode, message: "Success: An account was created Successfully!!" });
-        } else {
-            res.json({ statusCode: 400, message: "Error: Unable to create this account!" });
-        }
+        users.register(username, password, firstname, lastname, (result) => {
+            if (result === true) {
+                res.json({
+                    message: "Account was created successfully!",
+                    ErrorCode: 200
+                });
+            } else {
+                res.json({
+                    message: "Unable create an account. Please try again later!",
+                    ErrorCode: 404
+                });
+            };
+        });
     });
 
     router.route('/users/:id').get((req, res) => {
         var id = req.params.id;
-        var result = users.getUserById(id);
-        if (result != null) {
-            var data = JSON.stringify(result);
-            res.json(data);
-        } else {
-            res.json({
-                Error: "Unable to get user information! Data is null!",
-                ErrorCode: 404
-            });
-        }
-
+        users.getUserById(id, (result) => {
+            if (result) {
+                res.json(result);
+            } else {
+                res.json({
+                    Error: "Unable to get user information! Data is null!",
+                    ErrorCode: 404
+                });
+            }
+        });
     });
 
     //Devices
     router.route('/devices/:id/').get((req, res) => {
+        var id = req.params.id;
 
     });
 
