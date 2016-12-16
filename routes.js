@@ -15,7 +15,10 @@ module.exports = function(app) {
     app.get('/forgot', (req, res) => {
         res.render('forgot');
     });
-    app.post('/login', (req, res) => {
-
+    app.get('/account', (req, res) => {
+        res.render('account');
+    });
+    app.get('/logout', (req, res) => {
+        req.session.destroy();
     });
 };
