@@ -138,7 +138,6 @@ To get/fetch all information each user, we provided this URI ``/users/`` with ``
 ```
 GET /users/
 ```
-</br>
 #### Success
 If your operation is success, the API will be sent to a response with `HTTP 200` status code and JSON response:</br>
 ```
