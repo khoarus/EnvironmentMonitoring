@@ -85,6 +85,7 @@ module.exports = (app, router) => {
             }
         });
     });
+
     //Devices
     router.route('/devices/:id/').get((req, res) => {
         var id = req.params.id;
@@ -92,7 +93,7 @@ module.exports = (app, router) => {
             if (result != null) {
                 res.json({ Result: result, StatusCode: 200 });
             } else {
-                res.status(404).send({ message: "Error! Unable to find this Device within ID: " + id, StatusCode: 404 });
+                res.status(404).send({ message: "Error! Not Found Device with ID: " + id, StatusCode: 404 });
             }
         });
     });
@@ -100,18 +101,45 @@ module.exports = (app, router) => {
     router.route('/devices').get((req, res) => {
         devices.getAllDevice((result) => {
             if (result != null) {
-                res.json
-
+                res.json({
+                    Result: result,
+                    statusCode: 200
+                });
+            } else {
+                res.status(404).send({
+                    message: "Not Found Any Devices",
+                    StatusCode: 404
+                });
             }
         });
     });
 
-    router.route('/devices/search').get((req, res) => {
-
-    });
-
-    router.route('/devices/create').post((req, res) => {
-
+    router.route('/devices/').post((req, res) => {
+        var idEndPoint = req.body.endpoint,
+            name = req.body.name,
+            description = req.body.description,
+            unit = req.body.unit,
+            max = req.body.maxthreshold,
+            min = req.body.minthreshold;
+        if ((idEndPoint == null || idEndPoint == "") && (name == null && nam == "") && (description == null || description == "") && (unit == null || unit == "") && (max == null || max == "") && (min == null || min == "")) {
+            res.status(400).send({
+                message: "Bad Request",
+                StatusCode: 400
+            });
+        }
+        devices.addDevice(idEndPoint, name, description, unit, max, min, (result) => {
+            if (result) {
+                res.json({
+                    Result: result,
+                    StatusCode: 200
+                });
+            } else {
+                res.status(406).send({
+                    message: "Unable to create device",
+                    StatusCode: 406
+                })
+            }
+        });
     });
 
     router.route('/devices/:id').put((req, res) => {
