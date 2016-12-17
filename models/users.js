@@ -29,7 +29,11 @@ function User() {
     this.getUserById = (userId, callback) => {
         db.connection.query("SELECT IdUser ID, Firstname FirstName, Lastname LastName, Username, Password FROM userstbl WHERE IdUser = ?", userId, (err, result) => {
             if (!err) {
-                callback(result);
+                if (result.lenth > 0) {
+                    callback(result);
+                } else {
+                    callback(null);
+                }
             } else {
                 throw err;
             }

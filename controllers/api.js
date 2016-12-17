@@ -173,7 +173,7 @@ module.exports = (app, router) => {
         var min = req.body.min;
         var max = req.body.max;
 
-        if (!id || device_name == null || device_name == "" || description == "" || description == null || unit == null || unit == "" || min == null || max == null || max < min) {
+        if (!id || device_name === null || device_name === "" || description === "" || description === null || unit === null || unit === "" || min === null || max === null || max < min) {
             res.status(400).send({
                 message: "Required fields is not null/empty or value invalid",
                 StatusCode: 400
@@ -263,16 +263,48 @@ module.exports = (app, router) => {
     });
 
     //Endpoints
-    router.route('/endpoints/:id').get((req, res) => {
-
-    });
-
-    router.route('/endpoints/search').get((req, res) => {
+    router.route('/endpoints/:idDevice').get((req, res) => {
 
     });
 
     router.route('/endpoints/').get((req, res) => {
+        endpoints.getEndPoints((result) => {
+            if (result !== null) {
+                res.json({
+                    Result: result,
+                    StatusCode: 200
+                });
+            } else {
+                res.status(404).send({
+                    message: "Didn't find any device",
+                    StatusCode: 404
+                })
+            }
+        })
+    });
 
+    router.route('/endpoints/delete/:id').delete((req, res) => {
+        var id = req.params.id;
+        if (!id) {
+            res.status(400).send({
+                message: "Required field is needed to delete endpoint",
+                StatusCode: 400
+            });
+            return;
+        }
+        endpoints.deleteEndPoint(id, (result) => {
+            if (result === true) {
+                res.json({
+                    Result: "Device has been deleted successfully!",
+                    StatusCode: 200
+                });
+            } else {
+                res.status(404).send({
+                    message: "Unable to find endpoint",
+                    StatusCode: 404
+                });
+            }
+        });
     });
 
     router.use((req, res, next) => {
