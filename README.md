@@ -43,7 +43,7 @@ Status: 200 OK
         "Username": string,
         "Password": string
     ]},
-    Status: true
+    Status: boolean
     StatusCode: 200
 }
 ```
@@ -56,7 +56,7 @@ Status: 400 Bad Request
 {
     "message": "Invalid Username or Password",
     "StatusCode": 400,
-    "Status": false
+    "Status": boolean
 } 
 ```
 </br>
@@ -139,6 +139,21 @@ To get/fetch all information each user, we provided this URI ``/users/`` with ``
 GET /users/
 ```
 </br>
+#### Success
+If your operation is success, the API will be sent to a response with `HTTP 200` status code and JSON response:</br>
+```
+{
+    "Result": 
+    {[
+        "ID": int,
+        "FirstName": string,
+        "LastnName": string,
+        "Username": string,
+        "Password": string
+    ]}, 
+    "StatusCode": 200
+}
+```
 #### Failed
 If operation is failed, means is data is null or empty. You will get `HTTP 404` status code and JSON response look like this:</br>
 ```

@@ -90,7 +90,10 @@ module.exports = (app, router) => {
             if (result) {
                 res.json({ Result: result, StatusCode: 200 });
             } else {
-                res.status(404).send({ message: "Unable to find any user!", StatusCode: 404 });
+                res.status(404).send({
+                    message: "Unable to find any user!",
+                    StatusCode: 404
+                });
             }
         });
     });
@@ -107,7 +110,10 @@ module.exports = (app, router) => {
         }
         devices.getDevice(id, (result) => {
             if (result != null) {
-                res.json({ Result: result, StatusCode: 200 });
+                res.json({
+                    Result: result,
+                    StatusCode: 200
+                });
             } else {
                 res.status(404).send({ message: "Error! Not Found Device with ID: " + id, StatusCode: 404 });
             }
