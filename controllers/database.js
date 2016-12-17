@@ -8,6 +8,11 @@ function Database() {
         database: 'enviromentmonitoring',
         multipleStatements: true
     });
-    this.connection.connect();
+    this.connection.connect((err) => {
+        if (err) {
+            console.error("Error when connecting to MySQL Database: " + err.stack);
+            return;
+        }
+    });
 }
 module.exports = new Database();

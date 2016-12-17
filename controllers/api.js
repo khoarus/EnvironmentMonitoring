@@ -143,7 +143,7 @@ module.exports = (app, router) => {
             unit = req.body.unit,
             max = req.body.maxthreshold,
             min = req.body.minthreshold;
-        if ((idEndPoint === null || idEndPoint === "") && (name === null && nam === "") && (description === null || description === "") && (unit === null || unit === "") && (max === null || max === "") && (min === null || min === "")) {
+        if ((idEndPoint === null || idEndPoint === "") && (name === null && name === "") && (description === null || description === "") && (unit === null || unit === "") && (max === null || max === "") && (min === null || min === "")) {
             res.status(400).send({
                 message: "Bad Request",
                 StatusCode: 400
@@ -165,8 +165,34 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/devices/:id').put((req, res) => {
+    router.route('/devices/').put((req, res) => {
+        var id = req.body.id;
+        var device_name = req.body.name;
+        var description = req.body.description;
+        var unit = req.body.unit;
+        var min = req.body.min;
+        var max = req.body.max;
 
+        if (!id || device_name == null || device_name == "" || description == "" || description == null || unit == null || unit == "" || min == null || max == null || max < min) {
+            res.status(400).send({
+                message: "Required fields is not null/empty or value invalid",
+                StatusCode: 400
+            });
+            return;
+        }
+        devices.updateDeviceInfo(id, device_name, description, unit, min, max, (result) => {
+            if (result == true) {
+                res.json({
+                    Result: "SUCCESS",
+                    StatusCode: 200
+                });
+            } else {
+                res.status(403).send({
+                    message: "Can't not update information for device: " + id,
+                    StatusCode: 403
+                });
+            }
+        })
     });
 
     router.route('/devices/:id').delete((req, res) => {
