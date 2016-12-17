@@ -18,7 +18,7 @@ module.exports = (app, router) => {
             password = req.body.password;
         if (username == null || password == null) {
 
-            res.json({ StatusCode: 500, message: "Required fields not null" });
+            res.status(500).send({ StatusCode: 500, message: "Required fields not null" });
         }
         users.login(username, password, (result, status) => {
             if (result != null) {
@@ -92,7 +92,12 @@ module.exports = (app, router) => {
     });
 
     router.route('/devices').get((req, res) => {
+        devices.getAllDevice((result) => {
+            if (result != null) {
+                res.json
 
+            }
+        });
     });
 
     router.route('/devices/search').get((req, res) => {

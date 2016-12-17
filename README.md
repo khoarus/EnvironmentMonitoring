@@ -23,7 +23,42 @@ To login, we will use ``HTTP POST`` method to send request ``username`` and ``pa
 ``POST /users/login``
 </br>
 </br>
-You need add 2 parameters to body request: ``username`` and ``password``.
+You need add 2 parameters to body request: ``username`` and ``password``.</br>
+If success, you will receive JSON respone:
+```
+{
+    Status: 200 OK
+
+    "Result":
+    {[
+        "FirstName": string,
+        "LastnName": string,
+        "username": string,
+        "Password": string
+    ]},
+    Status: true
+    StatusCode: 200
+}
+```
+#### Invalid Username or Password
+Else if error, you will receive JSON respone with ``HTTP Status: 400``.
+```
+{
+    "message": "Invalid Username or Password",
+    "StatusCode": 400,
+    "Status": false
+}
+```
+#### Parameters is null
+And if you send request without `parameters` or `parementers` is `null`, the backend will send you response with ``HTTP 500 Internal Server Error``. Look like this:</br><br>
+``` 
+{
+    Status: 500 Internal Server Error
+
+    "StatusCode": 500,
+    "message": "Required fields not null"
+}
+```
 ### Register account
 To have an account, user must create an account. An account simple required ``username``, ``password``, ``firstname`` and ``lastname``. We also use ``HTTP POST`` method to send request create an account.
 </br>
