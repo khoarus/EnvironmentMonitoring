@@ -9,7 +9,9 @@ module.exports = (app, router) => {
         res.json({ message: "Welcome to Environment Monitoring API", version: "1.0", StatusCode: res.statusCode });
 
     });
-
+    router.get("/", (req, res) => {
+        res.status(200).send({ message: "Your test is OK! The API is running!" });
+    });
     //Users
     router.route('/users/login').post((req, res) => {
         var username = req.body.username,
@@ -26,7 +28,7 @@ module.exports = (app, router) => {
                     StatusCode: 200
                 });
             } else {
-                res.json({ message: "Invalid Username or Password!", StatusCode: 400, Status: status });
+                res.status(400).send({ message: "Invalid Username or Password!", StatusCode: 400, Status: status });
 
             }
         });
@@ -37,7 +39,7 @@ module.exports = (app, router) => {
         var firstname = req.body.firstname;
         var lastname = req.body.lastname;
         if (firstname == null || lastname == null || username == null || password == null) {
-            res.json({ StatusCode: 400, message: "Required fields not null" });
+            res.status(400).send({ StatusCode: 400, message: "Required fields not null" });
         }
         users.register(username, password, firstname, lastname, (result) => {
             if (result === true) {
@@ -46,7 +48,7 @@ module.exports = (app, router) => {
                     StatusCode: 200
                 });
             } else {
-                res.json({
+                res.status(404).send({
                     message: "Unable create an account. Please try again later!",
                     StatusCode: 404
                 });
@@ -60,7 +62,7 @@ module.exports = (app, router) => {
             if (result) {
                 res.json({ Result: result, StatusCode: 200 });
             } else {
-                res.json({
+                res.status(404).send({
                     Error: "Unable to get user information! Data is null!",
                     StatusCode: 404
                 });
@@ -68,12 +70,23 @@ module.exports = (app, router) => {
         });
     });
 
+    router.route('/users/').get((req, res) => {
+        users.getUsers((result) => {
+            if (result) {
+                res.json({ Result: result, StatusCode: 200 });
+            } else {
+                res.status(404).send({ message: "Unable to find any user!", StatusCode: 404 });
+            }
+        });
+    });
     //Devices
     router.route('/devices/:id/').get((req, res) => {
         var id = req.params.id;
         devices.getDevice(id, (result) => {
             if (result != null) {
                 res.json({ Result: result, StatusCode: 200 });
+            } else {
+                res.status(404).send({ message: "Error! Unable to find this Device within ID: " + id, StatusCode: 404 });
             }
         });
     });

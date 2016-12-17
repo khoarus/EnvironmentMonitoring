@@ -62,7 +62,9 @@ function User() {
             if (err) throw err;
             if (result.affectedRows > 0) {
                 callback(true);
-            } else callback(false);
+            } else {
+                callback(false)
+            };
         });
     };
 
