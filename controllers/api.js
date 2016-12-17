@@ -19,6 +19,7 @@ module.exports = (app, router) => {
             if (result != null) {
                 res.json({
                     Result: result,
+                    Status: status,
                     StatusCode: 200
                 });
             } else {
