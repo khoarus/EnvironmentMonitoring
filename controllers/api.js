@@ -19,6 +19,7 @@ module.exports = (app, router) => {
         if (username == null || password == null) {
 
             res.status(500).send({ StatusCode: 500, message: "Required fields not null" });
+            return;
         }
         users.login(username, password, (result, status) => {
             if (result != null) {
@@ -40,6 +41,7 @@ module.exports = (app, router) => {
         var lastname = req.body.lastname;
         if (firstname == null || lastname == null || username == null || password == null) {
             res.status(400).send({ StatusCode: 400, message: "Required fields not null" });
+            return;
         }
         users.register(username, password, firstname, lastname, (result) => {
             if (result === true) {
@@ -64,6 +66,13 @@ module.exports = (app, router) => {
 
     router.route('/users/:id').get((req, res) => {
         var id = req.params.id;
+        if (id == null) {
+            res.status(400).send({
+                message: "Required User ID is not null",
+                StatusCode: 400
+            });
+            return;
+        }
         users.getUserById(id, (result) => {
             if (result) {
                 res.json({ Result: result, StatusCode: 200 });
@@ -81,7 +90,10 @@ module.exports = (app, router) => {
             if (result) {
                 res.json({ Result: result, StatusCode: 200 });
             } else {
-                res.status(404).send({ message: "Unable to find any user!", StatusCode: 404 });
+                res.status(404).send({
+                    message: "Unable to find any user!",
+                    StatusCode: 404
+                });
             }
         });
     });
@@ -89,9 +101,19 @@ module.exports = (app, router) => {
     //Devices
     router.route('/devices/:id/').get((req, res) => {
         var id = req.params.id;
+        if (id == null) {
+            res.status(400).send({
+                message: "Required Device ID is not null",
+                StatusCode: 400
+            });
+            return;
+        }
         devices.getDevice(id, (result) => {
             if (result != null) {
-                res.json({ Result: result, StatusCode: 200 });
+                res.json({
+                    Result: result,
+                    StatusCode: 200
+                });
             } else {
                 res.status(404).send({ message: "Error! Not Found Device with ID: " + id, StatusCode: 404 });
             }
@@ -126,6 +148,7 @@ module.exports = (app, router) => {
                 message: "Bad Request",
                 StatusCode: 400
             });
+            return;
         }
         devices.addDevice(idEndPoint, name, description, unit, max, min, (result) => {
             if (result) {
@@ -147,12 +170,54 @@ module.exports = (app, router) => {
     });
 
     router.route('/devices/:id').delete((req, res) => {
-
+        var id = req.params.id
+        if (!id) {
+            res.status(400).send({
+                message: "Required fields is not null or empty",
+                StatusCode: 400
+            });
+            return;
+        }
+        devices.deleteDevice(id, (result) => {
+            if (result == true) {
+                res.json({
+                    Result: "OK",
+                    StatusCode: 200,
+                    message: "The device has been delete successfully!"
+                });
+            } else {
+                res.status(404).send({
+                    Result: "FAILED",
+                    StatusCode: 404,
+                    message: "Unable to delete device!"
+                });
+            }
+        });
     });
 
     //Values
     router.route('/values/').get((req, res) => {
-
+        var idDevice = req.body.id
+        if (idDevice == null) {
+            res.status(400).send({
+                message: "Required Device ID is not null!",
+                StatusCode: 400
+            });
+            return;
+        }
+        values.getValue(idDevice, (result) => {
+            if (result) {
+                res.json({
+                    Result: result,
+                    StatusCode: 200
+                });
+            } else {
+                res.status(404).send({
+                    message: "This device don't have any values",
+                    StatusCode: 404
+                });
+            }
+        });
     });
 
     router.route('/values/:id').get((req, res) => {
