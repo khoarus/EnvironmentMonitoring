@@ -120,8 +120,10 @@ If you don't provide parameters or parementers is null or empty string, you will
 ```
 {
     Status: 400 Bad Request
-    
+
     "StatusCode": 400,
     "message": "Required fields not null"
 }
 ```
+### Users Managerment
+This API provided a basic user management features example: Add user, edit/update information, delete user, find user by ID, fetch all users
