@@ -1,5 +1,5 @@
 var session = require('express-session');
-var users = require("./models/users");
+
 module.exports = function(app) {
     app.get('/', (req, res) => {
         res.render("index");
@@ -20,8 +20,9 @@ module.exports = function(app) {
     });
     app.get('/logout', (req, res) => {
         req.session.destroy();
+        res.render('login');
     });
     app.get('/create', (req, res) => {
-        req.render("create");
+        res.render("create");
     });
 };

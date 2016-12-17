@@ -16,13 +16,13 @@ module.exports = (app, router) => {
     router.route('/users/login').post((req, res) => {
         var username = req.body.username,
             password = req.body.password;
-        if (username == null || password == null) {
+        if (username === null || password === null) {
 
             res.status(500).send({ StatusCode: 500, message: "Required fields not null" });
             return;
         }
         users.login(username, password, (result, status) => {
-            if (result != null) {
+            if (result !== null) {
                 res.json({
                     Result: result,
                     Status: status,
@@ -39,7 +39,7 @@ module.exports = (app, router) => {
         var password = req.body.password;
         var firstname = req.body.firstname;
         var lastname = req.body.lastname;
-        if (firstname == null || lastname == null || username == null || password == null) {
+        if (firstname === null || lastname === null || username === null || password === null) {
             res.status(400).send({ StatusCode: 400, message: "Required fields not null" });
             return;
         }
@@ -49,24 +49,24 @@ module.exports = (app, router) => {
                     message: "Account was created successfully!",
                     StatusCode: 200
                 });
-            } else if (result == false) {
+            } else if (result === false) {
                 res.status(409).send({
                     message: "Unable create an account. Username could be existed. Please try again with another Username!",
                     StatusCode: 409
                 });
             }
-            if (result == null) {
+            if (result === null) {
                 res.status(503).send({
                     message: "Service Unavailable",
                     statusCode: 503
-                })
+                });
             }
         });
     });
 
     router.route('/users/:id').get((req, res) => {
         var id = req.params.id;
-        if (id == null) {
+        if (id === null) {
             res.status(400).send({
                 message: "Required User ID is not null",
                 StatusCode: 400
@@ -101,7 +101,7 @@ module.exports = (app, router) => {
     //Devices
     router.route('/devices/:id/').get((req, res) => {
         var id = req.params.id;
-        if (id == null) {
+        if (id === null) {
             res.status(400).send({
                 message: "Required Device ID is not null",
                 StatusCode: 400
@@ -109,7 +109,7 @@ module.exports = (app, router) => {
             return;
         }
         devices.getDevice(id, (result) => {
-            if (result != null) {
+            if (result !== null) {
                 res.json({
                     Result: result,
                     StatusCode: 200
@@ -122,7 +122,7 @@ module.exports = (app, router) => {
 
     router.route('/devices').get((req, res) => {
         devices.getAllDevice((result) => {
-            if (result != null) {
+            if (result !== null) {
                 res.json({
                     Result: result,
                     statusCode: 200
@@ -143,7 +143,7 @@ module.exports = (app, router) => {
             unit = req.body.unit,
             max = req.body.maxthreshold,
             min = req.body.minthreshold;
-        if ((idEndPoint == null || idEndPoint == "") && (name == null && nam == "") && (description == null || description == "") && (unit == null || unit == "") && (max == null || max == "") && (min == null || min == "")) {
+        if ((idEndPoint === null || idEndPoint === "") && (name === null && nam === "") && (description === null || description === "") && (unit === null || unit === "") && (max === null || max === "") && (min === null || min === "")) {
             res.status(400).send({
                 message: "Bad Request",
                 StatusCode: 400
@@ -160,7 +160,7 @@ module.exports = (app, router) => {
                 res.status(406).send({
                     message: "Unable to create device",
                     StatusCode: 406
-                })
+                });
             }
         });
     });
@@ -170,7 +170,7 @@ module.exports = (app, router) => {
     });
 
     router.route('/devices/:id').delete((req, res) => {
-        var id = req.params.id
+        var id = req.params.id;
         if (!id) {
             res.status(400).send({
                 message: "Required fields is not null or empty",
@@ -179,7 +179,7 @@ module.exports = (app, router) => {
             return;
         }
         devices.deleteDevice(id, (result) => {
-            if (result == true) {
+            if (result === true) {
                 res.json({
                     Result: "OK",
                     StatusCode: 200,
@@ -197,8 +197,8 @@ module.exports = (app, router) => {
 
     //Values
     router.route('/values/').get((req, res) => {
-        var idDevice = req.body.id
-        if (idDevice == null) {
+        var idDevice = req.body.id;
+        if (idDevice === null) {
             res.status(400).send({
                 message: "Required Device ID is not null!",
                 StatusCode: 400
@@ -254,4 +254,4 @@ module.exports = (app, router) => {
     });
     app.use("/api/v1/", router);
 
-}
+};

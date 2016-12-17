@@ -1,5 +1,5 @@
 function EndPoint() {
-    const db = require("../controllers/database");
+    var db = require("../controllers/database");
     this.addEndPoint = (name, description, address, callback) => {
         db.connection.query("INSERT INTO endpointtbl(name, description, address) VALUES(?, ?, ?)", [name, description, address], (err, result) => {
             if (err) throw err;
@@ -48,6 +48,6 @@ function EndPoint() {
             }
         });
     };
-};
+}
 
 module.exports = new EndPoint();

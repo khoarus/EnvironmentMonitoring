@@ -24,7 +24,7 @@ function User() {
     function encrypt(data) {
 
         return crypto.createHash('sha512').update(data).digest("hex");
-    };
+    }
 
     this.getUserById = (userId, callback) => {
         db.connection.query("SELECT IdUser ID, Firstname FirstName, Lastname LastName, Username, Password FROM userstbl WHERE IdUser = ?", userId, (err, result) => {
@@ -63,8 +63,8 @@ function User() {
             if (result.affectedRows > 0) {
                 callback(true);
             } else {
-                callback(false)
-            };
+                callback(false);
+            }
         });
     };
 
@@ -78,6 +78,6 @@ function User() {
             }
         });
     };
-};
+}
 
 module.exports = new User();
