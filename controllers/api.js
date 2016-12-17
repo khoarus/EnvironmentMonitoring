@@ -1,4 +1,5 @@
 module.exports = (app, router) => {
+
     var users = require("../models/users");
     var devices = require("../models/devices");
     var values = require("../models/values");
@@ -6,6 +7,7 @@ module.exports = (app, router) => {
 
     router.get("/welcome", (req, res) => {
         res.json({ message: "Welcome to Environment Monitoring API", version: "1.0", StatusCode: res.statusCode });
+
     });
 
     //Users
@@ -13,6 +15,7 @@ module.exports = (app, router) => {
         var username = req.body.username,
             password = req.body.password;
         if (username == null || password == null) {
+
             res.json({ StatusCode: 500, message: "Required fields not null" });
         }
         users.login(username, password, (result, status) => {
@@ -24,6 +27,7 @@ module.exports = (app, router) => {
                 });
             } else {
                 res.json({ message: "Invalid Username or Password!", StatusCode: 400, Status: status });
+
             }
         });
     });
