@@ -86,7 +86,7 @@ In this case, an account that provided by user was created successfully. You wil
 }
 ```
 ### Register failed
-Register will failed with 3 conditions:
+Register will failed with 3 conditions:</br>
 1. ``Username`` is existing in database.
 2. Error when connection is lost.
 3. Parameters is null or empty.
