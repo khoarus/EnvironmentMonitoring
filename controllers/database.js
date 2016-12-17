@@ -10,5 +10,4 @@ function Database() {
     })
     this.connection.connect();
 };
-
 module.exports = new Database();
