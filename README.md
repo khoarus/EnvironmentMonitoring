@@ -139,7 +139,6 @@ To get/fetch all information each user, we provided this URI ``/users/`` with ``
 GET /users/
 ```
 </br>
-</br>
 #### Failed
 If operation is failed, means is data is null or empty. You will get `HTTP 404` status code and JSON response look like this:</br>
 ```
