@@ -7,7 +7,7 @@ function Database() {
         password: '',
         database: 'enviromentmonitoring',
         multipleStatements: true
-    })
+    });
     this.connection.connect();
-};
+}
 module.exports = new Database();

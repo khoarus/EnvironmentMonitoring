@@ -8,7 +8,7 @@ function Device() {
             if (err)
                 throw err;
             if (result) {
-                callback(result)
+                callback(result);
             } else callback(null);
         });
     };
@@ -28,20 +28,20 @@ function Device() {
             if (result.rowsAffected > 0) callback(true);
             else callback(false);
         });
-    }
+    };
     this.deleteDevice = function(idDevice, callback) {
         db.connection.query("DELETE FROM devicetbl WHERE id=?", idDevice, (err, result) => {
             if (err) throw err;
             if (result.rowsAffected > 0) callback(true);
             else callback(false);
         });
-    }
+    };
     this.updateDeviceInfo = function(idDevice, name, description, unit, minthreshold, maxthreshold, callback) {
         db.connection.query("UPDATE devicetbl SET name = ?, description = ?, unit = ? minthreshold = ?, maxthreshold = ? WHERE id = ?", [name, description, unit, minthreshold, maxthreshold, idDevice], (err, result) => {
             if (err) throw err;
             if (result.rowsAffected > 0) callback(true);
             else callback(false);
         });
-    }
-};
+    };
+}
 module.exports = new Device();
