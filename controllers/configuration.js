@@ -14,5 +14,5 @@ module.exports = function(app) {
         saveUninitialized: true
     }));
     var router = express.Router();
-    require('./api/v1')(app, router);
+    require('./api')(app, router);
 };
