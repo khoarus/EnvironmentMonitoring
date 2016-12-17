@@ -1,4 +1,7 @@
 /*Global Styles*/
+* {
+    outline: 0;
+}
 
 body {
 	background: #f1f4f7;
@@ -619,4 +622,28 @@ a.bg-danger:hover {
 h1.page-header {
 	margin-top: 30px;
 	border-bottom: 0;
+}
+
+/* User Page */
+
+#actions input:hover {
+    background: #F56A35;
+	border: 1px solid #F56A35;
+}
+
+/* Table */
+
+a.table-link:hover {
+	color: #F56A35;
+}
+
+.table tbody tr {
+	-webkit-transition: .3s;
+	-moz-transition: .3s;
+	-ms-transition: .3s;
+	transition: .3s;
+}
+
+.table tbody tr:hover {
+	background: #F5F5F5;
 }

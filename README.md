@@ -1,6 +1,6 @@
 # Environment Monitoring API Documentation
 
-This is documentation using for Environment Monitoring API.</br>
+This is documentation using for Environment Monitoring API version 1.0.</br>
 Official website [here](http://hueic.edu.vn) </br>
 This API including 4 parts:
 </br>
@@ -16,22 +16,40 @@ The default trigged URL of this API is:</br>
 http://address:port/api/v1/
 ```
 Make sure you enter above address exactly. You can access, modify resource with the API.<br>
+## Testing
+For testing and check for API available/running, simply enter following URI on your browser or any REST client:
+```
+GET http://address:port/api/v1
+
+or
+
+GET http://address:port/api/v1/welcome
+```
+The home URI will response with JSON string:
+```
+{
+     message: "Your test is OK! The API is running!"
+}
+```
+and then the Welcome URI:
+```
+{
+    "message": "Welcome to Environment Monitoring API",
+    "version": "1.0",
+    "StatusCode": 200
+}
+```
+If your test is success, means is the API is running and you can start working on it!
 ###Let's start...
 ## Users
 #### Login
 User must login to access all services provided by this API. An users account have username, password, lastname and firstname.</br>
-To login, we will use HTTP POST method to send request username and password to API.
-</br>
-</br>
-
+To login, we will use ``HTTP POST`` method to send request username and password to API.
 ```
 POST /users/login
 ```
-
-</br>
-<br>
-You need add 2 parameters to body request: username and password.</br>
-If success, you will receive JSON respone:</br></br>
+You need add 2 parameters ``x-www-form-urlencoded`` format to body request: username and password.</br>
+If success, you will receive ``JSON`` respone:</br></br>
 ```
 Status: 200 OK
 
@@ -73,13 +91,9 @@ Status: 500 Internal Server Error
 ```
 ### Register account
 To have an account, user must create an account. An account simple required username, password, firstname and lastname. We also use HTTP POST method to send request create an account.
-</br>
-</br>
 ```
 POST /users/register
 ```
-</br>
-</br>
 You must add 4 parameters to register for an account: ``username``, ``password``, ``firstname``, ``lastname`` .</br>
 ### Registration successfully
 In this case, an account that provided by user was created successfully. You will received JSON response look like this:
@@ -113,6 +127,7 @@ Status 409 Conflict
 This error will occurred when API couldn't establishing connection to database to get data. And then you will receiving JSON response look like:
 ```
 Status: 503 Service Unavailable
+
 {
     
     "message": "Service Unavailable",
@@ -167,4 +182,22 @@ Status: 404 Not Found
 To get information specific user, you can use ID of them. Here is URI for find user information by ID:</br>
 ```
 GET /users/:id
+```
+You need provide an ID for request parameters and ID not empty or null.
+#### Success
+If your operation is success, you will get this JSON response:
+```
+Status: 200 OK
+
+{
+    "Result":
+    {
+        "ID": int,
+        "FirstName": string,
+        "LastnName": string,
+        "Username": string,
+        "Password": string
+    },
+    "StatusCode": 200
+}
 ```

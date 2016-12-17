@@ -39,5 +39,5 @@ function Values() {
             } else callback(null);
         });
     };
-};
+}
 module.exports = new Values();
