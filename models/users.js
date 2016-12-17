@@ -22,7 +22,7 @@ function User() {
     };
 
     function encrypt(data) {
-        return crypto.createHash('md5').update(data).digest("hex");
+        return crypto.createHash('sha512').update(data).digest("hex");
     };
 
     this.getUserById = (userId, callback) => {
