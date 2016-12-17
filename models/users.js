@@ -11,7 +11,7 @@ function User() {
 
     this.login = (username, password, callback) => {
         var passwordhash = encrypt(password);
-        db.connection.query("SELECT * FROM userstbl WHERE Username = ? AND Password = ?", [username, passwordhash], (err, result) => {
+        db.connection.query("SELECT IdUser ID, Firstname FirstName, LastName LastName, Username, Password FROM userstbl WHERE Username = ? AND Password = ?", [username, passwordhash], (err, result) => {
             if (err) throw err;
             if (result.length > 0) {
                 callback(result, true);
@@ -62,7 +62,9 @@ function User() {
             if (err) throw err;
             if (result.affectedRows > 0) {
                 callback(true);
-            } else callback(false);
+            } else {
+                callback(false)
+            };
         });
     };
 
