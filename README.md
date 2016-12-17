@@ -131,16 +131,16 @@ Status: 400 Bad Request
 ```
 ### Users Managerment
 This API provided a basic user management features example: Add user, edit/update information, delete user, find user by ID, fetch all users.
-##### Fetch all users
+### Fetch all users
 To get/fetch all information each user, we provided this URI ``/users/`` with ``HTTP GET`` to retrieving all information of all users. Look like this:
-</br>
-</br>
 ```
 GET /users/
 ```
 #### Success
 If your operation is success, the API will be sent to a response with `HTTP 200` status code and JSON response:</br>
 ```
+Status: 200 OK
+
 {
     "Result": 
     {[
@@ -162,4 +162,9 @@ Status: 404 Not Found
     "message": "Unable to find any user!",
     "StatusCode": 404
 }
+```
+### Find specific user by ID
+To get information specific user, you can use ID of them. Here is URI for find user information by ID:</br>
+```
+GET /users/:id
 ```
