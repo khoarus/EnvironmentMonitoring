@@ -11,7 +11,10 @@ This API including 4 parts:
 * Values
 ```
 
-The default trigged URL of this API is: http://address:port/api/v1/</br>
+The default trigged URL of this API is:</br>
+```
+http://address:port/api/v1/
+```
 Make sure you enter above address exactly. You can access, modify resource with the API.<br>
 ###Let's start...
 ## Users
