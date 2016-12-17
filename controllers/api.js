@@ -147,12 +147,46 @@ module.exports = (app, router) => {
     });
 
     router.route('/devices/:id').delete((req, res) => {
-
+        var id = req.params.id
+        if (!id) {
+            res.status(400).send({
+                message: "Required fields is not null or empty",
+                StatusCode: 400
+            });
+        }
+        devices.deleteDevice(id, (result) => {
+            if (result == true) {
+                res.json({
+                    Result: "OK",
+                    StatusCode: 200,
+                    message: "The device has been delete successfully!"
+                });
+            } else {
+                res.status(404).send({
+                    Result: "FAILED",
+                    StatusCode: 404,
+                    message: "Unable to delete device!"
+                });
+            }
+        });
     });
 
     //Values
     router.route('/values/').get((req, res) => {
-
+        var idDevice = req.body.id
+        values.getValue(idDevice, (result) => {
+            if (result) {
+                res.json({
+                    Result: result,
+                    StatusCode: 200
+                });
+            } else {
+                res.status(404).send({
+                    message: "This device don't have any values",
+                    StatusCode: 404
+                });
+            }
+        });
     });
 
     router.route('/values/:id').get((req, res) => {

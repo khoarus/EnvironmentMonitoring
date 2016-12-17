@@ -33,14 +33,14 @@ POST /users/login
 You need add 2 parameters to body request: username and password.</br>
 If success, you will receive JSON respone:</br></br>
 ```
-{
-    Status: 200 OK
+Status: 200 OK
 
+{
     "Result":
     {[
         "FirstName": string,
         "LastnName": string,
-        "username": string,
+        "Username": string,
         "Password": string
     ]},
     Status: true
@@ -51,9 +51,9 @@ If success, you will receive JSON respone:</br></br>
 #### Invalid Username or Password
 Else if error, you will receive JSON respone with HTTP Status: 400.
 ```
-{
-    Status: 400 Bad Request
+Status: 400 Bad Request
 
+{
     "message": "Invalid Username or Password",
     "StatusCode": 400,
     "Status": false
@@ -63,9 +63,10 @@ Else if error, you will receive JSON respone with HTTP Status: 400.
 #### Parameters is null
 And if you send request without parameters or parementers is null, the backend will send you response with HTTP 500 Internal Server Error. Look like this:</br><br>
 ```
-{
-    Status: 500 Internal Server Error
+Status: 500 Internal Server Error
 
+{
+    
     "StatusCode": 500,
     "message": "Required fields not null"
 }
@@ -83,9 +84,9 @@ You must add 4 parameters to register for an account: ``username``, ``password``
 ### Registration successfully
 In this case, an account that provided by user was created successfully. You will received JSON response look like this:
 ```
-{
-    Status: 200 OK
+Status: 200 OK
 
+{
 	"message": "Account was created successfully!",
 	"StatusCode": 200
 }
@@ -101,9 +102,9 @@ Register will failed with 3 conditions:</br>
 #### Username is existing
 Username that provided by user is existed in database and can't use to register again. In this case, the response will be look like:</br>
 ```
-{
-    Status 409 Conflict
+Status 409 Conflict
 
+{
 	"message": "Unable create an account. Username could be existed. Please try again with another Username!",
 	"StatusCode" 409
 }
@@ -111,9 +112,9 @@ Username that provided by user is existed in database and can't use to register 
 #### Error when connection is lost
 This error will occurred when API couldn't establishing connection to database to get data. And then you will receiving JSON response look like:
 ```
+Status: 503 Service Unavailable
 {
-    Status: 503 Service Unavailable
-
+    
     "message": "Service Unavailable",
     "StatusCode": 503
 }
@@ -121,12 +122,31 @@ This error will occurred when API couldn't establishing connection to database t
 #### Parameters is null or empty
 If you don't provide parameters or parementers is null or empty string, you will get an error `HTTP 400 Bad Request` and response will be look like this:
 ```
-{
-    Status: 400 Bad Request
+Status: 400 Bad Request
 
+{
     "StatusCode": 400,
     "message": "Required fields not null"
 }
 ```
 ### Users Managerment
-This API provided a basic user management features example: Add user, edit/update information, delete user, find user by ID, fetch all users
+This API provided a basic user management features example: Add user, edit/update information, delete user, find user by ID, fetch all users.
+##### Fetch all users
+To get/fetch all information each user, we provided this URI ``/users/`` with ``HTTP GET`` to retrieving all information of all users. Look like this:
+</br>
+</br>
+```
+GET /users/
+```
+</br>
+</br>
+#### Failed
+If operation is failed, means is data is null or empty. You will get `HTTP 404` status code and JSON response look like this:</br>
+```
+Status: 404 Not Found
+
+{
+    "message": "Unable to find any user!",
+    "StatusCode": 404
+}
+```
