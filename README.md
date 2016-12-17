@@ -1,7 +1,7 @@
 # Environment Monitoring API Documentation
 
-This is documentation using for Environment Monitoring API.
-
+This is documentation using for Environment Monitoring API.</br>
+Official website [here](http://hueic.edu.vn) </br>
 This API including 4 parts:
 </br>
 ```
@@ -43,7 +43,7 @@ Status: 200 OK
         "Username": string,
         "Password": string
     ]},
-    Status: true
+    Status: boolean
     StatusCode: 200
 }
 ```
@@ -56,7 +56,7 @@ Status: 400 Bad Request
 {
     "message": "Invalid Username or Password",
     "StatusCode": 400,
-    "Status": false
+    "Status": boolean
 } 
 ```
 </br>
@@ -131,15 +131,28 @@ Status: 400 Bad Request
 ```
 ### Users Managerment
 This API provided a basic user management features example: Add user, edit/update information, delete user, find user by ID, fetch all users.
-##### Fetch all users
+### Fetch all users
 To get/fetch all information each user, we provided this URI ``/users/`` with ``HTTP GET`` to retrieving all information of all users. Look like this:
-</br>
-</br>
 ```
 GET /users/
 ```
-</br>
-</br>
+#### Success
+If your operation is success, the API will be sent to a response with `HTTP 200` status code and JSON response:</br>
+```
+Status: 200 OK
+
+{
+    "Result": 
+    {[
+        "ID": int,
+        "FirstName": string,
+        "LastnName": string,
+        "Username": string,
+        "Password": string
+    ]}, 
+    "StatusCode": 200
+}
+```
 #### Failed
 If operation is failed, means is data is null or empty. You will get `HTTP 404` status code and JSON response look like this:</br>
 ```
@@ -149,4 +162,9 @@ Status: 404 Not Found
     "message": "Unable to find any user!",
     "StatusCode": 404
 }
+```
+### Find specific user by ID
+To get information specific user, you can use ID of them. Here is URI for find user information by ID:</br>
+```
+GET /users/:id
 ```
