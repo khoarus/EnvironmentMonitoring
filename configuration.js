@@ -10,7 +10,8 @@ module.exports = function(app) {
     app.use(bodyparser.json());
     app.use(bodyparser.urlencoded({ extended: true }));
     app.use(session({
-        secret: 'keyboard cat',
+        cookie: 'session',
+        secret: 'userlogin',
         resave: false,
         saveUninitialized: true
     }));
