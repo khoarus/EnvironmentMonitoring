@@ -87,9 +87,9 @@ In this case, an account that provided by user was created successfully. You wil
 ```
 ### Register failed
 Register will failed with 3 conditions:</br>
-1. ``Username`` is existing in database.
-2. Error when connection is lost.
-3. Parameters is null or empty.
+* ``Username`` is existing in database.
+* Error when connection is lost.
+* Parameters is null or empty.
 #### Username is existing
 Username that provided by user is existed in database and can't use to register again. In this case, the response will be look like:</br>
 ```
