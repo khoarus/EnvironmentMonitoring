@@ -10,7 +10,7 @@ This API including 4 parts:
 * Values
 ```
 
-The default/home URL of this API is: ``http://address:port/api/v1/``</br>
+The default trigged URL of this API is: ``http://address:port/api/v1/``</br>
 Make sure you enter above address exactly. You can access, modify resource with the API.<br>
 ###Let's start...
 ## Users

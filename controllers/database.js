@@ -5,7 +5,8 @@ function Database() {
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'enviromentmonitoring'
+        database: 'enviromentmonitoring',
+        multipleStatements: true
     })
     this.connection.connect();
 };
