@@ -47,12 +47,18 @@ module.exports = (app, router) => {
                     message: "Account was created successfully!",
                     StatusCode: 200
                 });
-            } else {
-                res.status(404).send({
+            } else if (result == false) {
+                res.status(409).send({
                     message: "Unable create an account. Username could be existed. Please try again with another Username!",
-                    StatusCode: 404
+                    StatusCode: 409
                 });
-            };
+            }
+            if (result == null) {
+                res.status(503).send({
+                    message: "Service Unavailable",
+                    statusCode: 503
+                })
+            }
         });
     });
 
