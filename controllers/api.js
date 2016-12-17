@@ -49,7 +49,7 @@ module.exports = (app, router) => {
                 });
             } else {
                 res.status(404).send({
-                    message: "Unable create an account. Please try again later!",
+                    message: "Unable create an account. Username could be existed. Please try again with another Username!",
                     StatusCode: 404
                 });
             };
