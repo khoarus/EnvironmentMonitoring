@@ -49,7 +49,7 @@ If success, you will receive JSON respone:</br></br>
 Else if error, you will receive JSON respone with HTTP Status: 400.
 ```
 {
-    Status: 400 Not Found
+    Status: 400 Bad Request
 
     "message": "Invalid Username or Password",
     "StatusCode": 400,
@@ -81,6 +81,8 @@ You must add 4 parameters to register for an account: ``username``, ``password``
 In this case, an account that provided by user was created successfully. You will received JSON response look like this:
 ```
 {
+    Status: 200 OK
+
 	"message": "Account was created successfully!",
 	"StatusCode": 200
 }
@@ -97,7 +99,29 @@ Register will failed with 3 conditions:</br>
 Username that provided by user is existed in database and can't use to register again. In this case, the response will be look like:</br>
 ```
 {
+    Status 409 Conflict
+
 	"message": "Unable create an account. Username could be existed. Please try again with another Username!",
-	"StatusCode" 404
+	"StatusCode" 409
+}
+```
+#### Error when connection is lost
+This error will occurred when API couldn't establishing connection to database to get data. And then you will receiving JSON response look like:
+```
+{
+    Status: 503 Service Unavailable
+
+    "message": "Service Unavailable",
+    "StatusCode": 503
+}
+```
+#### Parameters is null or empty
+If you don't provide parameters or parementers is null or empty string, you will get an error `HTTP 400 Bad Request` and response will be look like this:
+```
+{
+    Status: 400 Bad Request
+    
+    "StatusCode": 400,
+    "message": "Required fields not null"
 }
 ```
