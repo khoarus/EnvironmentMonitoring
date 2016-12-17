@@ -22,7 +22,8 @@ function User() {
     };
 
     function encrypt(data) {
-        return crypto.createHash('md5').update(data).digest("hex");
+
+        return crypto.createHash('sha512').update(data).digest("hex");
     };
 
     this.getUserById = (userId, callback) => {
@@ -48,7 +49,8 @@ function User() {
 
     this.updateUserInformation = (userId, firstname, lastname, username, password, callback) => {
         db.connection.query("UPDATE userstbl User SET FirstName = ?, LastName = ?, Username = ?, Password = ? WHERE IdUser = ?", [firstname, lastname, username, password, userId], (err, result) => {
-            if (err) throw
+
+            if (err) throw err;
             if (result.affectedRows > 0) callback(result);
             else callback(null);
         });

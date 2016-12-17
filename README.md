@@ -1,5 +1,6 @@
 # Environment Monitoring API Documentation
-This is documentation using for Environment Monitoring.
+
+This is documentation using for Environment Monitoring API.
 
 This API including 4 parts:
 </br>
@@ -10,7 +11,7 @@ This API including 4 parts:
 * Values
 ```
 
-The default/home URL of this API is: ``http://address:port/api/v1/``</br>
+The default trigged URL of this API is: ``http://address:port/api/v1/``</br>
 Make sure you enter above address exactly. You can access, modify resource with the API.<br>
 ###Let's start...
 ## Users
@@ -22,12 +23,12 @@ To login, we will use ``HTTP POST`` method to send request ``username`` and ``pa
 ``POST /users/login``
 </br>
 </br>
-We need add 2 parameters to body request: ``username`` and ``password``.
+You need add 2 parameters to body request: ``username`` and ``password``.
 ### Register account
-To have an account, user must create an account. An account simple required ``username``, ``password``, ``firstname`` and ``lastname``.
+To have an account, user must create an account. An account simple required ``username``, ``password``, ``firstname`` and ``lastname``. We also use ``HTTP POST`` method to send request create an account.
 </br>
 </br>
 ``POST /users/register``
 </br>
 </br>
-You must add 4 parameters to register account: ``username``, ``password``, ``firstname``, ``lastname``.</br>
+You must add 4 parameters to register for an account: ``username``, ``password``, ``firstname``, ``lastname``.</br>

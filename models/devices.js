@@ -4,7 +4,9 @@ function Device() {
 
     this.getDevice = function(idDevice, callback) {
 
-        db.connection.query("SELECT D.id, D.name,D.description,D.unit, D.id_endpoint IDEndPoint, D.minthreshold, D.maxthreshold, E.name EndPointName FROM devicetbl D LEFT JOIN endpointtbl E ON E.id = D.id_endpoint WHERE id=?", idDevice, (err, result) => {
+
+        db.connection.query("SELECT D.id IdDevice, D.name DeviceName, D.description Description, D.unit Unit, D.id_endpoint IDEndPoint, D.minthreshold MinValue, D.maxthreshold MaxValue, E.name EndPointName, V.value CurrentValue FROM devicetbl D LEFT JOIN endpointtbl E ON E.id = D.id_endpoint LEFT JOIN valuetbl V ON V.id_device = D.id ORDER BY V.value DESC LIMIT 1 WHERE D.id=?", idDevice, (err, result) => {
+
             if (err)
                 throw err;
             if (result) {
@@ -14,7 +16,9 @@ function Device() {
     };
     this.getAllDevice = function(callback) {
 
-        db.connection.query("SELECT D.name,D.description,D.unit, D.id_endpoint IDEndPoint, D.minthreshold, D.maxthreshold, E.name EndPointName FROM devicetbl D LEFT JOIN endpointtbl E ON E.id = D.id_endpoint ORDER BY D.name ASC limit 0,10", (err, result) => {
+
+        db.connection.query("SELECT D.id IdDevice, D.name DeviceName, D.description Description, D.unit, D.id_endpoint IDEndPoint, D.minthreshold MinValue, D.maxthreshold MaxValue, E.name EndPointName, V.value CurrentValue FROM devicetbl D LEFT JOIN endpointtbl E ON E.id = D.id_endpoint LEFT JOIN valuetbl V ON V.id_device = IdDevice ORDER BY CurrentValue DESC LIMIT 1", (err, result) => {
+
             if (err)
                 throw err;
             if (result) {

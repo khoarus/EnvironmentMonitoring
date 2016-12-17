@@ -1,9 +1,13 @@
 module.exports = (app, router) => {
 
     var users = require("../models/users");
+    var devices = require("../models/devices");
+    var values = require("../models/values");
+    var endpoints = require("../models/endpoints");
 
     router.get("/welcome", (req, res) => {
-        res.json({ message: "Welcome to Environment Monitoring API", version: "1.0", statusCode: res.statusCode });
+        res.json({ message: "Welcome to Environment Monitoring API", version: "1.0", StatusCode: res.statusCode });
+
     });
 
     //Users
@@ -11,13 +15,18 @@ module.exports = (app, router) => {
         var username = req.body.username,
             password = req.body.password;
         if (username == null || password == null) {
-            res.json({ statusCode: 500, message: "Required fields not null" });
+
+            res.json({ StatusCode: 500, message: "Required fields not null" });
         }
         users.login(username, password, (result, status) => {
             if (result != null) {
-                res.json(result);
+                res.json({
+                    Result: result,
+                    StatusCode: 200
+                });
             } else {
-                res.json({ message: "Invalid Username or Password!", ErrorCode: 400, Status: status });
+                res.json({ message: "Invalid Username or Password!", StatusCode: 400, Status: status });
+
             }
         });
     });
@@ -27,18 +36,18 @@ module.exports = (app, router) => {
         var firstname = req.body.firstname;
         var lastname = req.body.lastname;
         if (firstname == null || lastname == null || username == null || password == null) {
-            res.json({ statusCode: 400, message: "Required fields not null" });
+            res.json({ StatusCode: 400, message: "Required fields not null" });
         }
         users.register(username, password, firstname, lastname, (result) => {
             if (result === true) {
                 res.json({
                     message: "Account was created successfully!",
-                    ErrorCode: 200
+                    StatusCode: 200
                 });
             } else {
                 res.json({
                     message: "Unable create an account. Please try again later!",
-                    ErrorCode: 404
+                    StatusCode: 404
                 });
             };
         });
@@ -48,11 +57,11 @@ module.exports = (app, router) => {
         var id = req.params.id;
         users.getUserById(id, (result) => {
             if (result) {
-                res.json(result);
+                res.json({ Result: result, StatusCode: 200 });
             } else {
                 res.json({
                     Error: "Unable to get user information! Data is null!",
-                    ErrorCode: 404
+                    StatusCode: 404
                 });
             }
         });
@@ -61,7 +70,11 @@ module.exports = (app, router) => {
     //Devices
     router.route('/devices/:id/').get((req, res) => {
         var id = req.params.id;
-
+        devices.getDevice(id, (result) => {
+            if (result != null) {
+                res.json({ Result: result, StatusCode: 200 });
+            }
+        });
     });
 
     router.route('/devices').get((req, res) => {
