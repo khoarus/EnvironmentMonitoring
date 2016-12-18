@@ -1,7 +1,6 @@
 var express = require("express");
 var bodyparser = require("body-parser");
 var session = require('express-session');
-var path = require('path');
 module.exports = function(app) {
     app.set("view engine", "html");
     app.engine('html', require('ejs').renderFile);

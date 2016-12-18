@@ -59,7 +59,8 @@ Status: 200 OK
         "FirstName": string,
         "LastnName": string,
         "Username": string,
-        "Password": string
+        "Password": string,
+        "Role": string
     }],
     Status: boolean
     StatusCode: 200
@@ -159,11 +160,12 @@ Status: 200 OK
 {
     "Result": 
     [{
-        "ID": *integer*,
-        "FirstName": *string*,
-        "LastnName": *string*,
-        "Username": *string*,
-        "Password": *string*
+        "ID": integer,
+        "FirstName": string,
+        "LastnName": string,
+        "Username": string,
+        "Password": string,
+        "Role": string
     }], 
     "StatusCode": 200
 }
@@ -192,11 +194,12 @@ Status: 200 OK
 {
     "Result":
     {
-        "ID": *integer*,
-        "FirstName": *string*,
-        "LastnName": *string*,
-        "Username": *string*,
-        "Password": *string*
+        "ID": integer,
+        "FirstName": string,
+        "LastnName": string,
+        "Username": string,
+        "Password": string,
+        "Role": string
     },
     "StatusCode": 200
 }

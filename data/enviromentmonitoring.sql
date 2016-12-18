@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2016 at 03:30 PM
+-- Generation Time: Dec 18, 2016 at 06:40 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.11
 
@@ -52,6 +52,18 @@ CREATE TABLE `endpointtbl` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `roletbl`
+--
+
+CREATE TABLE `roletbl` (
+  `id` int(11) NOT NULL,
+  `role` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'User',
+  `description` varchar(20) COLLATE utf8_unicode_ci DEFAULT 'Người dùng'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `userstbl`
 --
 
@@ -60,7 +72,8 @@ CREATE TABLE `userstbl` (
   `FirstName` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'noname',
   `LastName` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `Username` varchar(24) COLLATE utf8_unicode_ci NOT NULL,
-  `Password` varchar(128) COLLATE utf8_unicode_ci NOT NULL
+  `Password` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `id_role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -93,6 +106,12 @@ ALTER TABLE `endpointtbl`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `roletbl`
+--
+ALTER TABLE `roletbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `userstbl`
 --
 ALTER TABLE `userstbl`
@@ -117,6 +136,11 @@ ALTER TABLE `devicetbl`
 -- AUTO_INCREMENT for table `endpointtbl`
 --
 ALTER TABLE `endpointtbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `roletbl`
+--
+ALTER TABLE `roletbl`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `userstbl`
