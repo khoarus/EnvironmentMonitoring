@@ -489,7 +489,6 @@ a.bg-danger:hover {
 }
 
 .user-menu {
-	display: inline-block;
 	margin-top: 14px;
 	margin-right: 10px;
 	float: right;
@@ -556,7 +555,7 @@ a.bg-danger:hover {
 .sidebar ul.nav .active > a:focus, .sidebar ul.nav li.parent a.active:focus {
 	color: #fff;
 	background-color: #30a5ff;
-}*/
+}
 
 .sidebar ul.nav ul,
 .sidebar ul.nav ul li {
