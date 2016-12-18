@@ -23,9 +23,7 @@ module.exports = function(app) {
     app.get('/forgot', (req, res) => {
         res.render('forgot');
     });
-    app.get('/account', (req, res) => {
-        res.render('account');
-    });
+
     app.get('/logout', (req, res) => {
         req.session.destroy();
         res.render('login');
@@ -33,6 +31,22 @@ module.exports = function(app) {
     app.get('/create', (req, res) => {
         res.render("create");
     });
+    // User
+
+    app.get('/account', (req, res) => {
+        res.render('account', {
+            title: 'User',
+            //pageHeader: 'Dashboard'
+        })
+    });
+
+    app.get('/account/edit', (req, res) => {
+        res.render('accountEdit', {
+            title: 'Chỉnh sửa tài khoản',
+            //pageHeader: 'Dashboard'
+        })
+    });
+
     // Device
 
     app.get('/device', (req, res) => {
