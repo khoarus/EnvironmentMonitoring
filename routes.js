@@ -3,7 +3,6 @@ module.exports = function(app) {
     app.get('/', (req, res) => {
         res.render('index', { 
             title: 'Trang chủ',
-            pageHeader: 'Dashboard'
         })
     });
 
@@ -34,7 +33,6 @@ module.exports = function(app) {
     app.get('/device', (req, res) => {
         res.render('device', { 
             title: 'Devices',
-            pageHeader: 'Devices'
         })
     });
 
