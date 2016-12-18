@@ -1,12 +1,19 @@
 module.exports = function(app) {
 
     app.get('/', (req, res) => {
+<<<<<<< HEAD
         var sess = req.session;
         if (sess.id) {
             res.render('index', { title: 'Trang chủ' });
         } else {
             res.render('login');
         }
+=======
+        res.render('index', { 
+            title: 'Trang chủ',
+            pageHeader: 'Dashboard'
+        })
+>>>>>>> d11e51e7faf7839aa0b3e1a4eb757ec7628e15cd
     });
 
     app.get('/login', (req, res) => {
