@@ -39,5 +39,23 @@ function Values() {
             } else callback(null);
         });
     };
+
+    this.deleteValue = (id, callback) => {
+        db.connection.query("SELECT * FROM valuetbl WHERE id = ?", id, (err, result) => {
+            if (err) throw err;
+            if (result.length > 0) {
+                db.connection.query("DELETE FROM valuetbl WHERE id = ?", id, (err, res) => {
+                    if (err) throw err;
+                    if (res.affectedRows > 0) {
+                        callback(res);
+                    } else {
+                        callback(null);
+                    }
+                });
+            } else {
+                callback(result.length);
+            }
+        });
+    }
 }
 module.exports = new Values();
