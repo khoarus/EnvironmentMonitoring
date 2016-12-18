@@ -60,6 +60,8 @@ module.exports = function(app) {
     });
 
     app.get('/device/create', (req, res) => {
-        res.render("deviceCreate");
+        res.render('deviceCreate', {
+            title: 'Thêm thiết bị',
+        })
     });
 };
