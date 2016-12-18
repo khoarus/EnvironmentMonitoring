@@ -11,7 +11,7 @@ function User() {
 
     this.login = (username, password, callback) => {
         var passwordhash = encrypt(password);
-        db.connection.query("SELECT IdUser ID, Firstname FirstName, LastName LastName, Username, Password FROM userstbl WHERE Username = ? AND Password = ?", [username, passwordhash], (err, result) => {
+        db.connection.query("SELECT U.IdUser ID, U.Firstname FirstName, U.LastName LastName, U.Username, U.Password, R.role Role FROM userstbl U LEFT JOIN roletbl R ON R.id = U.role_id WHERE U.Username = ? AND U.Password = ?", [username, passwordhash], (err, result) => {
             if (err) throw err;
             if (result.length > 0) {
                 callback(result, true);
@@ -27,7 +27,7 @@ function User() {
     }
 
     this.getUserById = (userId, callback) => {
-        db.connection.query("SELECT IdUser ID, Firstname FirstName, Lastname LastName, Username, Password FROM userstbl WHERE IdUser = ?", userId, (err, result) => {
+        db.connection.query("SELECT U.IdUser ID, U.Firstname FirstName, U.Lastname LastName, U.Username, U.Password, R.role Role FROM userstbl U LEFT JOIN roletbl R ON R.id = U.role_id WHERE U.IdUser = ?", userId, (err, result) => {
             if (!err) {
                 if (result.lenth > 0) {
                     callback(result);
@@ -41,7 +41,7 @@ function User() {
     };
 
     this.getUsers = (callback) => {
-        db.connection.query("SELECT IdUser ID, Firstname FirstName, Lastname LastName, Username, Password FROM userstbl", (err, result) => {
+        db.connection.query("SELECT U.IdUser ID, U.Firstname FirstName, U.Lastname LastName, U.Username, U.Password, R.role Role FROM userstbl U LEFT JOIN roletbl R ON R.id = U.role_id", (err, result) => {
             if (err) {
                 throw err;
             }
@@ -51,14 +51,26 @@ function User() {
         });
     };
 
-    this.updateUserInformation = (userId, firstname, lastname, username, password, callback) => {
-        db.connection.query("UPDATE userstbl User SET FirstName = ?, LastName = ?, Username = ?, Password = ? WHERE IdUser = ?", [firstname, lastname, username, password, userId], (err, result) => {
-
+    this.updateUserInformation = (userId, firstname, lastname, username, password, id_role, callback) => {
+        db.connection.query("UPDATE userstbl User SET FirstName = ?, LastName = ?, Username = ?, Password = ?, id_role = ? WHERE IdUser = ?", [firstname, lastname, username, password, id_role, userId], (err, result) => {
             if (err) throw err;
-            if (result.affectedRows > 0) callback(result);
-            else callback(null);
+            if (result.affectedRows > 0)
+                callback(result);
+            else
+                callback(null);
         });
     };
+
+    this.changeRole = (username, id_role, callback) => {
+        db.connection.query("UPDATE userstbl SET id_role = ? WHERE Username = ?", [id_role, username], (err, result) => {
+            if (err) throw err;
+            if (result.affectedRows > 0) {
+                callback(true);
+            } else {
+                callback(false);
+            }
+        });
+    }
 
     this.changePassword = (username, password, callback) => {
         var passwordhash = encrypt(password);

@@ -246,8 +246,28 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/values/:id').get((req, res) => {
-
+    router.route('/values/latest').get((req, res) => {
+        var id = req.body.id;
+        if (!id) {
+            res.status(400).send({
+                message: "Required value ID is not null!",
+                StatusCode: 400
+            });
+            return;
+        }
+        values.getLatestValue(id, (result) => {
+            if (result) {
+                res.json({
+                    Result: result,
+                    StatusCode: 200
+                });
+            } else {
+                res.status(404).send({
+                    message: "This device don't have latest value",
+                    StatusCode: 404
+                });
+            }
+        });
     });
 
     router.route('/values/:id').put((req, res) => {

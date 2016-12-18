@@ -21,7 +21,7 @@ function Values() {
     };
 
     this.getLatestValue = (idDevice, callback) => {
-        db.connection.query("SELECT * FROM valuetbl ORDER BY id DESC LIMIT 1", [], (err, result) => {
+        db.connection.query("SELECT * FROM valuetbl ORDER BY time DESC LIMIT 1 WHERE id_device = ?", idDevice, (err, result) => {
             if (err) throw err;
             if (result.length > 0) {
                 callback(result);
