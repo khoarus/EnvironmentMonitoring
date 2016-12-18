@@ -1,5 +1,3 @@
-var session = require('express-session');
-
 module.exports = function(app) {
     app.get('/', (req, res) => {
         res.render("index");
@@ -24,5 +22,9 @@ module.exports = function(app) {
     });
     app.get('/create', (req, res) => {
         res.render("create");
+    });
+
+    app.get('/device', (req, res) => {
+        res.render("device");
     });
 };

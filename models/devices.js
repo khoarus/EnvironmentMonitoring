@@ -13,11 +13,11 @@ function Device() {
         });
     };
     this.getAllDevice = function(callback) {
-        db.connection.query("SELECT D.id IdDevice, D.name DeviceName, D.description Description, D.unit, D.id_endpoint IDEndPoint, D.minthreshold MinValue, D.maxthreshold MaxValue, E.name EndPointName, V.value CurrentValue FROM devicetbl D LEFT JOIN endpointtbl E ON E.id = D.id_endpoint LEFT JOIN valuetbl V ON V.id_device = IdDevice ORDER BY CurrentValue DESC LIMIT 1", (err, result) => {
+        db.connection.query("SELECT D.id IdDevice, D.name DeviceName, D.description Description, D.unit, D.id_endpoint IDEndPoint, D.minthreshold Min, D.maxthreshold Max, E.name EndPointName, V.value CurrentValue FROM devicetbl D LEFT JOIN endpointtbl E ON E.id = D.id_endpoint LEFT JOIN valuetbl V ON V.id_device = D.id ORDER BY CurrentValue DESC LIMIT 1", (err, result) => {
 
             if (err)
                 throw err;
-            if (result) {
+            if (result && result.length > 0) {
                 callback(result);
             } else callback(null);
         });
