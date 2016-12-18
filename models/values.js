@@ -1,6 +1,7 @@
 function Values() {
     var db = require("../controllers/database");
-    this.putValue = (value, time, idDevice, callback) => {
+
+    this.postValue = (value, time, idDevice, callback) => {
         db.connection.query("INSERT valuetbl(id_device, time, value) VALUE(?, ?, ?)", [idDevice, time, value], (err, result) => {
             if (err) throw err;
             if (result.affectedRows > 0) {
@@ -21,7 +22,7 @@ function Values() {
     };
 
     this.getLatestValue = (idDevice, callback) => {
-        db.connection.query("SELECT * FROM valuetbl ORDER BY time DESC LIMIT 1 WHERE id_device = ?", idDevice, (err, result) => {
+        db.connection.query("SELECT V.id IDValue, V.id_device IDDevice, D.name DeviceName, V.time Time, V.value Value FROM valuetbl V LEFT JOIN devicetbl D ON D.id = V.id_device WHERE V.id_device = ? ORDER BY V.time DESC LIMIT 1", idDevice, (err, result) => {
             if (err) throw err;
             if (result.length > 0) {
                 callback(result);
@@ -32,7 +33,7 @@ function Values() {
     };
 
     this.changeValue = (idValue, idDevice, value, callback) => {
-        db.connection.query("UPDATE valuetbl SET value = ? WHERE id = ? AND id_device ?", [value, idValue, idDevice], (err, result) => {
+        db.connection.query("UPDATE valuetbl SET value = ? WHERE id = ? AND id_device = ?", [value, idValue, idDevice], (err, result) => {
             if (err) throw err;
             if (result.affectedRows > 0) {
                 callback(result);

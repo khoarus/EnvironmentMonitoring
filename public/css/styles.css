@@ -659,3 +659,7 @@ a.table-link:hover {
 	background: #F5F5F5;
 	border-left: 5px solid #30a5ff;
 }
+
+.list-box .buttons a {
+	margin-right: 10px;
+}

@@ -109,7 +109,7 @@ module.exports = (app, router) => {
     //Devices
 
     //Get device by ID
-    router.route('/devices/:id/').get((req, res) => {
+    router.route('/devices/fetch/:id/').get((req, res) => {
         var id = req.params.id;
         if (id === null) {
             res.status(400).send({
@@ -131,7 +131,7 @@ module.exports = (app, router) => {
     });
 
     //Get all devices
-    router.route('/devices').get((req, res) => {
+    router.route('/devices/fetch').get((req, res) => {
         devices.getAllDevice((result) => {
             if (result !== null) {
                 res.json({
@@ -316,17 +316,18 @@ module.exports = (app, router) => {
 
     //Add value
     router.route('/values/create/:endpoint/:device/:time/:value').post((req, res) => {
-        var device = req.body.idDevice;
-        var time = req.body.time;
-        var value = req.body.value;
-        if (!device || !time || !value) {
+        var device = req.params.idDevice;
+        var time = req.params.time;
+        var value = req.params.value;
+        var endpoint = req.params.endpoint;
+        if (!device || !time || !value || !endpoint) {
             res.status(400).send({
                 message: "Required fields is needed to create value",
                 StatusCode: 400
             });
             return;
         }
-        values.putValue(value, time, device, (result) => {
+        values.postValue(value, time, device, (result) => {
             if (result === true) {
                 res.json({
                     message: "SUCCESS",
@@ -371,7 +372,7 @@ module.exports = (app, router) => {
     });
 
     //Endpoints
-    router.route('/endpoints/:id').get((req, res) => {
+    router.route('/endpoints/fetch/:id').get((req, res) => {
         var id = req.params.id;
         if (!id) {
             res.status(400).send({
@@ -395,7 +396,7 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/endpoints/').get((req, res) => {
+    router.route('/endpoints/fetch').get((req, res) => {
         endpoints.getEndPoints((result) => {
             if (result !== null) {
                 res.json({

@@ -1,0 +1,43 @@
+doctype html
+html(lang='en')
+  head
+    title #{title} | Environment Monitoring
+    meta(charset='UTF-8')
+    link(href='../public/images/favicon.ico', rel='icon')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='../public/css/login.css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans&subset=vietnamese', rel='stylesheet')
+  body
+    form#login
+      .logo
+        a(href='/', title='Trang Chủ')
+          img(src='../public/images/logo.png', alt='logo')
+      #inputs
+        .input
+          label(for='lastName') Họ đệm
+          input#lastName(type='text', placeholder='Họ đệm')
+        .input
+          label(for='firstName') Tên
+          input#firstName(type='text', placeholder='Tên', required='')
+        .input
+          label(for='username') Tên tài khoản
+          input#username(pattern='.{6,16}', type='text', placeholder='Tên tài khoản', required='')
+        .input
+          label(for='password') Mật khẩu
+          input#password(type='password', placeholder='Mật khẩu', required='')
+        .input
+          label(for='password-repeat') Nhập lại mật khẩu
+          input#password-repeat(type='password', placeholder='Nhập lại mật khẩu', required='')
+          span#message
+      #actions
+        input#submit(type='submit', value='Đăng Ký')
+
+    script(src="../public/javascript/jquery-2.2.4.min.js")
+    script.
+      $( document ).ready(function() {
+        $('#password-repeat').on('keyup', function() {
+            if ($(this).val() == $('#password').val()) {
+                $('#message').html('Ok').css('color', 'green');
+            } else $('#message').html('Mật khẩu nhập lại không khớp').css('color', 'red');
+        });
+      });

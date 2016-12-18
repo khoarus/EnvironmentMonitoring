@@ -23,13 +23,14 @@ html(lang='en')
             ol.breadcrumb
                 li
                     a(href='#')
-                    i.fa.fa-home(aria-hidden='true')
-                li.active #{pageHeader}
+                        i.fa.fa-home(aria-hidden='true')
+                li.active #{title}
         .row
             .col-lg-12
-                h1.page-header #{pageHeader}
+                h1.page-header #{title}
 
         block content
 
 
     include partials/footer.pug
+    block scripts
