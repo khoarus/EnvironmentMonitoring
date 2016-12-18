@@ -76,4 +76,12 @@ module.exports = function(app) {
             title: 'Chỉnh sửa thiết bị',
         })
     });
+
+    // Endpoint
+
+    app.get('/endpoint/create', (req, res) => {
+        res.render('endpointCreate', {
+            title: 'Thêm thiết bị endpoint',
+        })
+    });
 };
