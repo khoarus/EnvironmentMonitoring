@@ -4,8 +4,6 @@ module.exports = function(app) {
         res.render('index', { title: 'Trang chủ'})
     });
 
-    app.get
-
     app.get('/login', (req, res) => {
         res.render("login");
     });
