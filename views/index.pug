@@ -1,54 +1,10 @@
-doctype html
-html(lang='en')
-  head
-    title #{title} | Environment Monitoring
-    meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(href='../public/images/favicon.ico', rel='icon')
-    link(href='../public/css/bootstrap.min.css', rel='stylesheet')
-    link(href='../public/css/styles.css', rel='stylesheet')
-    link(href='https://fonts.googleapis.com/css?family=Open+Sans&subset=vietnamese', rel='stylesheet')
-    link(href='../public/css/font-awesome.min.css', rel=' stylesheet')
-  body
+extends pug/layouts.pug
 
-    include pug/partials/nav.pug
-
-    #sidebar-collapse.col-sm-3.col-lg-2.sidebar
-      form(role='search')
-        .form-group
-          input.form-control(type='text', placeholder='Search')
-      ul.nav.menu
-        li.active
-          a(href='/')
-            i.fa.fa-area-chart(aria-hidden='true')
-            |  Dashboard
-        li
-          a(href='/device')
-            i.fa.fa-area-chart(aria-hidden='true')
-            |  Devices
-        li
-          a(href='/account')
-            i.fa.fa-user(aria-hidden='true')
-            |  User Profile
-        li.divider(role='presentation')
-        li
-          a(href='login')
-            i.fa.fa-sign-in(aria-hidden='true')
-            |  Login Page
-    .col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main
-      .row
-        ol.breadcrumb
-          li
-            a(href='#')
-              i.fa.fa-home(aria-hidden='true')
-          li.active Dashboard
-      .row
+block content
+    .row
         .col-lg-12
-          h1.page-header Dashboard
-      .row
-        .col-lg-12
-          .panel.panel-default
-            .panel-heading Chart
-            .panel-body
-              .canvas-wrapper
-                canvas#myChart(height='200', width='600')
+            .panel.panel-default
+                .panel-heading Chart
+                .panel-body
+                .canvas-wrapper
+                    canvas#myChart(height='200', width='600')

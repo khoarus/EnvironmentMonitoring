@@ -1,7 +1,10 @@
 module.exports = function(app) {
 
     app.get('/', (req, res) => {
-        res.render('index', { title: 'Trang chủ'})
+        res.render('index', { 
+            title: 'Trang chủ',
+            pageHeader: 'Dashboard'
+        })
     });
 
     app.get('/login', (req, res) => {
