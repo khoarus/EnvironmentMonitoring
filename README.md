@@ -55,12 +55,12 @@ Status: 200 OK
 
 {
     "Result":
-    {[
+    [{
         "FirstName": string,
         "LastnName": string,
         "Username": string,
         "Password": string
-    ]},
+    }],
     Status: boolean
     StatusCode: 200
 }
@@ -158,13 +158,13 @@ Status: 200 OK
 
 {
     "Result": 
-    {[
-        "ID": int,
-        "FirstName": string,
-        "LastnName": string,
-        "Username": string,
-        "Password": string
-    ]}, 
+    [{
+        "ID": *integer*,
+        "FirstName": *string*,
+        "LastnName": *string*,
+        "Username": *string*,
+        "Password": *string*
+    }], 
     "StatusCode": 200
 }
 ```
@@ -192,12 +192,14 @@ Status: 200 OK
 {
     "Result":
     {
-        "ID": int,
-        "FirstName": string,
-        "LastnName": string,
-        "Username": string,
-        "Password": string
+        "ID": *integer*,
+        "FirstName": *string*,
+        "LastnName": *string*,
+        "Username": *string*,
+        "Password": *string*
     },
     "StatusCode": 200
 }
 ```
+#### Failed
+Else if failed, you will get JSON response with ``HTTP 404`` code.
