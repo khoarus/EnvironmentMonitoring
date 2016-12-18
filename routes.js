@@ -8,10 +8,7 @@ module.exports = function(app) {
         }*/
         res.render('index', {
             title: 'Trang chủ',
-<<<<<<< HEAD
             //pageHeader: 'Dashboard'
-=======
->>>>>>> 47763e5d4a2ff07f174255e20bec323469091951
         })
     });
 
@@ -40,7 +37,7 @@ module.exports = function(app) {
     // Device
 
     app.get('/device', (req, res) => {
-        res.render('device', { 
+        res.render('device', {
             title: 'Devices',
         })
     });
