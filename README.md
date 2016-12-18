@@ -205,4 +205,10 @@ Status: 200 OK
 }
 ```
 #### Failed
-Else if failed, you will get JSON response with ``HTTP 404`` code. 
+Else if failed, you will get JSON response with ``HTTP 404`` code. This means is API couldn't find user with ID specific. A JSON respone will be look like this:
+```
+{
+    "Error": "Unable to get user information! Data is null!",
+    "StatusCode": 404
+}
+```
