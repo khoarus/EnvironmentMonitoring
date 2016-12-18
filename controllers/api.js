@@ -295,11 +295,33 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/values/:idDevice/:time/:value').post((req, res) => {
-
+    router.route('/values/create').post((req, res) => {
+        var device = req.body.idDevice;
+        var time = req.body.time;
+        var value = req.body.value;
+        if (!device || !time || !value) {
+            res.status(400).send({
+                message: "Required fields is needed to create value",
+                StatusCode: 400
+            });
+            return;
+        }
+        values.putValue(value, time, device, (result) => {
+            if (result === true) {
+                res.json({
+                    message: "SUCCESS",
+                    StatusCode: 200
+                });
+            } else {
+                res.status(408).send({
+                    message: "FAILED",
+                    StatusCode: 408
+                });
+            }
+        });
     });
 
-    router.route('/values/:id').delete((req, res) => {
+    router.route('/values/delete/:id').delete((req, res) => {
         var id = req.params.id;
         if (!id) {
             res.status(400).send({
@@ -307,6 +329,24 @@ module.exports = (app, router) => {
             });
             return;
         }
+        values.deleteValue(id, (result) => {
+            if (result < 0) {
+                res.status(404).send({
+                    message: "Value Not Found",
+                    StatusCode: 404
+                })
+            } else if (!result) {
+                res.this.status(400).send({
+                    message: "Unable to delete value: " + id,
+                    StatusCode: 400
+                });
+            } else {
+                res.json({
+                    message: "Value " + id + " has been deleted successfully!",
+                    StatusCode: 200
+                });
+            }
+        });
     });
 
     //Endpoints
