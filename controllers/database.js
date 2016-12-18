@@ -4,7 +4,7 @@ function Database() {
     this.connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: '',
+        password: 'Neo123',
         database: 'enviromentmonitoring',
         multipleStatements: true
     });

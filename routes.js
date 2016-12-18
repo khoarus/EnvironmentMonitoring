@@ -32,7 +32,10 @@ module.exports = function(app) {
     // Device
 
     app.get('/device', (req, res) => {
-        res.render("device");
+        res.render('device', { 
+            title: 'Devices',
+            pageHeader: 'Devices'
+        })
     });
 
     app.get('/createDevice', (req, res) => {
