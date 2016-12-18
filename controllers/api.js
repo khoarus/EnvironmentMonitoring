@@ -17,7 +17,6 @@ module.exports = (app, router) => {
         var username = req.body.username,
             password = req.body.password;
         if (username === null || password === null) {
-
             res.status(500).send({ StatusCode: 500, message: "Required fields not null" });
             return;
         }
@@ -270,11 +269,33 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/values/:id').put((req, res) => {
-
+    router.route('/values/').put((req, res) => {
+        var device = req.body.idDevice,
+            idValue = req.body.idValue,
+            value = req.body.value;
+        if (!device || !idValue || !value) {
+            res.status(400).send({
+                message: "Required value ID is not null!",
+                StatusCode: 400
+            });
+            return;
+        }
+        values.changeValue(idValue, device, value, (result) => {
+            if (result) {
+                res.json({
+                    Result: result,
+                    StatusCode: 200
+                });
+            } else {
+                res.status(404).send({
+                    message: "Can't change this value",
+                    StatusCode: 404
+                });
+            }
+        });
     });
 
-    router.route('/values/:id').post((req, res) => {
+    router.route('/values/:idDevice/:time/:value').post((req, res) => {
 
     });
 

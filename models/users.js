@@ -4,7 +4,7 @@ var db = require("../controllers/database");
 function User() {
     this.register = (username, password, firstname, lastname, callback) => {
         var passwordhash = encrypt(password);
-        db.connection.query("INSERT INTO userstbl(FirstName, LastName, Username, Password) VALUE(?, ?, ?, ?)", [firstname, lastname, username, passwordhash], (err, result) => {
+        db.connection.query("INSERT INTO userstbl(FirstName, LastName, Username, Password, id_role) VALUE(?, ?, ?, ?, 2)", [firstname, lastname, username, passwordhash], (err, result) => {
             callback(result.affectedRows > 0);
         });
     };

@@ -31,8 +31,8 @@ function Values() {
         });
     };
 
-    this.changeValue = (idValue, value, callback) => {
-        db.connection.query("UPDATE valuetbl SET value = ? WHERE id = ?", [value, idValue], (err, result) => {
+    this.changeValue = (idValue, idDevice, value, callback) => {
+        db.connection.query("UPDATE valuetbl SET value = ? WHERE id = ? AND id_device ?", [value, idValue, idDevice], (err, result) => {
             if (err) throw err;
             if (result.affectedRows > 0) {
                 callback(result);
