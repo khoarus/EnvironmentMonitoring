@@ -33,11 +33,12 @@ module.exports = function(app) {
     app.get('/create', (req, res) => {
         res.render("create");
     });
-
     // Device
 
     app.get('/device', (req, res) => {
-        res.render("device");
+        res.render('device', {
+            title: 'Devices',
+        })
     });
 
     app.get('/createDevice', (req, res) => {

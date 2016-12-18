@@ -13,17 +13,17 @@ This API including 4 parts:
 
 The default trigged URL of this API is:</br>
 ```
-http://address:port/api/v1/
+http://address:port/core/api/v1/
 ```
 Make sure you enter above address exactly. You can access, modify resource with the API.<br>
 ## Testing
 For testing and check for API available/running, simply enter following URI on your browser or any REST client:
 ```
-GET http://address:port/api/v1
+GET http://address:port/core/api/v1
 
 or
 
-GET http://address:port/api/v1/welcome
+GET http://address:port/core/api/v1/welcome
 ```
 The home URI will response with JSON string:
 ```
@@ -205,4 +205,10 @@ Status: 200 OK
 }
 ```
 #### Failed
-Else if failed, you will get JSON response with ``HTTP 404`` code. 
+Else if failed, you will get JSON response with ``HTTP 404`` code. This means is API couldn't find user with ID specific. A JSON respone will be look like this:
+```
+{
+    "Error": "Unable to get user information! Data is null!",
+    "StatusCode": 404
+}
+```

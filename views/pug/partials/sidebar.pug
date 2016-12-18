@@ -3,18 +3,17 @@
         .form-group
             input.form-control(type='text', placeholder='Search')
     ul.nav.menu
-        li.active
-            a(href='/')
-                i.fa.fa-area-chart(aria-hidden='true')
-                |  Dashboard
-        li
-            a(href='/device')
-                i.fa.fa-area-chart(aria-hidden='true')
-                |  Devices
-        li
-            a(href='/account')
-                i.fa.fa-user(aria-hidden='true')
-                |  User Profile
+        each val, key in menu
+            if selected === key
+                li.active
+                    a(href=val, title=key)
+                        //- block sidebar-icon
+                        = key
+            else
+                li
+                    a(href=val, title=key)
+                        //- i.fa.fa-area-chart(aria-hidden='true')
+                        = key
         li.divider(role='presentation')
         li
             a(href='login')
