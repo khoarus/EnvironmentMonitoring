@@ -7,7 +7,7 @@ module.exports = function(app) {
             res.render('login');
         }*/
         res.render('index', {
-            title: 'Trang chủ',
+            title: 'Dashboard',
             //pageHeader: 'Dashboard'
         })
     });
