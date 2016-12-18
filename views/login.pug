@@ -1,0 +1,24 @@
+doctype html
+html(lang='en')
+	head
+		title #{title} | Environment Monitoring
+		meta(charset='UTF-8')
+		link(href='../public/images/favicon.ico', rel='icon')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', href='../public/css/login.css')
+		link(href='https://fonts.googleapis.com/css?family=Open+Sans&subset=vietnamese', rel='stylesheet')
+	body
+		form#login
+			.logo
+				a(href='/', title='Trang Chủ')
+					img(src='../public/images/logo.png', alt='logo')
+			#inputs
+				input#username(type='text', placeholder='Tên tài khoản')
+				input#password(type='text', placeholder='Mật khẩu')
+			#actions
+				input#submit(type='submit', value='Đăng nhập')
+			.footer
+				p.pull-left
+					a(href='register') Đăng ký
+				p.pull-right
+					a(href='#') Quên mật khẩu?
