@@ -13,7 +13,7 @@ block content
                 .panel-heading
                     | Devices
                     span.pull-right
-                        button.btn.btn-large.btn-primary
+                        a.btn.btn-large.btn-primary(href="device/create")
                             i.fa.fa-pencil-square-o
                             |  Thêm thiết bị
                 .panel-body
@@ -37,7 +37,7 @@ block content
                                     button.btn.btn-sm.btn-primary
                                         i.fa.fa-eye
                                         |  Hiển thị chi tiết
-                                    button.btn.btn-sm.btn-default
+                                    button.btn.btn-sm.btn-default(type='button', data-toggle='modal', data-target='#myModal')
                                         i.fa.fa-pencil-square-o
                                         |  Chỉnh sửa
                                 span.pull-right
@@ -61,9 +61,22 @@ block content
                                     button.btn.btn-sm.btn-primary
                                         i.fa.fa-eye
                                         |  Hiển thị chi tiết
-                                    button.btn.btn-sm.btn-default
+                                    button.btn.btn-sm.btn-default(type='button', data-toggle='modal', data-target='#myModal')
                                         i.fa.fa-pencil-square-o
                                         |  Chỉnh sửa
                                 span.pull-right
                                     p #2
                     // /.list-box
+
+                    // Modal
+                    #myModal.modal.fade(role='dialog')
+                        .modal-dialog
+                            // Modal content
+                            .modal-content
+                                .modal-header
+                                    button.close(type='button', data-dismiss='modal') ×
+                                    h4.modal-title Modal Header
+                                .modal-body
+                                    p Some text in the modal.
+                                .modal-footer
+                                    button.btn.btn-default(type='button', data-dismiss='modal') Close

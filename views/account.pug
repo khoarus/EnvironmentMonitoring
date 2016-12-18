@@ -1,0 +1,64 @@
+extends pug/layouts.pug
+
+block link
+  -var selected = 'Users';
+
+block content
+  .row
+    .col-lg-12
+      .panel.panel-default
+        .panel-heading
+          | User
+          span.pull-right
+              a.btn.btn-large.btn-primary(href="account/create")
+                  i.fa.fa-pencil-square-o
+                  |  Thêm tài khoản
+        .panel-body
+          .table-responsive
+            table.table
+              thead
+                tr
+                  th #
+                  th Họ đệm
+                  th Tên
+                  th Tên tài khoản
+                  th
+              tbody
+                tr
+                  td 1
+                  td Nguyễn Văn
+                  td A
+                  td nguyenvana
+                  td
+                    a.table-link(href='#')
+                      span.fa-stack
+                        i.fa.fa-square.fa-stack-2x
+                        i.fa.fa-search-plus.fa-stack-1x.fa-inverse
+                    a.table-link(href='/account/edit')
+                      span.fa-stack
+                        i.fa.fa-square.fa-stack-2x
+                        i.fa.fa-pencil.fa-stack-1x.fa-inverse
+                    a.table-link.danger(href='#')
+                      span.fa-stack
+                        i.fa.fa-square.fa-stack-2x
+                        i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+                tr
+                  td 2
+                  td Nguyễn Văn
+                  td B
+                  td nguyenvanb
+                  td
+                    a.table-link(href='#', title='Truy cập')
+                      span.fa-stack
+                        i.fa.fa-square.fa-stack-2x
+                        i.fa.fa-search-plus.fa-stack-1x.fa-inverse
+                    a.table-link(href='/account/edit', title='Chỉnh sửa')
+                      span.fa-stack
+                        i.fa.fa-square.fa-stack-2x
+                        i.fa.fa-pencil.fa-stack-1x.fa-inverse
+                    a.table-link.danger(href='#', title='Xóa')
+                      span.fa-stack
+                        i.fa.fa-square.fa-stack-2x
+                        i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+  // /.row
+
