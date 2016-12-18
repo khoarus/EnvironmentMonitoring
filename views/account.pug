@@ -7,7 +7,12 @@ block content
   .row
     .col-lg-12
       .panel.panel-default
-        .panel-heading User
+        .panel-heading
+          | User
+          span.pull-right
+              a.btn.btn-large.btn-primary(href="account/create")
+                  i.fa.fa-pencil-square-o
+                  |  Thêm tài khoản
         .panel-body
           .table-responsive
             table.table
