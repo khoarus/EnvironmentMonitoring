@@ -109,7 +109,7 @@ module.exports = (app, router) => {
     //Devices
 
     //Get device by ID
-    router.route('/devices/:id/').get((req, res) => {
+    router.route('/devices/fetch/:id/').get((req, res) => {
         var id = req.params.id;
         if (id === null) {
             res.status(400).send({
@@ -131,7 +131,7 @@ module.exports = (app, router) => {
     });
 
     //Get all devices
-    router.route('/devices').get((req, res) => {
+    router.route('/devices/fetch').get((req, res) => {
         devices.getAllDevice((result) => {
             if (result !== null) {
                 res.json({
@@ -371,7 +371,7 @@ module.exports = (app, router) => {
     });
 
     //Endpoints
-    router.route('/endpoints/:id').get((req, res) => {
+    router.route('/endpoints/fetch/:id').get((req, res) => {
         var id = req.params.id;
         if (!id) {
             res.status(400).send({
@@ -395,7 +395,7 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/endpoints/').get((req, res) => {
+    router.route('/endpoints/fetch').get((req, res) => {
         endpoints.getEndPoints((result) => {
             if (result !== null) {
                 res.json({

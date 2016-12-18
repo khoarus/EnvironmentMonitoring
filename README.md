@@ -207,8 +207,67 @@ Status: 200 OK
 #### Failed
 Else if failed, you will get JSON response with ``HTTP 404`` code. This means is API couldn't find user with ID specific. A JSON respone will be look like this:
 ```
+Status: 404 Not Found
+
 {
     "Error": "Unable to get user information! Data is null!",
+    "StatusCode": 404
+}
+```
+##### Parameters is null
+An ID of user is required parameters to get specific user. If you leave blank, you'll get error. An JSON error with ``HTTP 400`` in respone look like this:
+```
+Status: 400 Bad Request
+
+{
+    "message": "Required User ID is not null",
+    "StatusCode": 400
+}
+```
+## Devices
+This API supported 5 features to manage devices. Included:
+```
+* Get all devices
+* Get specific device by ID
+* Delete device
+* Update device information
+* Delete device
+```
+### Get all devices
+To get all devices, you need use following URI:
+```
+GET /devices/fetch
+```
+This operation will return a response including list of available devices.
+#### Success
+If this done and success, a response with ``HTTP 200`` code will be look like:
+```
+Status: 200 OK
+
+{
+    Result:
+    [{
+        "IdDevice": integer,
+        "DeviceName": string,
+        "Description": string,
+        "Unit": string,
+        "IDEndPoint": integer,
+        "Min": double,
+        "Max": double,
+        "EndPointName": string,
+        "CurrentValue": double
+    }],
+    StatusCode: 200
+}
+```
+You need parse an array named ``Result`` to get a list of devices.
+#### Failed
+If operation failed, you will get response:
+```
+StatusCode: 404
+
+{
+    "message": "Not Found Any Devices",
     "StatusCode": 404
 }
 ```
