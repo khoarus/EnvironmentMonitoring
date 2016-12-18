@@ -64,4 +64,10 @@ module.exports = function(app) {
             title: 'Thêm thiết bị',
         })
     });
+
+    app.get('/device/edit', (req, res) => {
+        res.render('deviceEdit', {
+            title: 'Chỉnh sửa thiết bị',
+        })
+    });
 };
