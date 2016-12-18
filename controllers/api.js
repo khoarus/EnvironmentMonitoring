@@ -316,17 +316,18 @@ module.exports = (app, router) => {
 
     //Add value
     router.route('/values/create/:endpoint/:device/:time/:value').post((req, res) => {
-        var device = req.body.idDevice;
-        var time = req.body.time;
-        var value = req.body.value;
-        if (!device || !time || !value) {
+        var device = req.params.idDevice;
+        var time = req.params.time;
+        var value = req.params.value;
+        var endpoint = req.params.endpoint;
+        if (!device || !time || !value || !endpoint) {
             res.status(400).send({
                 message: "Required fields is needed to create value",
                 StatusCode: 400
             });
             return;
         }
-        values.putValue(value, time, device, (result) => {
+        values.postValue(value, time, device, (result) => {
             if (result === true) {
                 res.json({
                     message: "SUCCESS",

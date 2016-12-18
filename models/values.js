@@ -1,6 +1,7 @@
 function Values() {
     var db = require("../controllers/database");
-    this.putValue = (value, time, idDevice, callback) => {
+
+    this.postValue = (value, time, idDevice, callback) => {
         db.connection.query("INSERT valuetbl(id_device, time, value) VALUE(?, ?, ?)", [idDevice, time, value], (err, result) => {
             if (err) throw err;
             if (result.affectedRows > 0) {
@@ -32,7 +33,7 @@ function Values() {
     };
 
     this.changeValue = (idValue, idDevice, value, callback) => {
-        db.connection.query("UPDATE valuetbl SET value = ? WHERE id = ? AND id_device ?", [value, idValue, idDevice], (err, result) => {
+        db.connection.query("UPDATE valuetbl SET value = ? WHERE id = ? AND id_device = ?", [value, idValue, idDevice], (err, result) => {
             if (err) throw err;
             if (result.affectedRows > 0) {
                 callback(result);
