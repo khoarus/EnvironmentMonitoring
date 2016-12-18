@@ -3,9 +3,19 @@ var db = require("../controllers/database");
 
 function User() {
     this.register = (username, password, firstname, lastname, callback) => {
-        var passwordhash = encrypt(password);
-        db.connection.query("INSERT INTO userstbl(FirstName, LastName, Username, Password, id_role) VALUE(?, ?, ?, ?, 2)", [firstname, lastname, username, passwordhash], (err, result) => {
-            callback(result.affectedRows > 0);
+        db.connection.query("SELECT * FROM userstbl WHERE Username = ?", username, (err, result) => {
+            if (err) throw err;
+            else {
+                if (result.length > 0) {
+                    callback(false);
+                }
+                if (result.length === 0) {
+                    var passwordhash = encrypt(password);
+                    db.connection.query("INSERT INTO userstbl(FirstName, LastName, Username, Password, id_role) VALUE(?, ?, ?, ?, 2)", [firstname, lastname, username, passwordhash], (err, result) => {
+                        callback(result.affectedRows > 0);
+                    });
+                }
+            }
         });
     };
 

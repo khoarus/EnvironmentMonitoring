@@ -1,8 +1,9 @@
 module.exports = function(app) {
 
     app.get('/', (req, res) => {
-        res.render("index");
+        res.render('index', { title: 'Trang chủ'})
     });
+
     app.get('/login', (req, res) => {
         res.render("login");
     });
@@ -25,7 +26,13 @@ module.exports = function(app) {
         res.render("create");
     });
 
+    // Device
+
     app.get('/device', (req, res) => {
         res.render("device");
+    });
+
+    app.get('/createDevice', (req, res) => {
+        res.render("createDevice");
     });
 };
