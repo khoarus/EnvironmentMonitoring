@@ -5,14 +5,19 @@ module.exports = (app, router) => {
     var values = require("../models/values");
     var endpoints = require("../models/endpoints");
 
+    //Welcom page
     router.get("/welcome", (req, res) => {
         res.json({ message: "Welcome to Environment Monitoring API", version: "1.0", StatusCode: res.statusCode });
 
     });
+
+    //Test API
     router.get("/", (req, res) => {
         res.status(200).send({ message: "Your test is OK! The API is running! This is API home" });
     });
     //Users
+
+    //Login
     router.route('/users/login').post((req, res) => {
         var username = req.body.username,
             password = req.body.password;
@@ -33,6 +38,8 @@ module.exports = (app, router) => {
             }
         });
     });
+
+    //Register
     router.route('/users/register').post((req, res) => {
         var username = req.body.username;
         var password = req.body.password;
@@ -63,6 +70,7 @@ module.exports = (app, router) => {
         });
     });
 
+    //Get user specific by ID
     router.route('/users/:id').get((req, res) => {
         var id = req.params.id;
         if (id === null) {
@@ -84,6 +92,7 @@ module.exports = (app, router) => {
         });
     });
 
+    //Get all users
     router.route('/users/').get((req, res) => {
         users.getUsers((result) => {
             if (result) {
@@ -98,6 +107,8 @@ module.exports = (app, router) => {
     });
 
     //Devices
+
+    //Get device by ID
     router.route('/devices/:id/').get((req, res) => {
         var id = req.params.id;
         if (id === null) {
@@ -119,6 +130,7 @@ module.exports = (app, router) => {
         });
     });
 
+    //Get all devices
     router.route('/devices').get((req, res) => {
         devices.getAllDevice((result) => {
             if (result !== null) {
@@ -135,7 +147,8 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/devices/').post((req, res) => {
+    //Create a device
+    router.route('/devices/create').post((req, res) => {
         var idEndPoint = req.body.endpoint,
             name = req.body.name,
             description = req.body.description,
@@ -164,7 +177,8 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/devices/create').put((req, res) => {
+    //update device info
+    router.route('/devices/update').put((req, res) => {
         var id = req.body.id;
         var device_name = req.body.name;
         var description = req.body.description;
@@ -194,7 +208,8 @@ module.exports = (app, router) => {
         })
     });
 
-    router.route('/devices/:id').delete((req, res) => {
+    //Delete device
+    router.route('/devices/delete/:id').delete((req, res) => {
         var id = req.params.id;
         if (!id) {
             res.status(400).send({
@@ -221,7 +236,9 @@ module.exports = (app, router) => {
     });
 
     //Values
-    router.route('/values/:id').get((req, res) => {
+
+    //Fetch specific value
+    router.route('/values/fetch/:id').get((req, res) => {
         var idDevice = req.params.id;
         if (idDevice === null) {
             res.status(400).send({
@@ -245,8 +262,9 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/values/latest').get((req, res) => {
-        var id = req.body.id;
+    //Fetch the latest value of device
+    router.route('/values/fetch/latest/:iddevice').get((req, res) => {
+        var id = req.params.iddevice;
         if (!id) {
             res.status(400).send({
                 message: "Required value ID is not null!",
@@ -269,6 +287,7 @@ module.exports = (app, router) => {
         });
     });
 
+    //Update value of device
     router.route('/values/update').put((req, res) => {
         var device = req.body.idDevice,
             idValue = req.body.idValue,
@@ -295,7 +314,8 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/values/create').post((req, res) => {
+    //Add value
+    router.route('/values/create/:endpoint/:device/:time/:value').post((req, res) => {
         var device = req.body.idDevice;
         var time = req.body.time;
         var value = req.body.value;
@@ -321,6 +341,7 @@ module.exports = (app, router) => {
         });
     });
 
+    //Delete value
     router.route('/values/delete/:id').delete((req, res) => {
         var id = req.params.id;
         if (!id) {
@@ -417,6 +438,6 @@ module.exports = (app, router) => {
     router.use((req, res, next) => {
         next(new Error("Not implemented"));
     });
-    app.use("/api/v1/", router);
+    app.use("/core/api/v1/", router);
 
 };
