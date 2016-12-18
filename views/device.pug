@@ -34,10 +34,10 @@ block content
                                     | sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
                             .list-footer
                                 span.pull-left.buttons
-                                    button.btn.btn-sm.btn-primary
+                                    a.btn.btn-sm.btn-primary
                                         i.fa.fa-eye
                                         |  Hiển thị chi tiết
-                                    button.btn.btn-sm.btn-default(type='button', data-toggle='modal', data-target='#myModal')
+                                    a.btn.btn-sm.btn-default(href="device/edit")
                                         i.fa.fa-pencil-square-o
                                         |  Chỉnh sửa
                                 span.pull-right
@@ -58,25 +58,12 @@ block content
                                     | sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
                             .list-footer
                                 span.pull-left.buttons
-                                    button.btn.btn-sm.btn-primary
+                                    a.btn.btn-sm.btn-primary
                                         i.fa.fa-eye
                                         |  Hiển thị chi tiết
-                                    button.btn.btn-sm.btn-default(type='button', data-toggle='modal', data-target='#myModal')
+                                    a.btn.btn-sm.btn-default(href="device/edit")
                                         i.fa.fa-pencil-square-o
                                         |  Chỉnh sửa
                                 span.pull-right
                                     p #2
                     // /.list-box
-
-                    // Modal
-                    #myModal.modal.fade(role='dialog')
-                        .modal-dialog
-                            // Modal content
-                            .modal-content
-                                .modal-header
-                                    button.close(type='button', data-dismiss='modal') ×
-                                    h4.modal-title Modal Header
-                                .modal-body
-                                    p Some text in the modal.
-                                .modal-footer
-                                    button.btn.btn-default(type='button', data-dismiss='modal') Close
