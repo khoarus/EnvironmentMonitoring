@@ -1,9 +1,10 @@
 var express = require("express");
 var bodyparser = require("body-parser");
 var session = require('express-session');
+var pug = require('pug');
 module.exports = function(app) {
-    app.set("view engine", "html");
-    app.engine('html', require('ejs').renderFile);
+    app.set("view engine", "pug");
+    app.engine('html', require('pug').renderFile);
     app.set('views', __dirname + '/views');
     app.use('/public', express.static(__dirname + '/public'));
     app.use(bodyparser.json());

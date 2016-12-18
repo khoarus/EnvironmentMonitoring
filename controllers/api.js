@@ -300,7 +300,13 @@ module.exports = (app, router) => {
     });
 
     router.route('/values/:id').delete((req, res) => {
-
+        var id = req.params.id;
+        if (!id) {
+            res.status(400).send({
+                message: "Required field is needed to fetch specific value"
+            });
+            return;
+        }
     });
 
     //Endpoints
