@@ -272,3 +272,8 @@ StatusCode: 404 Not Found
 }
 ```
 ### Get specific device with ID
+For get specific device, you need provide ID of device in parameters.
+```
+GET /devices/fetch/:id
+```
+ID is number and required parameter to get device by ID.
