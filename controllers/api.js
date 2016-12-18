@@ -10,7 +10,7 @@ module.exports = (app, router) => {
 
     });
     router.get("/", (req, res) => {
-        res.status(200).send({ message: "Your test is OK! The API is running!" });
+        res.status(200).send({ message: "Your test is OK! The API is running! This is API home" });
     });
     //Users
     router.route('/users/login').post((req, res) => {
