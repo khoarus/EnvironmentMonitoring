@@ -164,7 +164,7 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/devices/').put((req, res) => {
+    router.route('/devices/create').put((req, res) => {
         var id = req.body.id;
         var device_name = req.body.name;
         var description = req.body.description;
@@ -187,7 +187,7 @@ module.exports = (app, router) => {
                 });
             } else {
                 res.status(403).send({
-                    message: "Can't not update information for device: " + id,
+                    message: "FAILED",
                     StatusCode: 403
                 });
             }
