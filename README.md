@@ -271,3 +271,4 @@ StatusCode: 404 Not Found
     "StatusCode": 404
 }
 ```
+### Get specific device with ID
