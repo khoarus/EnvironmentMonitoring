@@ -25,4 +25,8 @@ module.exports = function(app) {
     app.get('/create', (req, res) => {
         res.render("create");
     });
+
+    app.get('/device', (req, res) => {
+        res.render("device");
+    });
 };
