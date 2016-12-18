@@ -7,7 +7,7 @@ module.exports = function(app) {
             res.render('login');
         }*/
         res.render('index', {
-            title: 'Trang chủ',
+            title: 'Dashboard',
             //pageHeader: 'Dashboard'
         })
     });
@@ -62,6 +62,18 @@ module.exports = function(app) {
     app.get('/device/create', (req, res) => {
         res.render('deviceCreate', {
             title: 'Thêm thiết bị',
+        })
+    });
+
+    app.get('/device/detail', (req, res) => {
+        res.render('deviceDetail', {
+            title: 'Thông tin chi tiết',
+        })
+    });
+
+    app.get('/device/edit', (req, res) => {
+        res.render('deviceEdit', {
+            title: 'Chỉnh sửa thiết bị',
         })
     });
 };
