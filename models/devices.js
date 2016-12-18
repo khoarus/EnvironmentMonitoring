@@ -17,7 +17,7 @@ function Device() {
 
             if (err)
                 throw err;
-            if (result) {
+            if (result && result.length > 0) {
                 callback(result);
             } else callback(null);
         });

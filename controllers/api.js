@@ -263,8 +263,28 @@ module.exports = (app, router) => {
     });
 
     //Endpoints
-    router.route('/endpoints/:idDevice').get((req, res) => {
-
+    router.route('/endpoints/:id').get((req, res) => {
+        var id = req.params.id;
+        if (!id) {
+            res.status(400).send({
+                message: "Required field is needed to delete endpoint",
+                StatusCode: 400
+            });
+            return;
+        }
+        endpoints.getEndPointById(id, (result) => {
+            if (result) {
+                res.json({
+                    Result: result,
+                    StatusCode: 200
+                });
+            } else {
+                res.status(404).send({
+                    message: "Can't find any devices",
+                    StatusCode: 404
+                });
+            }
+        });
     });
 
     router.route('/endpoints/').get((req, res) => {
