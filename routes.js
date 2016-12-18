@@ -36,14 +36,18 @@ module.exports = function(app) {
     app.get('/account', (req, res) => {
         res.render('account', {
             title: 'User',
-            //pageHeader: 'Dashboard'
+        })
+    });
+
+    app.get('/account/create', (req, res) => {
+        res.render('accountCreate', {
+            title: 'Tạo tài khoản',
         })
     });
 
     app.get('/account/edit', (req, res) => {
         res.render('accountEdit', {
             title: 'Chỉnh sửa tài khoản',
-            //pageHeader: 'Dashboard'
         })
     });
 

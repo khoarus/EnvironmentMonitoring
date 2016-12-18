@@ -7,19 +7,19 @@ block content
   .row
     .col-lg-12
       .panel.panel-default
-        .panel-heading Edit Profile
+        .panel-heading Thêm tài khoản
         .panel-body
           form(role='form')
             #inputs
               .form-group
                 label(for='lastName') Họ đệm
-                input#lastName.form-control(type='text', placeholder='Họ đệm', value='Nguyễn Văn')
+                input#lastName.form-control(type='text', placeholder='Họ đệm')
               .form-group
                 label(for='firstName') Tên
-                input#firstName.form-control(type='text', placeholder='Tên', value='A')
+                input#firstName.form-control(type='text', placeholder='Tên')
               .form-group
                 label(for='username') Tên tài khoản
-                input#username.form-control(pattern='.{6,16}', type='text', placeholder='Tên tài khoản', value='hoangbaovu')
+                input#username.form-control(pattern='.{6,16}', type='text', placeholder='Tên tài khoản')
               .form-group
                 label(for='password') Mật khẩu
                 input#password.form-control(type='password', placeholder='Mật khẩu')
@@ -29,10 +29,11 @@ block content
                 span#message
             // /#input
             #actions
-              input#submit.btn.btn-primary(type='submit', value='Cập Nhật')
+              input#submit.btn.btn-primary(type='submit', value='Tạo tài khoản')
           // ./form
     // /.col
   // /.row
+
 block scripts
   script.
     $('#password-repeat').on('keyup', function() {
