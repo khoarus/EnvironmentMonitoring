@@ -91,6 +91,12 @@ module.exports = function(app) {
         })
     });
 
+    app.get('/endpoint/detail', (req, res) => {
+        res.render('endpointDetail', {
+            title: 'Thông tin chi tiết',
+        })
+    });
+
     app.get('/endpoint/edit', (req, res) => {
         res.render('endpointEdit', {
             title: 'Chỉnh sửa thiết bị',
