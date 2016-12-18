@@ -79,6 +79,12 @@ module.exports = function(app) {
 
     // Endpoint
 
+    app.get('/endpoint', (req, res) => {
+        res.render('endpoint', {
+            title: 'Endpoint',
+        })
+    });
+
     app.get('/endpoint/create', (req, res) => {
         res.render('endpointCreate', {
             title: 'Thêm thiết bị',
