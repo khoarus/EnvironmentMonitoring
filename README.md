@@ -205,4 +205,4 @@ Status: 200 OK
 }
 ```
 #### Failed
-Else if failed, you will get JSON response with ``HTTP 404`` code.
+Else if failed, you will get JSON response with ``HTTP 404`` code. 

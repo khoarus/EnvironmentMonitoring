@@ -1,18 +1,23 @@
 module.exports = function(app) {
-
     app.get('/', (req, res) => {
-        res.render('index', { 
+        /*var sess = req.session;
+        if (sess.id) {
+            res.render('index', { title: 'Trang chủ' });
+        } else {
+            res.render('login');
+        }*/
+        res.render('index', {
             title: 'Trang chủ',
-            pageHeader: 'Dashboard'
+            //pageHeader: 'Dashboard'
         })
     });
 
     app.get('/login', (req, res) => {
-        res.render("login");
+        res.render("login", { title: 'Đăng nhập' });
     });
 
     app.get('/register', (req, res) => {
-        res.render("register");
+        res.render("register", { title: 'Đăng ký' });
     });
 
     app.get('/forgot', (req, res) => {

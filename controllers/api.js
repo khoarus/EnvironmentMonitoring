@@ -164,7 +164,7 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/devices/').put((req, res) => {
+    router.route('/devices/create').put((req, res) => {
         var id = req.body.id;
         var device_name = req.body.name;
         var description = req.body.description;
@@ -187,7 +187,7 @@ module.exports = (app, router) => {
                 });
             } else {
                 res.status(403).send({
-                    message: "Can't not update information for device: " + id,
+                    message: "FAILED",
                     StatusCode: 403
                 });
             }
@@ -221,8 +221,8 @@ module.exports = (app, router) => {
     });
 
     //Values
-    router.route('/values/').get((req, res) => {
-        var idDevice = req.body.id;
+    router.route('/values/:id').get((req, res) => {
+        var idDevice = req.params.id;
         if (idDevice === null) {
             res.status(400).send({
                 message: "Required Device ID is not null!",
@@ -269,7 +269,7 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/values/').put((req, res) => {
+    router.route('/values/update').put((req, res) => {
         var device = req.body.idDevice,
             idValue = req.body.idValue,
             value = req.body.value;
