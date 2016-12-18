@@ -2,9 +2,6 @@ doctype html
 html(lang='en')
   head
     title #{title} | Environment Monitoring
-    block link
-        -var selected = 'dashboard'; //default
-    -var menu = { 'Dashboard': '/', 'Devices': '/device', 'Endpoint': '/endpoint', 'Users': '/account' };
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(href='../public/images/favicon.ico', rel='icon')
@@ -13,6 +10,10 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans&subset=vietnamese', rel='stylesheet')
     link(href='../public/css/font-awesome.min.css', rel=' stylesheet')
   body
+
+    block link
+        -var selected = 'dashboard'; //default
+    -var menu = { 'Dashboard': '/', 'Endpoint': '/endpoint', 'Devices': '/device', 'Users': '/account' };
 
     include partials/nav.pug
 
