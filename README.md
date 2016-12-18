@@ -264,7 +264,7 @@ You need parse an array named ``Result`` to get a list of devices.
 #### Failed
 If operation failed, you will get response:
 ```
-StatusCode: 404
+StatusCode: 404 Not Found
 
 {
     "message": "Not Found Any Devices",
