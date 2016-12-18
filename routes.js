@@ -65,6 +65,12 @@ module.exports = function(app) {
         })
     });
 
+    app.get('/device/detail', (req, res) => {
+        res.render('deviceDetail', {
+            title: 'Thông tin chi tiết',
+        })
+    });
+
     app.get('/device/edit', (req, res) => {
         res.render('deviceEdit', {
             title: 'Chỉnh sửa thiết bị',
