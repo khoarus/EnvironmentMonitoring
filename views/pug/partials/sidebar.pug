@@ -1,0 +1,21 @@
+#sidebar-collapse.col-sm-3.col-lg-2.sidebar
+    form(role='search')
+        .form-group
+            input.form-control(type='text', placeholder='Search')
+    ul.nav.menu
+        each val, key in menu
+            if selected === key
+                li.active
+                    a(href=val, title=key)
+                        i.fa.fa-area-chart(aria-hidden='true')
+                        = key
+            else
+                li
+                    a(href=val, title=key)
+                        i.fa.fa-area-chart(aria-hidden='true')
+                        = key
+        li.divider(role='presentation')
+        li
+            a(href='login')
+                i.fa.fa-sign-in(aria-hidden='true')
+                |  Login Page

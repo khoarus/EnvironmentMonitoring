@@ -1,0 +1,13 @@
+extends pug/layouts.pug
+
+block link
+  -var selected = 'Dashboard';
+
+block content
+    .row
+        .col-lg-12
+            .panel.panel-default
+                .panel-heading Chart
+                .panel-body
+                .canvas-wrapper
+                    canvas#myChart(height='200', width='600')
