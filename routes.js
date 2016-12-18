@@ -1,8 +1,11 @@
 module.exports = function(app) {
 
     app.get('/', (req, res) => {
-        res.render("index");
+        res.render('index', { title: 'Trang chủ'})
     });
+
+    app.get
+
     app.get('/login', (req, res) => {
         res.render("login");
     });
