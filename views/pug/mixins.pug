@@ -18,3 +18,13 @@ mixin list-user(id, lastName, firstName, userName, role)
         span.fa-stack
           i.fa.fa-square.fa-stack-2x
           i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+
+mixin breadcrumb(breadcrumbs)
+  ol.breadcrumb
+    li
+      a(href='/', title="Quay lại trang chủ")
+          i.fa.fa-home(aria-hidden='true')
+    each val, key in breadcrumbs
+      li
+        a(href=val, title=key)=key
+    li.active #{title}
