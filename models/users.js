@@ -70,14 +70,19 @@ function User() {
         });
     };
 
-    this.changeRole = (username, id_role, callback) => {
-        db.connection.query("UPDATE userstbl SET id_role = ? WHERE Username = ?", [id_role, username], (err, result) => {
+    this.changeRole = (id_user, id_role, callback) => {
+        db.connection.query("SELECT * FROM userstbl WHERE IdUser = ?", id_user, (err, result) => {
             if (err) throw err;
-            if (result.affectedRows > 0) {
-                callback(true);
-            } else {
-                callback(false);
-            }
+            if (result.length > 0) {
+                db.connection.query("UPDATE userstbl SET id_role = ? WHERE IdUser = ?", [id_role, id_user], (err, result) => {
+                    if (err) throw err;
+                    if (result.affectedRows > 0) {
+                        callback(true);
+                    } else {
+                        callback(false);
+                    }
+                });
+            } else callback(null);
         });
     }
 
