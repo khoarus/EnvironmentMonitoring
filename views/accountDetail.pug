@@ -1,0 +1,42 @@
+extends pug/layouts.pug
+
+block link
+  -var selected = 'Users';
+
+block content
+  .row
+    .col-lg-12
+      .panel.panel-default
+        .panel-heading Edit Profile
+        .panel-body
+          form(role='form')
+            #inputs
+              .form-group
+                label(for='lastName') Họ đệm
+                input#lastName.form-control(type='text', placeholder='Họ đệm', value='Nguyễn Văn')
+              .form-group
+                label(for='firstName') Tên
+                input#firstName.form-control(type='text', placeholder='Tên', value='A')
+              .form-group
+                label(for='username') Tên tài khoản
+                input#username.form-control(pattern='.{6,16}', type='text', placeholder='Tên tài khoản', value='nguyenvana')
+              .form-group
+                label(for='password') Mật khẩu
+                input#password.form-control(type='password', placeholder='Mật khẩu')
+              .form-group
+                label(for='password-repeat') Nhập lại mật khẩu
+                input#password-repeat.form-control(type='password', placeholder='Nhập lại mật khẩu')
+                span#message
+            // /#input
+            #actions
+              input#submit.btn.btn-primary(type='submit', value='Cập Nhật')
+          // ./form
+    // /.col
+  // /.row
+block scripts
+  script.
+    $('#password-repeat').on('keyup', function() {
+        if ($(this).val() == $('#password').val()) {
+            $('#message').html('Ok').css('color', 'green');
+        } else $('#message').html('Mật khẩu nhập lại không khớp').css('color', 'red');
+    });
