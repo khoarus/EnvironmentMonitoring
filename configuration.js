@@ -14,6 +14,57 @@ module.exports = function(app) {
         resave: false,
         saveUninitialized: true
     }));
+
+    //Error handling
+
+    /* //400
+     app.use(function(req, res) {
+         res.status(400);
+         res.render('400');
+     });
+
+     app.use(function(req, res) {
+         res.status(401);
+         res.render('401');
+     });
+     app.use(function(req, res) {
+         res.status(403);
+         res.render('403');
+     });
+     app.use(function(req, res) {
+         res.status(404);
+         res.render('404');
+     });
+     app.use(function(req, res) {
+         res.status(500);
+         res.render('500');
+     });
+
+     app.use(function(req, res) {
+         res.status(501);
+         res.render('501');
+     });
+
+     app.use(function(req, res) {
+         res.status(502);
+         res.render('502');
+     });
+
+     app.use(function(req, res) {
+         res.status(503);
+         res.render('503');
+     });
+
+     app.use(function(req, res) {
+         res.status(520);
+         res.render('520');
+     });
+
+     app.use(function(req, res) {
+         res.status(521);
+         res.render('521');
+     });*/
+
     var router = express.Router();
     require('./controllers/api')(app, router);
 };
