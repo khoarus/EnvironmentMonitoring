@@ -393,7 +393,7 @@ module.exports = (app, router) => {
                 res.status(404).send({
                     message: "Didn't find any device",
                     StatusCode: 404
-                })
+                });
             }
         });
     });
@@ -416,13 +416,36 @@ module.exports = (app, router) => {
                     StatusCode: 200
                 });
             } else {
-
+                res.status(409).send({
+                    message: "Endpoint name conflict",
+                    StatusCode: 409
+                });
             }
         });
     });
 
     router.route('/endpoints/update/:id').put((req, res) => {
+        var id = req.params.id,
+            name = req.body.name,
+            description = req.body.description,
+            address = req.body.address;
+        if (!id || (!name || name == "") || (!description || description == "") || (!address || address == "")) {
+            res.status(400).send({
+                message: "Required fields is not null",
+                StatusCode: 400
+            });
+            return;
+        }
+        endpoints.updateEndPoint(id, name, description, address, (result) => {
+            if (result == true) {
+                res.json({
+                    message: "SUCCESS",
+                    StatusCode: 200
+                });
+            } else {
 
+            }
+        });
     });
 
     router.route('/endpoints/delete/:id').delete((req, res) => {
@@ -435,22 +458,29 @@ module.exports = (app, router) => {
             return;
         }
         endpoints.deleteEndPoint(id, (result) => {
+            if (!result) {
+                res.status(404).send({
+                    message: "Device Not Found",
+                    StatusCode: 404
+                });
+                return;
+            }
             if (result === true) {
                 res.json({
                     Result: "Device has been deleted successfully!",
                     StatusCode: 200
                 });
             } else {
-                res.status(404).send({
+                res.status(400).send({
                     message: "Unable to find endpoint",
-                    StatusCode: 404
+                    StatusCode: 400
                 });
             }
         });
     });
 
     router.use((req, res, next) => {
-        next(new Error("Not implemented"));
+        next(new Error("Not Implemented"));
     });
     app.use("/core/api/v1/", router);
 
