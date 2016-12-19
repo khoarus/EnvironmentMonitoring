@@ -488,6 +488,26 @@ a.bg-danger:hover {
 	box-shadow: inset 0px 0px 0px 1px #30a5ff;
 }
 
+.user-menu { 
+  margin-top: 14px; 
+  margin-right: 10px; 
+  float: right; 
+  list-style: none; 
+  padding: 0; 
+} 
+ 
+.user-menu a { 
+  color: #fff; 
+}
+
+.user-menu .fa {
+	margin: 0 10px 0 0;
+}
+ 
+.user-menu a:hover { 
+  text-decoration: underline; 
+}
+
 /* Sidebar */
 
 .sidebar {
