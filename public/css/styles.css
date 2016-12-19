@@ -634,6 +634,10 @@ a.bg-danger:hover {
 	margin: 0 ;
 }
 
+.breadcrumb li {
+	font-size: 2em;
+}
+
 h1.page-header {
 	margin-top: 30px;
 	border-bottom: 0;
