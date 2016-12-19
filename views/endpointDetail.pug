@@ -1,10 +1,9 @@
-extends pug/layouts.pug
+extends pug/layouts
 
 block link
   -var selected = 'Endpoints';
 
-//- block sidebar-icon
-//-   i.fa.fa-area-chart(aria-hidden='true')
+include pug/partials/breadcrumb/endpoints
 
 block content
     .row
