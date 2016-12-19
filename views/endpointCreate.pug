@@ -1,7 +1,9 @@
-extends pug/layouts.pug
+extends pug/layouts
 
 block link
   -var selected = 'Endpoints';
+
+include pug/partials/breadcrumb/endpoints
 
 block content
   .row
