@@ -1,9 +1,10 @@
+-var sideBar = { 'Dashboard': '/', 'Endpoints': '/endpoint', 'Devices': '/device', 'Users': '/account' };
 #sidebar-collapse.col-sm-3.col-lg-2.sidebar
     form(role='search')
         .form-group
             input.form-control(type='text', placeholder='Search')
     ul.nav.menu
-        each val, key in menu
+        each val, key in sideBar
             if selected === key
                 li.active
                     a(href=val, title=key)
