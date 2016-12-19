@@ -111,13 +111,6 @@ module.exports = (app, router) => {
     //Get device by ID
     router.route('/devices/fetch/:id/').get((req, res) => {
         var id = req.params.id;
-        if (id === null) {
-            res.status(400).send({
-                message: "Required Device ID is not null",
-                StatusCode: 400
-            });
-            return;
-        }
         devices.getDevice(id, (result) => {
             if (result !== null) {
                 res.json({
@@ -374,13 +367,6 @@ module.exports = (app, router) => {
     //Endpoints
     router.route('/endpoints/fetch/:id').get((req, res) => {
         var id = req.params.id;
-        if (!id) {
-            res.status(400).send({
-                message: "Required field is needed to delete endpoint",
-                StatusCode: 400
-            });
-            return;
-        }
         endpoints.getEndPointById(id, (result) => {
             if (result) {
                 res.json({
@@ -409,7 +395,34 @@ module.exports = (app, router) => {
                     StatusCode: 404
                 })
             }
-        })
+        });
+    });
+
+    router.route('/endpoints/create').post((req, res) => {
+        var name = req.body.name;
+        var description = req.body.description;
+        var address = req.body.description;
+        if ((!name || name == "") || (!description || description == "") || (!address || address == "")) {
+            res.status(400).send({
+                message: "Required fields not null or empty",
+                StatusCode: 400
+            });
+            return;
+        }
+        endpoints.addEndPoint(name, description, address, (result) => {
+            if (result == true) {
+                res.json({
+                    message: "Endpoints has been created successfully!",
+                    StatusCode: 200
+                });
+            } else {
+
+            }
+        });
+    });
+
+    router.route('/endpoints/update/:id').put((req, res) => {
+
     });
 
     router.route('/endpoints/delete/:id').delete((req, res) => {
