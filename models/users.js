@@ -21,7 +21,7 @@ function User() {
 
     this.login = (username, password, callback) => {
         var passwordhash = encrypt(password);
-        db.connection.query("SELECT U.IdUser ID, U.Firstname FirstName, U.LastName LastName, U.Username, U.Password, R.role Role FROM userstbl U LEFT JOIN roletbl R ON R.id = U.role_id WHERE U.Username = ? AND U.Password = ?", [username, passwordhash], (err, result) => {
+        db.connection.query("SELECT U.IdUser ID, U.Firstname FirstName, U.LastName LastName, U.Username, U.Password, R.role Role FROM userstbl U LEFT JOIN roletbl R ON R.id = U.id_role WHERE U.Username = ? AND U.Password = ?", [username, passwordhash], (err, result) => {
             if (err) throw err;
             if (result.length > 0) {
                 callback(result, true);
@@ -33,31 +33,30 @@ function User() {
 
     function encrypt(data) {
 
-        return crypto.createHash('sha512').update(data).digest("hex");
+        return crypto.createHash('sha512').update(data).digest("hex").toUpperCase();
     }
 
     this.getUserById = (userId, callback) => {
-        db.connection.query("SELECT U.IdUser ID, U.Firstname FirstName, U.Lastname LastName, U.Username, U.Password, R.role Role FROM userstbl U LEFT JOIN roletbl R ON R.id = U.role_id WHERE U.IdUser = ?", userId, (err, result) => {
-            if (!err) {
-                if (result.lenth > 0) {
-                    callback(result);
-                } else {
-                    callback(null);
-                }
+        db.connection.query("SELECT U.IdUser ID, U.Firstname FirstName, U.Lastname LastName, U.Username, U.Password, R.role Role FROM userstbl U LEFT JOIN roletbl R ON R.id = U.id_role WHERE U.IdUser = ?", userId, (err, result) => {
+            if (err) throw err;
+            if (result.length > 0) {
+                callback(result);
             } else {
-                throw err;
+                callback(null);
             }
         });
     };
 
     this.getUsers = (callback) => {
-        db.connection.query("SELECT U.IdUser ID, U.Firstname FirstName, U.Lastname LastName, U.Username, U.Password, R.role Role FROM userstbl U LEFT JOIN roletbl R ON R.id = U.role_id", (err, result) => {
+        db.connection.query("SELECT U.IdUser ID, U.Firstname FirstName, U.Lastname LastName, U.Username, U.Password, R.role Role FROM userstbl U LEFT JOIN roletbl R ON R.id = U.id_role", (err, result) => {
             if (err) {
                 throw err;
             }
-            if (result.lenth > 0) {
+            if (result.length > 0) {
                 callback(result);
-            } else callback(null);
+            } else {
+                callback(null);
+            }
         });
     };
 
