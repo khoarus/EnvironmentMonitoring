@@ -625,8 +625,35 @@ h1.page-header {
 
 /* User Page */
 
-#actions input:hover {
-    background: #F56A35;
+#inputs .role label {
+	padding: 5px 12px;
+}
+
+#inputs .role label:first-child {
+	margin-left: -12px;
+  color: #5f6468;
+	font-size: 14px;
+}
+
+#inputs input[type=radio]{
+	display:none;
+}
+
+#inputs input[type=radio]:hover + label {
+	background: rgba(48,165,255, 0.6);
+	color: #fff;
+	cursor: pointer;
+}
+
+#inputs input[type=radio]:checked + label {
+	background:rgba(48,165,255, 1);
+	color: #fff;
+	cursor: pointer;
+	padding: 5px 12px;
+}
+
+#inputs input#actions input:hover {
+	background: #F56A35;
 	border: 1px solid #F56A35;
 }
 

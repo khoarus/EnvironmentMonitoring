@@ -20,6 +20,12 @@ block content
               .form-group
                 label(for='username') Tên tài khoản
                 input#username.form-control(pattern='.{6,16}', type='text', placeholder='Tên tài khoản')
+              .form-group.role
+                label.label(for='role') Chức vụ
+                input#1(type='radio', name='name', checked='')
+                label(for='1') User
+                input#2(type='radio', name='name')
+                label(for='2') Admin
               .form-group
                 label(for='password') Mật khẩu
                 input#password.form-control(type='password', placeholder='Mật khẩu')

@@ -7,7 +7,7 @@ block content
   .row
     .col-lg-12
       .panel.panel-default
-        .panel-heading Edit Profile
+        .panel-heading Detail Profile
         .panel-body
           form(role='form')
             #inputs
@@ -20,6 +20,9 @@ block content
               .form-group
                 label(for='username') Tên tài khoản
                 input#username.form-control(pattern='.{6,16}', type='text', placeholder='Tên tài khoản', value='nguyenvana')
+              .form-group
+                label(for='role') Chức vụ
+                input#role.form-control(type='text', value='Admin' disabled)
               .form-group
                 label(for='password') Mật khẩu
                 input#password.form-control(type='password', placeholder='Mật khẩu')
