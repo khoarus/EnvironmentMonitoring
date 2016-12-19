@@ -488,22 +488,6 @@ a.bg-danger:hover {
 	box-shadow: inset 0px 0px 0px 1px #30a5ff;
 }
 
-.user-menu {
-	margin-top: 14px;
-	margin-right: 10px;
-	float: right;
-	list-style: none;
-	padding: 0;
-}
-
-.user-menu a {
-	color: #fff;
-}
-
-.user-menu a:hover, .user-menu a:focus {
-	text-decoration: none;
-}
-
 /* Sidebar */
 
 .sidebar {
@@ -521,6 +505,10 @@ a.bg-danger:hover {
 
 .sidebar .fa {
 	margin: 10px;
+}
+
+.sidebar a {
+	font-size: 1.3em;
 }
 
 @media (min-width: 768px) {
@@ -606,6 +594,14 @@ a.bg-danger:hover {
 	text-align: center;
 	border-top: 1px solid #eee;
 	font-size: 12px;
+}
+
+.sidebar .nav p {
+	margin-left: 20px;
+}
+
+.sidebar .nav .active {
+	font-weight: bold;
 }
 
 /*Breadcrumbs*/

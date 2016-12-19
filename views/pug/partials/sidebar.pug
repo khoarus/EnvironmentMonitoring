@@ -8,13 +8,24 @@
             if selected === key
                 li.active
                     a(href=val, title=key)
-                        //- block sidebar-icon
+                        i.fa.fa-circle(aria-hidden='true')
                         = key
             else
                 li
                     a(href=val, title=key)
-                        //- i.fa.fa-area-chart(aria-hidden='true')
+                        i.fa.fa-circle-thin(aria-hidden='true')
                         = key
+        li.divider(role='presentation')
+        li
+            p User
+        li
+            a(href='/account/detail', title="Tài khoản")
+                i.fa.fa-user(aria-hidden='true')
+                | Tài khoản
+        li
+            a(href='#', title="settings")
+                i.fa.fa-cog(aria-hidden='true')
+                | Cài đặt
         li.divider(role='presentation')
         li
             a(href='/logout')
