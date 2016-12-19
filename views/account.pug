@@ -18,47 +18,18 @@ block content
             table.table
               thead
                 tr
-                  th #
+                  th id
                   th Họ đệm
                   th Tên
                   th Tên tài khoản
+                  th Chức vụ
                   th
               tbody
-                tr
-                  td 1
-                  td Nguyễn Văn
-                  td A
-                  td nguyenvana
-                  td
-                    a.table-link(href='#')
-                      span.fa-stack
-                        i.fa.fa-square.fa-stack-2x
-                        i.fa.fa-search-plus.fa-stack-1x.fa-inverse
-                    a.table-link(href='/account/edit')
-                      span.fa-stack
-                        i.fa.fa-square.fa-stack-2x
-                        i.fa.fa-pencil.fa-stack-1x.fa-inverse
-                    a.table-link.danger(href='#')
-                      span.fa-stack
-                        i.fa.fa-square.fa-stack-2x
-                        i.fa.fa-trash-o.fa-stack-1x.fa-inverse
-                tr
-                  td 2
-                  td Nguyễn Văn
-                  td B
-                  td nguyenvanb
-                  td
-                    a.table-link(href='#', title='Truy cập')
-                      span.fa-stack
-                        i.fa.fa-square.fa-stack-2x
-                        i.fa.fa-search-plus.fa-stack-1x.fa-inverse
-                    a.table-link(href='/account/edit', title='Chỉnh sửa')
-                      span.fa-stack
-                        i.fa.fa-square.fa-stack-2x
-                        i.fa.fa-pencil.fa-stack-1x.fa-inverse
-                    a.table-link.danger(href='#', title='Xóa')
-                      span.fa-stack
-                        i.fa.fa-square.fa-stack-2x
-                        i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+                +list-user(1, 'Nguyễn Văn', 'A', 'nguyenvana', 'Admin')
+                +list-user(2, 'Nguyễn Văn', 'A', 'nguyenvana', 'User')
+                +list-user(3, 'Nguyễn Văn', 'A', 'nguyenvana', 'User')
+                +list-user(4, 'Nguyễn Văn', 'A', 'nguyenvana', 'User')
+                +list-user(5, 'Nguyễn Văn', 'A', 'nguyenvana', 'Admin')
+                +list-user(6, 'Nguyễn Văn', 'A', 'nguyenvana', 'User')
   // /.row
 

@@ -1,0 +1,20 @@
+mixin list-user(id, lastName, firstName, userName, role)
+  tr
+    td #{id}
+    td #{lastName}
+    td #{firstName}
+    td #{userName}
+    td #{role}
+    td
+      a.table-link(href='#')
+        span.fa-stack
+          i.fa.fa-square.fa-stack-2x
+          i.fa.fa-search-plus.fa-stack-1x.fa-inverse
+      a.table-link(href='/account/edit')
+        span.fa-stack
+          i.fa.fa-square.fa-stack-2x
+          i.fa.fa-pencil.fa-stack-1x.fa-inverse
+      a.table-link.danger(href='#')
+        span.fa-stack
+          i.fa.fa-square.fa-stack-2x
+          i.fa.fa-trash-o.fa-stack-1x.fa-inverse
