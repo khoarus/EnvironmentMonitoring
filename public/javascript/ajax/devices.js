@@ -1,6 +1,8 @@
 $(function (){
 
-  $.getJSON( "http://localhost:8082/core/api/v1/devices/fetch", function( data ) {
+  var API = "http://localhost:8082/core/api/v1/devices/fetch";
+
+  $.getJSON( API, function( data ) {
 
     $.each(data.Result, function(){
       $('.list-box').append('\
@@ -24,7 +26,7 @@ $(function (){
             <p>' + this.IdDevice + '</p>\
           </span>\
         </li>\
-        ');
+      ');
     });
 
   });
