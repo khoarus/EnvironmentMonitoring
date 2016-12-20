@@ -1,11 +1,11 @@
-$(function (){
+$(function() {
 
-  var API = "http://localhost:8082/core/api/v1/users";
+    var API = "http://203.113.167.3:8082/core/api/v1/users";
 
-  $.getJSON( API, function( data ) {
+    $.getJSON(API, function(data) {
 
-    $.each(data.Result, function(){
-      $('.table tbody').append('\
+        $.each(data.Result, function() {
+            $('.table tbody').append('\
         <tr>\
           <td>' + this.ID + '</td>\
           <td>' + this.LastName + '</td>\
@@ -34,7 +34,7 @@ $(function (){
           </td>\
         </tr>\
       ');
-    });
+        });
 
-  });
+    });
 });

@@ -1,11 +1,11 @@
 function EndPoint() {
     var db = require("../controllers/database");
 
-    this.addEndPoint = (name, description, address, callback) => {
+    this.addEndPoint = (name, description, address, id_user, callback) => {
         db.connection.query("SELECT * FROM endpointtbl WHERE name = ?", name, (err, result) => {
             if (err) throw err;
             if (result.length > 0) {
-                db.connection.query("INSERT INTO endpointtbl(name, description, address) VALUES(?, ?, ?)", [name, description, address], (err, result) => {
+                db.connection.query("INSERT INTO endpointtbl(name, description, address, id_user) VALUES(?, ?, ?, ?)", [name, description, address, id_user], (err, result) => {
                     if (err) throw err;
                     if (result.affectedRows > 0) {
                         callback(true);

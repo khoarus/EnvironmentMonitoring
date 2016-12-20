@@ -432,33 +432,40 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/endpoints/create').post((req, res) => {
-        var name = req.body.name;
-        var description = req.body.description;
-        var address = req.body.description;
-        if ((!name || name == "") || (!description || description == "") || (!address || address == "")) {
+    router.route('/endpoints/create/:userid/:name/:description/:address').post((req, res) => {
+        var name = req.params.name;
+        var description = req.params.description;
+        var address = req.params.description;
+        var userid = req.params.userid;
+        if ((!name || name == "") || (!description || description == "") || (!address || address == "") || !userid) {
             res.status(400).send({
                 message: "Required fields not null or empty",
                 StatusCode: 400
             });
             return;
         }
-        endpoints.addEndPoint(name, description, address, (result) => {
+        endpoints.addEndPoint(name, description, address, userid, (result) => {
+            if (!result) {
+                res.status(409).send({
+                    message: "Endpoint name conflict",
+                    StatusCode: 409
+                });
+            }
             if (result == true) {
                 res.json({
                     message: "Endpoints has been created successfully!",
                     StatusCode: 200
                 });
             } else {
-                res.status(409).send({
-                    message: "Endpoint name conflict",
-                    StatusCode: 409
+                res.status(400).send({
+                    message: "Can't add this endpoint",
+                    StatusCode: 400
                 });
             }
         });
     });
 
-    router.route('/endpoints/update/:id').put((req, res) => {
+    router.route('/endpoints/update/:id/:name/:description/:address').put((req, res) => {
         var id = req.params.id,
             name = req.body.name,
             description = req.body.description,
