@@ -1,3 +1,5 @@
+include mixins.pug
+
 doctype html
 html(lang='en')
   head
@@ -13,7 +15,9 @@ html(lang='en')
 
     block link
         -var selected = 'dashboard'; //default
-    -var menu = { 'Dashboard': '/', 'Endpoint': '/endpoint', 'Devices': '/device', 'Users': '/account' };
+    
+    block breadcrumb
+        - var breadcrumbs = {}; //default
 
     include partials/nav.pug
 
@@ -21,11 +25,7 @@ html(lang='en')
 
     .col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main
         .row
-            ol.breadcrumb
-                li
-                    a(href='#')
-                        i.fa.fa-home(aria-hidden='true')
-                li.active #{title}
+            +breadcrumb(breadcrumbs)
         .row
             .col-lg-12
                 h1.page-header #{title}

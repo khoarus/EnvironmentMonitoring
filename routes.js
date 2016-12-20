@@ -45,6 +45,12 @@ module.exports = function(app) {
         })
     });
 
+    app.get('/account/detail', (req, res) => {
+        res.render('accountDetail', {
+            title: 'Thông tin chi tiết',
+        })
+    });
+
     app.get('/account/edit', (req, res) => {
         res.render('accountEdit', {
             title: 'Chỉnh sửa tài khoản',

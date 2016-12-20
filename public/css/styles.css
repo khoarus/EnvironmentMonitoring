@@ -488,20 +488,24 @@ a.bg-danger:hover {
 	box-shadow: inset 0px 0px 0px 1px #30a5ff;
 }
 
-.user-menu {
-	margin-top: 14px;
-	margin-right: 10px;
-	float: right;
-	list-style: none;
-	padding: 0;
+.user-menu { 
+  margin-top: 14px; 
+  margin-right: 10px; 
+  float: right; 
+  list-style: none; 
+  padding: 0; 
+} 
+ 
+.user-menu a { 
+  color: #fff; 
 }
 
-.user-menu a {
-	color: #fff;
+.user-menu .fa {
+	margin: 0 10px 0 0;
 }
-
-.user-menu a:hover, .user-menu a:focus {
-	text-decoration: none;
+ 
+.user-menu a:hover { 
+  text-decoration: underline; 
 }
 
 /* Sidebar */
@@ -521,6 +525,10 @@ a.bg-danger:hover {
 
 .sidebar .fa {
 	margin: 10px;
+}
+
+.sidebar a {
+	font-size: 1.3em;
 }
 
 @media (min-width: 768px) {
@@ -608,6 +616,14 @@ a.bg-danger:hover {
 	font-size: 12px;
 }
 
+.sidebar .nav p {
+	margin-left: 20px;
+}
+
+.sidebar .nav .active {
+	font-weight: bold;
+}
+
 /*Breadcrumbs*/
 
 .breadcrumb {
@@ -618,6 +634,17 @@ a.bg-danger:hover {
 	margin: 0 ;
 }
 
+.breadcrumb li {
+	font-size: 2em;
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+	.breadcrumb li {
+		font-size: 1em;
+	}
+}
+
 h1.page-header {
 	margin-top: 30px;
 	border-bottom: 0;
@@ -625,8 +652,35 @@ h1.page-header {
 
 /* User Page */
 
-#actions input:hover {
-    background: #F56A35;
+#inputs .role label {
+	padding: 5px 12px;
+}
+
+#inputs .role label:first-child {
+	margin-left: -12px;
+  color: #5f6468;
+	font-size: 14px;
+}
+
+#inputs input[type=radio]{
+	display:none;
+}
+
+#inputs input[type=radio]:hover + label {
+	background: rgba(48,165,255, 0.6);
+	color: #fff;
+	cursor: pointer;
+}
+
+#inputs input[type=radio]:checked + label {
+	background:rgba(48,165,255, 1);
+	color: #fff;
+	cursor: pointer;
+	padding: 5px 12px;
+}
+
+#inputs input#actions input:hover {
+	background: #F56A35;
 	border: 1px solid #F56A35;
 }
 

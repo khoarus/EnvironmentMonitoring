@@ -92,6 +92,38 @@ module.exports = (app, router) => {
         });
     });
 
+    router.route('/users/role/:id/:roleid').get((req, res) => {
+        var id = req.params.id,
+            roleid = req.params.roleid;
+        if (!id || !roleid) {
+            res.status(400).send({
+                message: "Required fields is not null or empty",
+                StatusCode: 400
+            });
+            return;
+        }
+        users.changeRole(id, roleid, (result) => {
+            if (!result) {
+                res.status(404).send({
+                    message: "Can't not find an user with ID: " + id,
+                    StatusCode: 404
+                });
+                return;
+            }
+            if (result == true) {
+                res.json({
+                    Result: "SUCCESS",
+                    StatusCode: 200
+                });
+            } else {
+                res.status(408).send({
+                    Result: "FAILED",
+                    StatusCode: 408
+                });
+            }
+        });
+    });
+
     //Get all users
     router.route('/users/').get((req, res) => {
         users.getUsers((result) => {
@@ -141,13 +173,13 @@ module.exports = (app, router) => {
     });
 
     //Create a device
-    router.route('/devices/create').post((req, res) => {
-        var idEndPoint = req.body.endpoint,
-            name = req.body.name,
-            description = req.body.description,
-            unit = req.body.unit,
-            max = req.body.maxthreshold,
-            min = req.body.minthreshold;
+    router.route('/devices/create/:endpointid/:name/:description/:unit/:min/:max').post((req, res) => {
+        var idEndPoint = req.params.endpoint,
+            name = req.params.name,
+            description = req.params.description,
+            unit = req.params.unit,
+            max = req.params.maxthreshold,
+            min = req.params.minthreshold;
         if ((idEndPoint === null || idEndPoint === "") && (name === null && name === "") && (description === null || description === "") && (unit === null || unit === "") && (max === null || max === "") && (min === null || min === "")) {
             res.status(400).send({
                 message: "Bad Request",
@@ -171,13 +203,13 @@ module.exports = (app, router) => {
     });
 
     //update device info
-    router.route('/devices/update').put((req, res) => {
-        var id = req.body.id;
-        var device_name = req.body.name;
-        var description = req.body.description;
-        var unit = req.body.unit;
-        var min = req.body.min;
-        var max = req.body.max;
+    router.route('/devices/update/:endpointid/:deviceid/:name/:description/:unit/:min/:max').put((req, res) => {
+        var id = req.params.id;
+        var device_name = req.params.name;
+        var description = req.params.description;
+        var unit = req.params.unit;
+        var min = req.params.min;
+        var max = req.params.max;
 
         if (!id || device_name === null || device_name === "" || description === "" || description === null || unit === null || unit === "" || min === null || max === null || max < min) {
             res.status(400).send({
@@ -281,11 +313,13 @@ module.exports = (app, router) => {
     });
 
     //Update value of device
-    router.route('/values/update').put((req, res) => {
-        var device = req.body.idDevice,
-            idValue = req.body.idValue,
-            value = req.body.value;
-        if (!device || !idValue || !value) {
+    router.route('/values/update/:endpointid/:deviceid/:valueid/:value/:time').put((req, res) => {
+        var device = req.params.deviceid,
+            idValue = req.params.valueid,
+            idendpoint = req.params.endpointid,
+            time = req.params.time,
+            value = req.params.value;
+        if (!device || !idValue || !value || !idendpoint || !time) {
             res.status(400).send({
                 message: "Required value ID is not null!",
                 StatusCode: 400
@@ -393,36 +427,66 @@ module.exports = (app, router) => {
                 res.status(404).send({
                     message: "Didn't find any device",
                     StatusCode: 404
-                })
+                });
             }
         });
     });
 
-    router.route('/endpoints/create').post((req, res) => {
-        var name = req.body.name;
-        var description = req.body.description;
-        var address = req.body.description;
-        if ((!name || name == "") || (!description || description == "") || (!address || address == "")) {
+    router.route('/endpoints/create/:userid/:name/:description/:address').post((req, res) => {
+        var name = req.params.name;
+        var description = req.params.description;
+        var address = req.params.description;
+        var userid = req.params.userid;
+        if ((!name || name == "") || (!description || description == "") || (!address || address == "") || !userid) {
             res.status(400).send({
                 message: "Required fields not null or empty",
                 StatusCode: 400
             });
             return;
         }
-        endpoints.addEndPoint(name, description, address, (result) => {
+        endpoints.addEndPoint(name, description, address, userid, (result) => {
+            if (!result) {
+                res.status(409).send({
+                    message: "Endpoint name conflict",
+                    StatusCode: 409
+                });
+            }
             if (result == true) {
                 res.json({
                     message: "Endpoints has been created successfully!",
                     StatusCode: 200
                 });
             } else {
-
+                res.status(400).send({
+                    message: "Can't add this endpoint",
+                    StatusCode: 400
+                });
             }
         });
     });
 
-    router.route('/endpoints/update/:id').put((req, res) => {
+    router.route('/endpoints/update/:id/:name/:description/:address').put((req, res) => {
+        var id = req.params.id,
+            name = req.body.name,
+            description = req.body.description,
+            address = req.body.address;
+        if (!id || (!name || name == "") || (!description || description == "") || (!address || address == "")) {
+            res.status(400).send({
+                message: "Required fields is not null",
+                StatusCode: 400
+            });
+            return;
+        }
+        endpoints.updateEndPoint(id, name, description, address, (result) => {
+            if (result == true) {
+                res.json({
+                    message: "SUCCESS",
+                    StatusCode: 200
+                });
+            } else {
 
+            }
+        });
     });
 
     router.route('/endpoints/delete/:id').delete((req, res) => {
@@ -435,22 +499,29 @@ module.exports = (app, router) => {
             return;
         }
         endpoints.deleteEndPoint(id, (result) => {
+            if (!result) {
+                res.status(404).send({
+                    message: "Device Not Found",
+                    StatusCode: 404
+                });
+                return;
+            }
             if (result === true) {
                 res.json({
                     Result: "Device has been deleted successfully!",
                     StatusCode: 200
                 });
             } else {
-                res.status(404).send({
+                res.status(400).send({
                     message: "Unable to find endpoint",
-                    StatusCode: 404
+                    StatusCode: 400
                 });
             }
         });
     });
 
     router.use((req, res, next) => {
-        next(new Error("Not implemented"));
+        next(new Error("Not Implemented"));
     });
     app.use("/core/api/v1/", router);
 
