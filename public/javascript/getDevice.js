@@ -13,10 +13,10 @@ $(function (){
           </div>\
           <div class="list-footer"></div>\
           <span class="pull-left buttons">\
-            <a href="device/detail" class="btn btn-sm btn-primary">\
+            <a href="/device/detail" class="btn btn-sm btn-primary">\
               <i class="fa fa-eye"></i> Hiển thị chi tiết\
             </a>\
-            <a href="device/edit" class="btn btn-sm btn-primary">\
+            <a href="/device/edit" class="btn btn-sm btn-primary">\
               <i class="fa fa-pencil-square-o"></i> Chỉnh sửa\
             </a>\
           </span>\
