@@ -18,18 +18,14 @@ block content
             table.table
               thead
                 tr
-                  th id
+                  th #
                   th Họ đệm
                   th Tên
                   th Tên tài khoản
                   th Chức vụ
                   th
               tbody
-                +list-user(1, 'Nguyễn Văn', 'A', 'nguyenvana', 'Admin')
-                +list-user(2, 'Nguyễn Văn', 'A', 'nguyenvana', 'User')
-                +list-user(3, 'Nguyễn Văn', 'A', 'nguyenvana', 'User')
-                +list-user(4, 'Nguyễn Văn', 'A', 'nguyenvana', 'User')
-                +list-user(5, 'Nguyễn Văn', 'A', 'nguyenvana', 'Admin')
-                +list-user(6, 'Nguyễn Văn', 'A', 'nguyenvana', 'User')
+                
   // /.row
-
+  block scripts
+      script(src='../public/javascript/ajax/users.js')
