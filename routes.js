@@ -31,8 +31,9 @@ module.exports = function(app) {
     app.get('/create', (req, res) => {
         res.render("create");
     });
-    // User
 
+
+    // User
     app.get('/account', (req, res) => {
         res.render('account', {
             title: 'User',
@@ -45,7 +46,8 @@ module.exports = function(app) {
         })
     });
 
-    app.get('/account/detail', (req, res) => {
+    app.get('/account/detail/:id', (req, res) => {
+        console.log(req.params.id);
         res.render('accountDetail', {
             title: 'Thông tin chi tiết',
         })
