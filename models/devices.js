@@ -38,17 +38,12 @@ function Device() {
 
     };
     this.deleteDevice = function(idDevice, callback) {
-        db.connection.query("SELECT * FROM devicetbl WHERE id = ?", idDevice, (err, result) => {
+        db.connection.query("DELETE FROM devicetbl WHERE id=?", idDevice, (err, result) => {
             if (err) throw err;
-            if (result.length > 0) {
-                db.connection.query("DELETE FROM devicetbl WHERE id=?", idDevice, (err, result) => {
-                    if (err) throw err;
-                    if (result.rowsAffected > 0)
-                        callback(true);
-                    else
-                        callback(false);
-                });
-            } else callback(null);
+            if (result.rowsAffected > 0)
+                callback(true);
+            else
+                callback(false);
         });
     };
     this.updateDeviceInfo = function(idDevice, name, description, unit, minthreshold, maxthreshold, callback) {
