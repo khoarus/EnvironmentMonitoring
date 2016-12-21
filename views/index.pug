@@ -17,6 +17,15 @@ block content
             a(href='#') Endpoint Name 4
           li
             a(href='#') Endpoint Name 4
+          li
+            a(href='#') Endpoint Name 2
+          li
+            a(href='#') Endpoint Name 3
+          li
+            a(href='#') Endpoint Name 4
+          li
+            a(href='#') Endpoint Name 4
+            
     .row
         .col-lg-12
           .panel.panel-default
@@ -30,4 +39,101 @@ block content
             .panel-heading Device 2
             .panel-body
               .canvas-wrapper
-                canvas#myChart.myChart(height='200', width='600')
+                canvas#myChart2.myChart(height='200', width='600')
+
+    block scripts
+      script.
+        // myChart 1
+          var ctx = document.getElementById("myChart");
+          var data = [65, 59, 80, 95, 56, 55, 40, 67, 45, 12, 44, -20]
+          var HighlightRange = {
+                begin: 80,
+                end: 10,
+          }
+
+          var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+              datasets: [{
+                  fill: false,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(75,192,192,0.4)",
+                  borderColor: "rgba(75,192,192,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(75,192,192,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                  label: "My First dataset",
+                  data: data,
+                  spanGaps: false,
+              }],
+              // This, if it exists at all, defines the highlight region.
+              yHighlightRange : HighlightRange
+            },
+            options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero:false
+                  }
+                }]
+              }
+            }
+          });
+        // myChart 2
+          var ctx = document.getElementById("myChart2");
+          var data = [20, 25, 8, 15, 26, 25, 32, 17, 10, 12, 30, 20]
+          var HighlightRange = {
+                begin: 30,
+                end: 10,
+          }
+
+          var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+              datasets: [{
+                  fill: false,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(75,192,192,0.4)",
+                  borderColor: "rgba(75,192,192,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(75,192,192,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                  label: "My First dataset",
+                  data: data,
+                  spanGaps: false,
+              }],
+              // This, if it exists at all, defines the highlight region.
+              yHighlightRange : HighlightRange
+            },
+            options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero:false
+                  }
+                }]
+              }
+            }
+          });
