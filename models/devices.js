@@ -3,7 +3,7 @@ function Device() {
     var db = require("../controllers/database");
 
     this.getDevice = function(idDevice, callback) {
-        db.connection.query("SELECT D.id IdDevice, D.name DeviceName, D.description Description, D.unit Unit, D.id_endpoint IDEndPoint, D.minthreshold Min, D.maxthreshold Max, E.name EndPointName, V.value CurrentValue FROM devicetbl D LEFT JOIN endpointtbl E ON E.id = D.id_endpoint LEFT JOIN valuetbl V ON V.id_device = ?", idDevice, (err, result) => {
+        db.connection.query("SELECT D.id IdDevice, D.name DeviceName, D.description Description, D.unit Unit, D.id_endpoint IDEndPoint, D.minthreshold Min, D.maxthreshold Max, E.name EndPointName, V.value CurrentValue FROM devicetbl D LEFT JOIN endpointtbl E ON E.id = D.id_endpoint LEFT JOIN valuetbl V ON V.id_device = D.id WHERE D.id = ?", idDevice, (err, result) => {
             if (err)
                 throw err;
             if (result) {

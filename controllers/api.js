@@ -92,9 +92,9 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/users/role/:id/:roleid').get((req, res) => {
-        var id = req.params.id,
-            roleid = req.params.roleid;
+    router.route('/users/role').put((req, res) => {
+        var id = req.query.id,
+            roleid = req.query.roleid;
         if (!id || !roleid) {
             res.status(400).send({
                 message: "Required fields is not null or empty",
@@ -173,13 +173,13 @@ module.exports = (app, router) => {
     });
 
     //Create a device
-    router.route('/devices/create/:endpointid/:name/:description/:unit/:min/:max').post((req, res) => {
-        var idEndPoint = req.params.endpoint,
-            name = req.params.name,
-            description = req.params.description,
-            unit = req.params.unit,
-            max = req.params.maxthreshold,
-            min = req.params.minthreshold;
+    router.route('/devices/create').post((req, res) => {
+        var idEndPoint = req.query.endpointCode,
+            name = req.query.deviceName,
+            description = req.query.description,
+            unit = req.query.unit,
+            max = req.query.maxthreshold,
+            min = req.query.minthreshold;
         if ((idEndPoint === null || idEndPoint === "") && (name === null && name === "") && (description === null || description === "") && (unit === null || unit === "") && (max === null || max === "") && (min === null || min === "")) {
             res.status(400).send({
                 message: "Bad Request",
@@ -187,8 +187,11 @@ module.exports = (app, router) => {
             });
             return;
         }
-        devices.addDevice(idEndPoint, name, description, unit, max, min, (result) => {
-            if (result) {
+        devices.addDevice(idEndPoint, name, description, unit, min, max, (result) => {
+            if (!result) {
+
+            }
+            if (result === true) {
                 res.json({
                     Result: result,
                     StatusCode: 200
@@ -203,15 +206,16 @@ module.exports = (app, router) => {
     });
 
     //update device info
-    router.route('/devices/update/:endpointid/:deviceid/:name/:description/:unit/:min/:max').put((req, res) => {
-        var id = req.params.id;
-        var device_name = req.params.name;
-        var description = req.params.description;
-        var unit = req.params.unit;
-        var min = req.params.min;
-        var max = req.params.max;
+    router.route('/devices/update').put((req, res) => {
+        var id = req.query.deviceCode;
+        var endpoint = req.query.endpointCode
+        var device_name = req.query.name;
+        var description = req.query.description;
+        var unit = req.query.unit;
+        var min = req.query.min;
+        var max = req.query.max;
 
-        if (!id || device_name === null || device_name === "" || description === "" || description === null || unit === null || unit === "" || min === null || max === null || max < min) {
+        if (!endpoint || !id || device_name === null || device_name === "" || description === "" || description === null || unit === null || unit === "" || min === null || max === null || max < min) {
             res.status(400).send({
                 message: "Required fields is not null/empty or value invalid",
                 StatusCode: 400
@@ -313,10 +317,10 @@ module.exports = (app, router) => {
     });
 
     //Update value of device
-    router.route('/values/update/:endpointid/:deviceid/:valueid/:value/:time').put((req, res) => {
-        var device = req.params.deviceid,
-            idValue = req.params.valueid,
-            idendpoint = req.params.endpointid,
+    router.route('/values/update/').put((req, res) => {
+        var device = req.params.deviceCode,
+            idValue = req.params.valueCode,
+            idendpoint = req.params.endpointCode,
             time = req.params.time,
             value = req.params.value;
         if (!device || !idValue || !value || !idendpoint || !time) {
@@ -342,11 +346,11 @@ module.exports = (app, router) => {
     });
 
     //Add value
-    router.route('/values/create/:endpoint/:device/:time/:value').post((req, res) => {
-        var device = req.params.idDevice;
-        var time = req.params.time;
-        var value = req.params.value;
-        var endpoint = req.params.endpoint;
+    router.route('/values/create').post((req, res) => {
+        var device = req.query.deviceCode;
+        var time = req.query.time;
+        var value = req.query.value;
+        var endpoint = req.query.endpointCode;
         if (!device || !time || !value || !endpoint) {
             res.status(400).send({
                 message: "Required fields is needed to create value",
@@ -432,11 +436,11 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/endpoints/create/:userid/:name/:description/:address').post((req, res) => {
-        var name = req.params.name;
-        var description = req.params.description;
-        var address = req.params.description;
-        var userid = req.params.userid;
+    router.route('/endpoints/create').post((req, res) => {
+        var name = req.query.endpointName;
+        var description = req.query.description;
+        var address = req.query.address;
+        var userid = req.query.userId;
         if ((!name || name == "") || (!description || description == "") || (!address || address == "") || !userid) {
             res.status(400).send({
                 message: "Required fields not null or empty",
@@ -465,7 +469,7 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/endpoints/update/:id/:name/:description/:address').put((req, res) => {
+    router.route('/endpoints/update').put((req, res) => {
         var id = req.params.id,
             name = req.body.name,
             description = req.body.description,
