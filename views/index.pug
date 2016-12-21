@@ -7,24 +7,6 @@ block content
     .row
       .col-lg-12
         ul.nav.nav-tabs
-          li.active
-            a(href='#') Endpoint Name 1
-          li
-            a(href='#') Endpoint Name 2
-          li
-            a(href='#') Endpoint Name 3
-          li
-            a(href='#') Endpoint Name 4
-          li
-            a(href='#') Endpoint Name 4
-          li
-            a(href='#') Endpoint Name 2
-          li
-            a(href='#') Endpoint Name 3
-          li
-            a(href='#') Endpoint Name 4
-          li
-            a(href='#') Endpoint Name 4
             
     .row
         .col-lg-12
@@ -42,6 +24,7 @@ block content
                 canvas#myChart2.myChart(height='200', width='600')
 
     block scripts
+      script(src='../public/javascript/ajax/menuDashboard.js')
       script.
         // myChart 1
           var ctx = document.getElementById("myChart");
