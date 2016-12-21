@@ -1,0 +1,56 @@
+mixin list-user(id, lastName, firstName, userName, role)
+  tr
+    td #{id}
+    td #{lastName}
+    td #{firstName}
+    td #{userName}
+    td #{role}
+    td
+      a.table-link(href='/account/detail')
+        span.fa-stack
+          i.fa.fa-square.fa-stack-2x
+          i.fa.fa-search-plus.fa-stack-1x.fa-inverse
+      a.table-link(href='/account/edit')
+        span.fa-stack
+          i.fa.fa-square.fa-stack-2x
+          i.fa.fa-pencil.fa-stack-1x.fa-inverse
+      a.table-link.danger(href='#')
+        span.fa-stack
+          i.fa.fa-square.fa-stack-2x
+          i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+
+mixin list-device(id, name, link)
+  li
+      .list-content
+          h4
+              a(href="#{link}/detail") #{name}
+          p
+              | Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+              | sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+              | sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+              | Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+              | sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+              | sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+              | Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+              | sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+              | sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+      .list-footer
+          span.pull-left.buttons
+              a.btn.btn-sm.btn-primary(href="#{link}/detail")
+                  i.fa.fa-eye
+                  |  Hiển thị chi tiết
+              a.btn.btn-sm.btn-default(href="#{link}/edit")
+                  i.fa.fa-pencil-square-o
+                  |  Chỉnh sửa
+          span.pull-right
+              p ##{id}
+
+mixin breadcrumb(breadcrumbs)
+  ol.breadcrumb
+    li
+      a(href='/', title="Quay lại trang chủ")
+          i.fa.fa-home(aria-hidden='true')
+    each val, key in breadcrumbs
+      li
+        a(href=val, title=key)=key
+    li.active #{title}
