@@ -253,7 +253,7 @@ module.exports = (app, router) => {
                 res.json({
                     Result: "OK",
                     StatusCode: 200,
-                    message: "The device has been delete successfully!"
+                    message: "The device has been deleted successfully!"
                 });
             } else {
                 res.status(404).send({
@@ -513,7 +513,7 @@ module.exports = (app, router) => {
             }
             if (result === true) {
                 res.json({
-                    Result: "Device has been deleted successfully!",
+                    Result: "Endpoint has been deleted successfully!",
                     StatusCode: 200
                 });
             } else {
