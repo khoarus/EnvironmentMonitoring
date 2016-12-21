@@ -4,7 +4,7 @@ function Values() {
     this.postValue = (value, time, idDevice, callback) => {
         db.connection.query("INSERT valuetbl(id_device, time, value) VALUE(?, ?, ?)", [idDevice, time, value], (err, result) => {
             if (err) throw err;
-            if (result.affectedRows > 0) {
+            if (result.affectedRows >= 0) {
                 callback(true);
             } else {
                 callback(false);
@@ -35,7 +35,7 @@ function Values() {
     this.changeValue = (idValue, idDevice, value, callback) => {
         db.connection.query("UPDATE valuetbl SET value = ? WHERE id = ? AND id_device = ?", [value, idValue, idDevice], (err, result) => {
             if (err) throw err;
-            if (result.affectedRows > 0) {
+            if (result.affectedRows >= 0) {
                 callback(result);
             } else callback(null);
         });
@@ -47,7 +47,7 @@ function Values() {
             if (result.length > 0) {
                 db.connection.query("DELETE FROM valuetbl WHERE id = ?", id, (err, res) => {
                     if (err) throw err;
-                    if (res.affectedRows > 0) {
+                    if (res.affectedRows >= 0) {
                         callback(res);
                     } else {
                         callback(null);
