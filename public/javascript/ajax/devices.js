@@ -1,6 +1,6 @@
 $(function (){
 
-  var API = "http://203.113.167.3:8082/core/api/v1/devices/fetch";
+  var API = "/core/api/v1/devices/fetch";
 
   $.getJSON( API, function( data ) {
 
