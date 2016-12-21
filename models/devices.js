@@ -35,11 +35,11 @@ function Device() {
                 callback(null);
             }
         });
-
     };
     this.deleteDevice = function(idDevice, callback) {
         db.connection.query("DELETE FROM devicetbl WHERE id=?", idDevice, (err, result) => {
             if (err) throw err;
+            console.log(result);
             if (result.affectedRows >= 0)
                 callback(true);
             else
