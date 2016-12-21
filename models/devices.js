@@ -26,7 +26,7 @@ function Device() {
             if (result.length > 0) {
                 db.connection.query("INSERT INTO devicetbl(id_endpoint, name, description, unit, minthreshold, maxthreshold) VALUES(?, ?, ?, ?, ?, ?)", [idEndPoint, name, description, unit, minthreshold, maxthreshold], (err, result) => {
                     if (err) throw err;
-                    if (result.affectedRows > 0)
+                    if (result.affectedRows >= 0)
                         callback(true);
                     else
                         callback(false);
@@ -40,7 +40,7 @@ function Device() {
     this.deleteDevice = function(idDevice, callback) {
         db.connection.query("DELETE FROM devicetbl WHERE id=?", idDevice, (err, result) => {
             if (err) throw err;
-            if (result.affectedRows > 0)
+            if (result.affectedRows >= 0)
                 callback(true);
             else
                 callback(false);
@@ -52,7 +52,7 @@ function Device() {
             if (result.length > 0) {
                 db.connection.query("UPDATE devicetbl SET name = ?, description = ?, unit = ? minthreshold = ?, maxthreshold = ? WHERE id = ?", [name, description, unit, minthreshold, maxthreshold, idDevice], (err, result) => {
                     if (err) throw err;
-                    if (result.affectedRows > 0)
+                    if (result.affectedRows >= 0)
                         callback(true);
                     else
                         callback(false);

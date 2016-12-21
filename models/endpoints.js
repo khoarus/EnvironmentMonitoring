@@ -7,7 +7,7 @@ function EndPoint() {
             if (result.length > 0) {
                 db.connection.query("INSERT INTO endpointtbl(name, description, address, id_user) VALUES(?, ?, ?, ?)", [name, description, address, id_user], (err, result) => {
                     if (err) throw err;
-                    if (result.affectedRows > 0) {
+                    if (result.affectedRows >= 0) {
                         callback(true);
                     } else
                         callback(false);
@@ -40,7 +40,7 @@ function EndPoint() {
             if (result.length > 0) {
                 db.connection.query("DELETE FROM endpointtbl WHERE id = ?", IdEndPoint, (err, result) => {
                     if (err) throw err;
-                    if (result.affectedRows > 0) {
+                    if (result.affectedRows >= 0) {
                         callback(true);
                     } else {
                         callback(false);
@@ -58,7 +58,7 @@ function EndPoint() {
             if (result.length > 0) {
                 db.connection.query("UPDATE endpointtbl SET name = ?, description = ?, address = ? WHERE id = ?", [id, name, description, address], (err, result) => {
                     if (err) throw err;
-                    if (result.affectedRows > 0) {
+                    if (result.affectedRows >= 0) {
                         callback(true);
                     } else {
                         callback(false);
