@@ -77,7 +77,7 @@ module.exports = function(app) {
                 }
             });
         } else {
-            res.redirect('/register');
+            res.render('register');
         }
     });
 
