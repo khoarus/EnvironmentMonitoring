@@ -73,13 +73,13 @@ module.exports = function(app) {
         })
     });
 
-    app.get('/device/detail', (req, res) => {
+    app.get('/device/detail/:id', (req, res) => {
         res.render('deviceDetail', {
             title: 'Thông tin chi tiết',
         })
     });
 
-    app.get('/device/edit', (req, res) => {
+    app.get('/device/edit/:id', (req, res) => {
         res.render('deviceEdit', {
             title: 'Chỉnh sửa thiết bị',
         })

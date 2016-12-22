@@ -405,7 +405,9 @@ module.exports = (app, router) => {
 
     //Endpoints
     router.route('/endpoints/fetch/:id').get((req, res) => {
+      
         var id = req.params.id;
+        console.log('id = ' + id);
         endpoints.getEndPointById(id, (result) => {
             if (result) {
                 res.json({

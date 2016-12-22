@@ -26,7 +26,7 @@ function EndPoint() {
         });
     };
     this.getEndPointById = (IdEndPoint, callback) => {
-        db.connection.query("SELECT E.id ID, E.name, E.description Description, E.address Address, E.id_user OwnerID, U FROM endpointtbl E LEFT JOIN userstbl U ON U.IdUser = E.id_user WHERE E.id = ?", IdEndPoint, (err, result) => {
+        db.connection.query("SELECT E.id ID, E.name, E.description Description, E.address Address, E.id_user OwnerID FROM endpointtbl E LEFT JOIN userstbl U ON U.IdUser = E.id_user WHERE E.id = ?", IdEndPoint, (err, result) => {
             if (err) throw err;
             if (result.length > 0) {
                 callback(result);

@@ -7,7 +7,7 @@ $(function() {
         $.each(data.Result, function() {
             $('.nav-tabs').append('\
               <li>\
-                <a href="' + this.ID + '">' + this.name + '</a>\
+                <a href="/endpoints/fetch/' + this.ID + '">' + this.name + '</a>\
               </li>\
             ');
         });
