@@ -37,7 +37,11 @@ html(lang='en')
       $( document ).ready(function() {
         $('#password-repeat').on('keyup', function() {
             if ($(this).val() == $('#password').val()) {
-                $('#message').html('Ok').css('color', 'green');
-            } else $('#message').html('Mật khẩu nhập lại không khớp').css('color', 'red');
+                $('#message').html('Mật khẩu khớp').css('color', 'green');
+                $('#submit').removeClass('disabled');
+            } else {
+              $('#submit').addClass('disabled');
+              $('#message').html('Mật khẩu nhập lại không khớp').css('color', 'red');
+            }
         });
       });
