@@ -59,8 +59,15 @@ module.exports = function(app) {
     });
 
     app.get('/register', (req, res) => {
+        var idlogged;
         if (req.session && req.session.user) {
-            users.getUserById(req.session.result.ID, (result) => {
+            req.session.result.forEach(function(element) {
+                var temp = JSON.stringify(element);
+                var logdata = JSON.parse(temp);
+                idlogged = logdata.ID;
+            }, this);
+
+            users.getUserById(idlogged, (result) => {
                 if (result) {
                     res.redirect("/");
                 } else {
@@ -103,7 +110,7 @@ module.exports = function(app) {
     });
 
     app.get('/logout', (req, res) => {
-        req.session.reset();
+        req.session.destroy();
         res.redirect('/login');
     });
 
@@ -119,8 +126,15 @@ module.exports = function(app) {
     });
 
     app.get('/account/create', (req, res) => {
+        var idlogged;
         if (req.session && req.session.result) {
-            users.getUserById(req.session.result.ID, (result) => {
+            req.session.result.forEach(function(element) {
+                var temp = JSON.stringify(element);
+                var logdata = JSON.parse(temp);
+                idlogged = logdata.ID;
+            }, this);
+
+            users.getUserById(idlogged, (result) => {
                 if (result) {
                     res.render('accountCreate', {
                         title: 'Tạo tài khoản',
@@ -136,9 +150,16 @@ module.exports = function(app) {
     });
 
     app.get('/account/detail/:id', (req, res) => {
+        var idlogged;
         if (req.session && req.session.result) {
             var id = req.params.id;
-            users.getUserById(req.session.result.ID, (result) => {
+            req.session.result.forEach(function(element) {
+                var temp = JSON.stringify(element);
+                var logdata = JSON.parse(temp);
+                idlogged = logdata.ID;
+            }, this);
+
+            users.getUserById(idlogged, (result) => {
                 if (result) {
                     if (!id) {
                         res.redirect('/account');
@@ -151,24 +172,57 @@ module.exports = function(app) {
                     res.redirect('/login');
                 }
             });
+        } else {
+            res.redirect('/login');
         }
     });
 
     app.get('/account/edit', (req, res) => {
+        var idlogged;
         if (req.session && req.session.result) {
+            req.session.result.forEach(function(element) {
+                var temp = JSON.stringify(element);
+                var logdata = JSON.parse(temp);
+                idlogged = logdata.ID;
+            }, this);
 
+            users.getUserById(idlogged, (result) => {
+                if (result) {
+                    res.render('accountEdit', {
+                        title: 'Chỉnh sửa tài khoản',
+                    });
+                } else {
+                    res.redirect('/login');
+                }
+            });
+        } else {
+            res.redirect('/login');
         }
-        res.render('accountEdit', {
-            title: 'Chỉnh sửa tài khoản',
-        });
     });
 
     // Device
 
     app.get('/device', (req, res) => {
-        res.render('device', {
-            title: 'Devices',
-        });
+        var idlogged;
+        if (req.session && req.session.result) {
+            req.session.result.forEach(function(element) {
+                var temp = JSON.stringify(element);
+                var logdata = JSON.parse(temp);
+                idlogged = logdata.ID;
+            }, this);
+
+            users.getUserById(idlogged, (result) => {
+                if (result) {
+                    res.render('device', {
+                        title: 'Devices',
+                    });
+                } else {
+                    res.redirect('/login');
+                }
+            });
+        } else {
+            res.redirect('/login');
+        }
     });
 
     app.get('/device/create', (req, res) => {
@@ -214,5 +268,4 @@ module.exports = function(app) {
             title: 'Chỉnh sửa thiết bị',
         });
     });
-
 };

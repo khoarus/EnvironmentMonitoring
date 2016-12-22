@@ -17,37 +17,6 @@ module.exports = (app, router) => {
     });
     //users
 
-    //Register
-    router.route('/users/register').post((req, res) => {
-        var username = req.body.username;
-        var password = req.body.password;
-        var firstname = req.body.firstname;
-        var lastname = req.body.lastname;
-        if (firstname === null || lastname === null || username === null || password === null) {
-            res.status(400).send({ StatusCode: 400, message: "Required fields not null" });
-            return;
-        }
-        users.register(username, password, firstname, lastname, (result) => {
-            if (result === true) {
-                res.json({
-                    message: "Account was created successfully!",
-                    StatusCode: 200
-                });
-            } else if (result === false) {
-                res.status(409).send({
-                    message: "Unable create an account. Username could be existed. Please try again with another Username!",
-                    StatusCode: 409
-                });
-            }
-            if (result === null) {
-                res.status(503).send({
-                    message: "Service Unavailable",
-                    statusCode: 503
-                });
-            }
-        });
-    });
-
     //Get user specific by ID
     router.route('/users/:id').get((req, res) => {
         var id = req.params.id;
