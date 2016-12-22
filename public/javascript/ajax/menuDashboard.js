@@ -9,10 +9,17 @@ function getEndpoint(id) {
 
             $.each(data.Result, function() {
                 $('.nav-tabs').append('\
-                <li>\
-                    <a  onclick="getEndpoint('+ this.ID +')" >' + this.name + '</a>\
+                <li class="menu-db">\
+                    <a onclick="getEndpoint('+ this.ID +')" >' + this.name + '</a>\
                 </li>\
             ');
+            });
+
+            // add menu endpoints
+            
+            $(".menu-db").click(function(e) {
+                $(".menu-db").removeClass("active");
+                $(this).addClass("active");
             });
 
         });
@@ -24,7 +31,12 @@ function getEndpoint(id) {
         $.getJSON(API, function(data) {
             // console.log(data);
 
-            
+            $.each(data.Result, function(){
+                $('').append('\
+                    <div class="row">\
+                    </div>\
+                ');
+            });
         });
     }
 }
