@@ -85,35 +85,24 @@ module.exports = function(app) {
         var username = req.body.username;
         var password = req.body.password;
         var firstname = req.body.firstname;
-        var lastname = req.body.lastnname;
-        var idlogged;
-        if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+        var lastname = req.body.lastname;
+        if (!username || !password || !firstname || !lastname) {
 
-            users.getUserById(idlogged, (result) => {
-                if (!result) {
-                    if (!username || !password || !firstname || !lastname) {
-                        res.render('register', { title: "Đăng ký" });
-                    } else {
-                        users.register(username, password, firstname, lastname, (result) => {
-                            if (result && result === true) {
-                                console.log('Welcome ' + username + ' has been registered successfully!\n');
-                                res.redirect('/login');
-                            } else {
-                                res.render('register', { error: "Có lỗi xảy ra. Không thể đăng ký tài khoản!" });
-                            }
-                        });
-                    }
+            res.render('register', { title: "Đăng ký" });
+
+        } else {
+            users.register(username, password, firstname, lastname, (result) => {
+
+                if (result === true) {
+
+                    console.log('Welcome ' + username + ' has been registered successfully!\n');
+
+                    res.redirect('/login');
                 } else {
-                    res.redirect('/');
+
+                    res.render('register', { error: "Có lỗi xảy ra. Không thể đăng ký tài khoản!" });
                 }
             });
-        } else {
-            res.redirect('/register');
         }
     });
 
