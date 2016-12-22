@@ -9,9 +9,8 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans&subset=vietnamese', rel='stylesheet')
   body
     form#register(action='/register', method='post')
-      .logo
-        a(href='/', title='Trang Chủ')
-          img(src='../public/images/logo.png', alt='logo')
+      a.logo(href='/', title='Trang Chủ')
+        img(src='../public/images/logo.png', alt='logo')
       #inputs
         .input
           label(for='lastName') Họ đệm
