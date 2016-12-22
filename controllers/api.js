@@ -163,7 +163,7 @@ module.exports = (app, router) => {
         var min = req.query.min;
         var max = req.query.max;
 
-        if (!endpoint || !id || !description || !unit || unit === "" || !min || !max & max < min) {
+        if (!endpoint || !id || !description || !unit || unit === "" || !min || !max && max < min) {
             res.status(400).send({
                 message: "Required fields is not null/empty or value invalid",
                 StatusCode: 400
@@ -294,7 +294,7 @@ module.exports = (app, router) => {
     });
 
     //Add and put value
-    router.route('/values/push').post((req, res) => {
+    router.route('/values/push').get((req, res) => {
         var device = req.query.deviceCode;
         var time = req.query.time;
         var value = req.query.value;
