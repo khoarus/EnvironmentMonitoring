@@ -15,29 +15,7 @@ module.exports = (app, router) => {
     router.get("/", (req, res) => {
         res.status(200).send({ message: "Your test is OK! The API is running! This is API home" });
     });
-    //Users
-
-    //Login
-    router.route('/users/login').post((req, res) => {
-        var username = req.body.username,
-            password = req.body.password;
-        if (username === null || password === null) {
-            res.status(500).send({ StatusCode: 500, message: "Required fields not null" });
-            return;
-        }
-        users.login(username, password, (result, status) => {
-            if (result !== null) {
-                res.json({
-                    Result: result,
-                    Status: status,
-                    StatusCode: 200
-                });
-            } else {
-                res.status(400).send({ message: "Invalid Username or Password!", StatusCode: 400, Status: status });
-
-            }
-        });
-    });
+    //users
 
     //Register
     router.route('/users/register').post((req, res) => {
@@ -405,7 +383,7 @@ module.exports = (app, router) => {
 
     //Endpoints
     router.route('/endpoints/fetch/:id').get((req, res) => {
-      
+
         var id = req.params.id;
         console.log('id = ' + id);
         endpoints.getEndPointById(id, (result) => {

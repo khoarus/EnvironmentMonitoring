@@ -1,48 +1,48 @@
 {
-  "name": "enviroment_monitoring",
-  "version": "0.0.1",
-  "description": "Enviroment Monitoring",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "node",
-    "envr",
-    "monitor",
-    "iot"
-  ],
-  "contributors": [
-    {
-      "name": "khoarus",
-      "email": "ndkhoa@hueic.edu.vn"
+    "name": "enviroment_monitoring",
+    "version": "0.0.1",
+    "description": "Enviroment Monitoring",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
-    {
-      "name": "anhquoctran",
-      "email": "quoc.trananh@students.hueic.edu.vn"
+    "keywords": [
+        "node",
+        "envr",
+        "monitor",
+        "iot"
+    ],
+    "contributors": [{
+            "name": "khoarus",
+            "email": "ndkhoa@hueic.edu.vn"
+        },
+        {
+            "name": "anhquoctran",
+            "email": "quoc.trananh@students.hueic.edu.vn"
+        },
+        {
+            "name": "hoangbaovu",
+            "email": "baovuhbv@gmail.com"
+        }
+    ],
+    "engines": {
+        "vscode": "^0.10.0",
+        "node": "4.4.7"
     },
-    {
-      "name": "hoangbaovu",
-      "email": "baovuhbv@gmail.com"
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/khoarus/EnvironmentMonitoring.git"
+    },
+    "author": "Hueic",
+    "license": "GPL-3.0",
+    "dependencies": {
+        "body-parser": "1.15.2",
+        "ejs": "^1.0.0",
+        "express": "4.14.0",
+        "express-session": "1.14.2",
+        "markdown-toc": "^1.0.2",
+        "mysql": "2.12.0",
+        "pug": "2.0.0-beta6",
+        "client-sessions": "0.7.0"
     }
-  ],
-  "engines": {
-    "vscode": "^0.10.0",
-    "node": "4.4.7"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/khoarus/EnvironmentMonitoring.git"
-  },
-  "author": "Hueic",
-  "license": "GPL-3.0",
-  "dependencies": {
-    "body-parser": "1.15.2",
-    "ejs": "^1.0.0",
-    "express": "latest",
-    "express-session": "1.14.2",
-    "markdown-toc": "^1.0.2",
-    "mysql": "2.12.0",
-    "pug": "2.0.0-beta6"
-  }
 }
