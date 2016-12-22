@@ -1,6 +1,6 @@
 var express = require("express");
 var bodyparser = require("body-parser");
-var session = require('express-session');
+var session = require('client-sessions');
 module.exports = function(app) {
     app.set("view engine", "pug");
     app.engine('pug', require('pug').renderFile);
@@ -12,7 +12,9 @@ module.exports = function(app) {
         cookie: 'session',
         secret: 'userlogin',
         resave: false,
-        saveUninitialized: true
+        saveUninitialized: true,
+        duration: 30 * 60 * 1000,
+        activeDuration: 5 * 60 * 1000
     }));
 
     var router = express.Router();
