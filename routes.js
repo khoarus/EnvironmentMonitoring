@@ -1,8 +1,15 @@
 var users = require('./models/users');
 module.exports = function(app) {
     app.get('/', (req, res) => {
+        var idlogged = null;
         if (req.session && req.session.result) {
-            users.getUserById(req.session.result.ID, (result) => {
+            req.session.result.forEach(function(element) {
+                var temp = JSON.stringify(element);
+                var logdata = JSON.parse(temp);
+                idlogged = logdata.ID;
+            }, this);
+
+            users.getUserById(idlogged, (result) => {
                 if (result) {
                     res.render('index', {
                         title: 'Dashboard',
@@ -22,7 +29,7 @@ module.exports = function(app) {
         if (req.session && req.session.result) {
             users.getUserById(req.session.result.ID, (result) => {
                 if (result) {
-                    res.redirect('/index');
+                    res.redirect('/');
                 } else {
                     res.render('login');
                 }
@@ -40,9 +47,10 @@ module.exports = function(app) {
             res.render("login", { error: 'Tên đăng nhập hoặc mật khẩu không được bỏ trống!' });
         } else {
             users.login(username, password, (result, status) => {
+                console.log("Logged successfully for: " + JSON.stringify(result));
                 if (result && status === true) {
                     req.session.result = result;
-                    res.redirect('/index');
+                    res.redirect('/');
                 } else {
                     res.redirect("/login", { error: "Sai tên đăng nhập hoặc mật khẩu" });
                 }
@@ -54,7 +62,7 @@ module.exports = function(app) {
         if (req.session && req.session.user) {
             users.getUserById(req.session.result.ID, (result) => {
                 if (result) {
-                    res.redirect("/index");
+                    res.redirect("/");
                 } else {
                     req.session.reset();
                     res.render('register', { title: 'Đăng ký' });
@@ -86,7 +94,7 @@ module.exports = function(app) {
                         });
                     }
                 } else {
-                    res.redirect('/index');
+                    res.redirect('/');
                 }
             });
         } else {
