@@ -9,11 +9,11 @@ module.exports = function(app) {
                         //pageHeader: 'Dashboard'
                     });
                 } else {
-                    res.redirect('/login');
+                    res.render('login');
                 }
             });
         } else {
-            res.redirect('/login');
+            res.render('login');
         }
 
     });
