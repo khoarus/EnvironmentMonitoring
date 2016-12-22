@@ -1,5 +1,6 @@
 var users = require('./models/users');
 module.exports = function(app) {
+
     app.get('/', (req, res) => {
         var idlogged = null;
         if (req.session && req.session.result) {

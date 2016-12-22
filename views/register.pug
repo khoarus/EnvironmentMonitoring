@@ -15,19 +15,19 @@ html(lang='en')
       #inputs
         .input
           label(for='lastName') Họ đệm
-          input#lastName(type='text', placeholder='Họ đệm')
+          input#lastName(type='text', placeholder='Họ đệm', name='lastName', required='')
         .input
           label(for='firstName') Tên
-          input#firstName(type='text', placeholder='Tên', required='')
+          input#firstName(type='text', placeholder='Tên', required='', name='firstName')
         .input
           label(for='username') Tên tài khoản
-          input#username(pattern='.{6,16}', type='text', placeholder='Tên tài khoản', required='')
+          input#username(pattern='.{6,16}', type='text', placeholder='Tên tài khoản', required='', name='username')
         .input
           label(for='password') Mật khẩu
-          input#password(type='password', placeholder='Mật khẩu', required='')
+          input#password(type='password', placeholder='Mật khẩu', required='', name='password')
         .input
           label(for='password-repeat') Nhập lại mật khẩu
-          input#password-repeat(type='password', placeholder='Nhập lại mật khẩu', required='')
+          input#password-repeat(type='password', placeholder='Nhập lại mật khẩu', required='', name='repeat')
           span#message
       #actions
         input#submit(type='submit', value='Đăng Ký')
