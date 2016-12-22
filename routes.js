@@ -22,13 +22,13 @@ module.exports = function(app) {
         if (req.session && req.session.result) {
             users.getUserById(req.session.result.ID, (result) => {
                 if (result) {
-                    res.render('index', { title: 'Dashboard' });
+                    res.redirect('index');
                 } else {
-                    res.redirect('/login');
+                    res.render('login');
                 }
             });
         } else {
-            res.redirect("login", { title: 'Đăng nhập' });
+            res.render("login");
         }
     });
 
@@ -41,7 +41,7 @@ module.exports = function(app) {
         } else {
             users.login(username, password, (result, status) => {
                 if (result && status === true) {
-                    req.session.user = result;
+                    req.session.result = result;
                     res.redirect('/index');
                 } else {
                     res.redirect("/login", { error: "Sai tên đăng nhập hoặc mật khẩu" });
