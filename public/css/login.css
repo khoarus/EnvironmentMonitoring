@@ -33,18 +33,19 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-#login, #register {
+form {
     background: #fff;
     max-width: 500px;
     padding: 20px;
     margin: 30px auto 0;
 }
 
-#login .logo {
+form .logo {
+    display: block;
     text-align: center;
 }
 
-#login .logo img{
+form .logo img{
     margin-bottom: 20px;
     max-width: 400px;
 }
@@ -88,4 +89,8 @@ input:focus {
 .footer {
     margin-top: 20px;
     overflow: hidden;
+}
+
+#err {
+    display: none;
 }
