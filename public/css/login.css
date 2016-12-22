@@ -81,6 +81,14 @@ input:focus {
     background: #F56A35;
 }
 
+#actions input[type="submit"].disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    color: #c0c0c0;
+    background-color: #ffffff;
+}
+
+
 .input label {
     font-size: 12px;
     text-align: left;
@@ -91,6 +99,6 @@ input:focus {
     overflow: hidden;
 }
 
-#err {
+#error {
     display: none;
 }
