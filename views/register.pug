@@ -8,7 +8,7 @@ html(lang='en')
     link(rel='stylesheet', href='../public/css/login.css')
     link(href='https://fonts.googleapis.com/css?family=Open+Sans&subset=vietnamese', rel='stylesheet')
   body
-    form#login
+    form#register(action='/register', method='post')
       .logo
         a(href='/', title='Trang Chủ')
           img(src='../public/images/logo.png', alt='logo')
