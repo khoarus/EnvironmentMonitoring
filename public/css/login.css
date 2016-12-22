@@ -33,7 +33,7 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-#login {
+#login, #register {
     background: #fff;
     max-width: 500px;
     padding: 20px;
