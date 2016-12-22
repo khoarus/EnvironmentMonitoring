@@ -11,7 +11,7 @@ html(lang='en')
     form#register(action='/register', method='post')
       a.logo(href='/', title='Trang Chủ')
         img(src='../public/images/logo.png', alt='logo')
-      p#error #{error}
+      p#error.alert.alert-danger #{error}
       #inputs
         .input
           label(for='lastName') Họ đệm
