@@ -85,9 +85,15 @@ module.exports = function(app) {
         var password = req.body.password;
         var firstname = req.body.firstname;
         var lastname = req.body.lastnname;
-
+        var idlogged;
         if (req.session && req.session.result) {
-            users.getUserById(req.session.result.ID, (result) => {
+            req.session.result.forEach(function(element) {
+                var temp = JSON.stringify(element);
+                var logdata = JSON.parse(temp);
+                idlogged = logdata.ID;
+            }, this);
+
+            users.getUserById(idlogged, (result) => {
                 if (result) {
                     if (!username || !password || !firstname || !lastname) {
                         res.render('register', { title: "Đăng ký" });
@@ -111,18 +117,32 @@ module.exports = function(app) {
 
     app.get('/logout', (req, res) => {
         req.session.destroy();
+        console.log("Someone logged out");
         res.redirect('/login');
-    });
-
-    app.get('/create', (req, res) => {
-        res.render("create");
     });
 
     // User
     app.get('/account', (req, res) => {
-        res.render('account', {
-            title: 'User',
-        });
+        var idlogged;
+        if (req.session && req.session.result) {
+            req.session.result.forEach(function(element) {
+                var temp = JSON.stringify(element);
+                var logdata = JSON.parse(temp);
+                idlogged = logdata.ID;
+            }, this);
+
+            users.getUserById(idlogged, (result) => {
+                if (result) {
+                    res.render('account', {
+                        title: 'User',
+                    });
+                } else {
+                    res.redirect('/login');
+                }
+            });
+        } else {
+            res.redirect('/login');
+        }
     });
 
     app.get('/account/create', (req, res) => {
