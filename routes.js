@@ -48,12 +48,12 @@ module.exports = function(app) {
             res.render("login", { error: 'Tên đăng nhập hoặc mật khẩu không được bỏ trống!' });
         } else {
             users.login(username, password, (result, status) => {
-                console.log("Logged successfully for: " + JSON.stringify(result));
+                console.log("Logged successfully for: \n" + JSON.stringify(result));
                 if (result && status === true) {
                     req.session.result = result;
                     res.redirect('/');
                 } else {
-                    res.redirect("/login", { error: "Sai tên đăng nhập hoặc mật khẩu" });
+                    res.render("login", { error: "Sai tên đăng nhập hoặc mật khẩu" });
                 }
             });
         }
@@ -77,7 +77,7 @@ module.exports = function(app) {
                 }
             });
         } else {
-            res.redirect('/register');
+            res.render('register');
         }
     });
 
@@ -95,12 +95,13 @@ module.exports = function(app) {
             }, this);
 
             users.getUserById(idlogged, (result) => {
-                if (result) {
+                if (!result) {
                     if (!username || !password || !firstname || !lastname) {
                         res.render('register', { title: "Đăng ký" });
                     } else {
                         users.register(username, password, firstname, lastname, (result) => {
                             if (result && result === true) {
+                                console.log('Welcome ' + username + ' has been registered successfully!\n');
                                 res.redirect('/login');
                             } else {
                                 res.render('register', { error: "Có lỗi xảy ra. Không thể đăng ký tài khoản!" });
@@ -112,7 +113,7 @@ module.exports = function(app) {
                 }
             });
         } else {
-            res.redirect('/redirect');
+            res.redirect('/register');
         }
     });
 
