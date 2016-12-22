@@ -26,14 +26,25 @@ function getEndpoint(id) {
     } 
     else 
     {
-        API = "/core/api/v1/endpoints/fetch/"+id;
+        // API = "/core/api/v1/devices/fetch/"+id;
+        API = "/core/api/v1/devices/fetch/";
 
         $.getJSON(API, function(data) {
             // console.log(data);
 
             $.each(data.Result, function(){
-                $('').append('\
+                $('#dashboard').append('\
                     <div class="row">\
+                        <div class="col-lg-12">\
+                            <div class="panel panel-default">\
+                                <div class="panel-heading">' + this.DeviceName  + '</div>\
+                                <div class="panel-body">\
+                                    <div class="canvas-wrapper">\
+                                        <canvas id="device' + this.IdDevice + '" width="600" height="200"></canvas>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </div>\
                     </div>\
                 ');
             });
