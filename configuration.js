@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyparser = require("body-parser");
-var session = require('client-sessions');
+var cookieParser = require('cookie-parser')
+var session = require('express-session');
 module.exports = function(app) {
     app.set("view engine", "pug");
     app.engine('pug', require('pug').renderFile);
@@ -8,6 +9,7 @@ module.exports = function(app) {
     app.use('/public', express.static(__dirname + '/public'));
     app.use(bodyparser.json());
     app.use(bodyparser.urlencoded({ extended: true }));
+    app.use(cookieParser());
     app.use(session({
         cookie: 'session',
         secret: 'userlogin',

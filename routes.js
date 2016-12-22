@@ -22,7 +22,7 @@ module.exports = function(app) {
         if (req.session && req.session.result) {
             users.getUserById(req.session.result.ID, (result) => {
                 if (result) {
-                    res.redirect('index');
+                    res.redirect('/index');
                 } else {
                     res.render('login');
                 }
@@ -36,7 +36,7 @@ module.exports = function(app) {
 
         var username = req.body.username,
             password = req.body.password;
-        if (!username || !password || (!username && !password)) {
+        if (!username || !password) {
             res.render("login", { error: 'Tên đăng nhập hoặc mật khẩu không được bỏ trống!' });
         } else {
             users.login(username, password, (result, status) => {
