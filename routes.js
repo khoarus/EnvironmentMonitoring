@@ -1,6 +1,7 @@
 var users = require('./models/users');
-module.exports = function(app) {
+var fs = require('fs');
 
+module.exports = function(app) {
     app.get('/', (req, res) => {
         var idlogged = null;
         if (req.session && req.session.result) {
@@ -27,16 +28,23 @@ module.exports = function(app) {
     });
 
     app.get('/login', (req, res) => {
+        var idlogged;
         if (req.session && req.session.result) {
-            users.getUserById(req.session.result.ID, (result) => {
+            req.session.result.forEach(function(element) {
+                var temp = JSON.stringify(element);
+                var logdata = JSON.parse(temp);
+                idlogged = logdata.ID;
+            }, this);
+
+            users.getUserById(idlogged, (result) => {
                 if (result) {
                     res.redirect('/');
                 } else {
-                    res.render('login');
+                    res.render('login', { title: 'Đăng nhập' });
                 }
             });
         } else {
-            res.render("login");
+            res.render("login", { title: 'Đăng nhập' });
         }
     });
 

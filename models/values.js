@@ -1,8 +1,8 @@
 function Values() {
     var db = require("../controllers/database");
 
-    this.postValue = (value, time, idDevice, callback) => {
-        db.connection.query("INSERT valuetbl(id_device, time, value) VALUE(?, ?, ?)", [idDevice, time, value], (err, result) => {
+    this.postValue = (value, idDevice, callback) => {
+        db.connection.query("INSERT valuetbl(id_device, value) VALUE(?,?)", [idDevice, value], (err, result) => {
             if (err) throw err;
             if (result.affectedRows >= 0) {
                 callback(true);
