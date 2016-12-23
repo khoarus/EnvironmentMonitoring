@@ -218,7 +218,7 @@ module.exports = (app, router) => {
     //Values
 
     //Fetch specific value
-    router.route('/values/fetch/:id').get((req, res) => {
+    router.route('/values/fetch/:deviceid').get((req, res) => {
         var idDevice = req.params.id;
         if (idDevice === null) {
             res.status(400).send({

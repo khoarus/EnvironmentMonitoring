@@ -1,15 +1,9 @@
 var users = require('./models/users');
-var fs = require('fs');
-
 module.exports = function(app) {
     app.get('/', (req, res) => {
         var idlogged = null;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
@@ -31,11 +25,7 @@ module.exports = function(app) {
     app.get('/login', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
@@ -71,11 +61,7 @@ module.exports = function(app) {
     app.get('/register', (req, res) => {
         var idlogged;
         if (req.session && req.session.user) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
@@ -125,11 +111,7 @@ module.exports = function(app) {
     app.get('/account', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
@@ -148,11 +130,7 @@ module.exports = function(app) {
     app.get('/account/create', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
@@ -173,11 +151,7 @@ module.exports = function(app) {
         var idlogged;
         if (req.session && req.session.result) {
             var id = req.params.id;
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
@@ -200,13 +174,7 @@ module.exports = function(app) {
     app.get('/account/edit/:id', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            var id = req.params.id;
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
-
+            idlogged = req.session.result[0].ID;
             users.getUserById(idlogged, (result) => {
                 if (result) {
                     res.render('accountEdit', {
@@ -226,11 +194,7 @@ module.exports = function(app) {
     app.get('/device', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
@@ -249,11 +213,7 @@ module.exports = function(app) {
     app.get('/device/create', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
@@ -272,14 +232,14 @@ module.exports = function(app) {
     app.get('/device/detail/:id', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
+                    if (!req.params.id) {
+                        res.redirect('/device');
+                        return;
+                    }
                     res.render('deviceDetail', {
                         title: 'Thông tin chi tiết',
                     });
@@ -295,14 +255,14 @@ module.exports = function(app) {
     app.get('/device/edit/:id', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
+                    if (!req.params.id) {
+                        res.redirect('/device');
+                        return;
+                    }
                     res.render('deviceEdit', {
                         title: 'Chỉnh sửa thiết bị',
                     });
@@ -320,11 +280,7 @@ module.exports = function(app) {
     app.get('/endpoint', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
@@ -343,11 +299,7 @@ module.exports = function(app) {
     app.get('/endpoint/create', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
@@ -363,17 +315,17 @@ module.exports = function(app) {
         }
     });
 
-    app.get('/endpoint/detail', (req, res) => {
+    app.get('/endpoint/detail/:id', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
+            idlogged = req.session.result[0].ID;
 
             users.getUserById(idlogged, (result) => {
                 if (result) {
+                    if (!req.params.id) {
+                        res.redirect('/endpoint');
+                        return;
+                    }
                     res.render('endpointDetail', {
                         title: 'Thông tin chi tiết',
                     });
@@ -386,17 +338,16 @@ module.exports = function(app) {
         }
     });
 
-    app.get('/endpoint/edit', (req, res) => {
+    app.get('/endpoint/edit/:id', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
-            req.session.result.forEach(function(element) {
-                var temp = JSON.stringify(element);
-                var logdata = JSON.parse(temp);
-                idlogged = logdata.ID;
-            }, this);
-
+            idlogged = req.session.result[0].ID;
             users.getUserById(idlogged, (result) => {
                 if (result) {
+                    if (!req.params.id) {
+                        res.redirect('/endpoint');
+                        return;
+                    }
                     res.render('endpointEdit', {
                         title: 'Chỉnh sửa thiết bị',
                     });
