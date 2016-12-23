@@ -188,9 +188,10 @@ module.exports = function(app) {
         }
     });
 
-    app.get('/account/edit', (req, res) => {
+    app.get('/account/edit/:id', (req, res) => {
         var idlogged;
         if (req.session && req.session.result) {
+            var id = req.params.id;
             req.session.result.forEach(function(element) {
                 var temp = JSON.stringify(element);
                 var logdata = JSON.parse(temp);
