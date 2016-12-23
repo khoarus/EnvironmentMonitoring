@@ -23,7 +23,7 @@ $(function (){
             </a>\
           </span>\
           <span class="pull-right">\
-            <p>' + this.IdDevice + '</p>\
+            <p>#' + this.IdDevice + '</p>\
           </span>\
         </li>\
       ');
