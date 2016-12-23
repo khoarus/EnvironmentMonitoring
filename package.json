@@ -45,6 +45,7 @@
         "pug": "2.0.0-beta6",
         "client-sessions": "0.7.0",
         "cookie-parser": "1.4.3",
-        "request": "2.79.0"
+        "request": "2.79.0",
+        "request-ip": "1.2.3"
     }
 }
