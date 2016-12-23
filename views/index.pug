@@ -26,34 +26,100 @@ block content
                 canvas#myChart2.myChart(height='200', width='600')
 
     block scripts
-      script(src='../public/javascript/ajax/menuDashboard.js')
+      
       script.
+          var values = [];
+          var times = [];
+          fetchValueByDeviceId(4);
+          function fetchValueByDeviceId(id) {
+            var URI = "core/api/v1/values/fetch/" + id;
+            $.getJSON(URI, function(json) {
+              json.Result.forEach((item) => {
+                values.push(item.Value);
+                var temp = new Date(item.Time);
+                var timeFormated = temp.getDay() + "/" + temp.getMonth() + "/" + temp.getYear() + "-" + temp.getHours() + ":" + temp.getMinutes() + ":" + temp.getSeconds();
+                times.push(timeFormated);
+              });
+            });
+          };
+
+          function createChart(idDevice, valueRange, min, max, unit, times) {
+            var ctx = document.getElementById("chart"+idDevice);
+            var HighlightRange = {
+              begin: max,
+              end: min,
+            }
+
+          var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: times,
+              datasets: [{
+                  fill: false,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(178,0,0,0.4)",
+                  borderColor: "#f44336",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: " #f44336",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "#f44336",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                  label: unit,
+                  data: valueRange,
+                  spanGaps: false,
+              }],
+              // This, if it exists at all, defines the highlight region.
+              yHighlightRange : HighlightRange
+            },
+            options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero:false
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: unit
+                  }
+                }]
+              }
+            }
+          });
+          }
         // myChart 1
           var ctx = document.getElementById("myChart");
-          var data = [65, 59, 80, 95, 56, 55, 40, 67, 45, 12, 44, -20]
+          var data = values
           var HighlightRange = {
-                begin: 80,
-                end: 10,
+                begin: 30,
+                end: -15,
           }
 
           var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-              labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+              labels: times,
               datasets: [{
                   fill: false,
                   lineTension: 0.1,
                   backgroundColor: "rgba(178,0,0,0.4)",
-                  borderColor: "rgba(178,0,0,1)",
+                  borderColor: "#f44336",
                   borderCapStyle: 'butt',
                   borderDash: [],
                   borderDashOffset: 0.0,
                   borderJoinStyle: 'miter',
-                  pointBorderColor: "rgba(178,0,0,1)",
+                  pointBorderColor: " #f44336",
                   pointBackgroundColor: "#fff",
                   pointBorderWidth: 1,
                   pointHoverRadius: 5,
-                  pointHoverBackgroundColor: "rgba(178,0,0,1)",
+                  pointHoverBackgroundColor: "#f44336",
                   pointHoverBorderColor: "rgba(220,220,220,1)",
                   pointHoverBorderWidth: 2,
                   pointRadius: 1,
@@ -74,53 +140,6 @@ block content
                   scaleLabel: {
                     display: true,
                     labelString: '*c'
-                  }
-                }]
-              }
-            }
-          });
-        // myChart 2
-          var ctx = document.getElementById("myChart2");
-          var data = [20, 25, 8, 15, 26, 25, 32, 17, 10, 12, 30, 20]
-          var HighlightRange = {
-                begin: 30,
-                end: 10,
-          }
-
-          var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-              datasets: [{
-                  fill: false,
-                  lineTension: 0.1,
-                  backgroundColor: "rgba(75,192,192,0.4)",
-                  borderColor: "rgba(75,192,192,1)",
-                  borderCapStyle: 'butt',
-                  borderDash: [],
-                  borderDashOffset: 0.0,
-                  borderJoinStyle: 'miter',
-                  pointBorderColor: "rgba(75,192,192,1)",
-                  pointBackgroundColor: "#fff",
-                  pointBorderWidth: 1,
-                  pointHoverRadius: 5,
-                  pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                  pointHoverBorderColor: "rgba(220,220,220,1)",
-                  pointHoverBorderWidth: 2,
-                  pointRadius: 1,
-                  pointHitRadius: 10,
-                  label: "Áp Suất",
-                  data: data,
-                  spanGaps: false,
-              }],
-              // This, if it exists at all, defines the highlight region.
-              yHighlightRange : HighlightRange
-            },
-            options: {
-              scales: {
-                yAxes: [{
-                  ticks: {
-                    beginAtZero:false
                   }
                 }]
               }

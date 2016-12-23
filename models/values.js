@@ -20,7 +20,7 @@ function Values() {
     };
 
     this.getValue = (idDevice, callback) => {
-        db.connection.query("SELECT V.id IdValue, V.id_device IdDevice, V.time Time, V.value Value FROM valuetbl V LEFT JOIN devicetbl D ON D.id = IdDevice WHERE IdDevice = ?", idDevice, (err, result) => {
+        db.connection.query("SELECT V.id IdValue, V.id_device IdDevice, V.time Time, V.value Value FROM valuetbl V LEFT JOIN devicetbl D ON D.id = V.id_device WHERE V.id_device = ?", idDevice, (err, result) => {
             if (err) throw err;
             if (result.length > 0) {
                 callback(result);

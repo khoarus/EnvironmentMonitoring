@@ -1,5 +1,4 @@
 var users = require('./models/users');
-var requestIp = require('request-ip');
 module.exports = function(app) {
     app.get('/', (req, res) => {
         var idlogged = null;
@@ -19,8 +18,6 @@ module.exports = function(app) {
         } else {
             res.render('login');
         }
-        var ip = requestIp.getClientIp(req);
-        console.log('Remote client connected: ' + ip);
     });
 
     app.get('/login', (req, res) => {

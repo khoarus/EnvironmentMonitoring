@@ -219,8 +219,8 @@ module.exports = (app, router) => {
 
     //Fetch specific value
     router.route('/values/fetch/:deviceid').get((req, res) => {
-        var idDevice = req.params.id;
-        if (idDevice === null) {
+        var idDevice = req.params.deviceid;
+        if (!idDevice) {
             res.status(400).send({
                 message: "Required Device ID is not null!",
                 StatusCode: 400
@@ -377,8 +377,16 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/endpoints/fetch').get((req, res) => {
-        endpoints.getEndPoints((result) => {
+    router.route('/endpoints/fetch/:userid').get((req, res) => {
+        var userid = req.params.userid;
+        if (!userid) {
+            res.status(400).send({
+                message: "Required User ID need to get endpoints!",
+                StatusCode: 400
+            });
+            return;
+        }
+        endpoints.getEndPoints(userid, (result) => {
             if (result !== null) {
                 res.json({
                     Result: result,
