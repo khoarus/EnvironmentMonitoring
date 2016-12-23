@@ -297,7 +297,7 @@ module.exports = (app, router) => {
     router.route('/values/push').get((req, res) => {
         var device = req.query.devicecode;
         var value = req.query.value;
-
+        console.log("value: " + value + "device: " + device);
         if (!device || !value) {
             res.status(400).send({
                 message: "Required fields is needed to create value",

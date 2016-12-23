@@ -2,7 +2,7 @@ function Values() {
     var db = require("../controllers/database");
 
     this.postValue = (value, idDevice, callback) => {
-        db.connection.query("", idDevice, (err, result) => {
+        db.connection.query("SELECT * FROM devicetbl WHERE id = ?", idDevice, (err, result) => {
             if (err) throw err;
             if (result && result.length > 0) {
                 db.connection.query("INSERT valuetbl(id_device, value) VALUE(?,?)", [idDevice, value], (err, result) => {
