@@ -297,6 +297,7 @@ module.exports = (app, router) => {
     router.route('/values/push').get((req, res) => {
         var device = req.query.devicecode;
         var value = req.query.value;
+
         if (!device || !value) {
             res.status(400).send({
                 message: "Required fields is needed to create value",
@@ -305,6 +306,12 @@ module.exports = (app, router) => {
             return;
         }
         values.postValue(value, device, (result) => {
+            if (!result) {
+                res.status(404).send({
+                    message: "Device Not Found. The device must available and exists",
+                    StatusCode: 404
+                });
+            }
             if (result === true) {
                 res.json({
                     message: "SUCCESS",
