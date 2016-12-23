@@ -1,6 +1,6 @@
 $(function (){
 
-  var API = "/core/api/v1/devices/fetch";
+  var API = "/core/api/v1/endpoints/fetch";
 
   $.getJSON( API, function( data ) {
 
@@ -9,21 +9,21 @@ $(function (){
         <li>\
           <div class="list-content">\
             <h4>\
-              <a href="/device/detail/'+ this.IdDevice +'">'+ this.DeviceName +'</a>\
+              <a href="/endpoint/detail/'+ this.ID +'">'+ this.name +'</a>\
             </h4>\
             <p>' + this.Description + '</p>\
           </div>\
           <div class="list-footer"></div>\
           <span class="pull-left buttons">\
-            <a href="/device/detail/'+ this.IdDevice +'" class="btn btn-sm btn-primary">\
+            <a href="/endpoint/detail/'+ this.ID +'" class="btn btn-sm btn-primary">\
               <i class="fa fa-eye"></i> Hiển thị chi tiết\
             </a>\
-            <a href="/device/edit/'+ this.IdDevice +'" class="btn btn-sm btn-default">\
+            <a href="/endpoint/edit/'+ this.ID +'" class="btn btn-sm btn-default">\
               <i class="fa fa-pencil-square-o"></i> Chỉnh sửa\
             </a>\
           </span>\
           <span class="pull-right">\
-            <p>#' + this.IdDevice + '</p>\
+            <p>#' + this.ID + '</p>\
           </span>\
         </li>\
       ');
