@@ -144,6 +144,7 @@ module.exports = (app, router) => {
                     Result: result,
                     StatusCode: 200
                 });
+                console.log('The device ' + name + " has been created successfully!\n");
             } else {
                 res.status(406).send({
                     message: "Unable to create device",
@@ -176,6 +177,7 @@ module.exports = (app, router) => {
                     Result: "SUCCESS",
                     StatusCode: 200
                 });
+                console.log('The device ' + device_name + ' has been updated!');
             } else {
                 res.status(403).send({
                     message: "FAILED",
@@ -200,8 +202,9 @@ module.exports = (app, router) => {
                 res.json({
                     Result: "OK",
                     StatusCode: 200,
-                    message: "The device has been deleted successfully!"
+                    message: "The device " + id + "has been deleted successfully!"
                 });
+                console.log("The device " + id + "has been deleted successfully!");
             } else {
                 res.status(404).send({
                     Result: "FAILED",
@@ -265,13 +268,12 @@ module.exports = (app, router) => {
     });
 
     //Update value of device
-    router.route('/values/update/').put((req, res) => {
-        var device = req.query.deviceCode,
-            idValue = req.query.valueCode,
-            idendpoint = req.query.endpointCode,
-            time = req.query.time,
+    router.route('/values/update').put((req, res) => {
+        var device = req.query.devicecode,
+            idValue = req.query.valuecode,
             value = req.query.value;
-        if (!device || !idValue || !value || !idendpoint || !time) {
+
+        if (!device || !idValue || !value) {
             res.status(400).send({
                 message: "Required value ID is not null!",
                 StatusCode: 400
@@ -297,7 +299,6 @@ module.exports = (app, router) => {
     router.route('/values/push').get((req, res) => {
         var device = req.query.devicecode;
         var value = req.query.value;
-        console.log("value: " + value + "device: " + device);
         if (!device || !value) {
             res.status(400).send({
                 message: "Required fields is needed to create value",
@@ -311,6 +312,7 @@ module.exports = (app, router) => {
                     message: "Device Not Found. The device must available and exists",
                     StatusCode: 404
                 });
+                return;
             }
             if (result === true) {
                 res.json({

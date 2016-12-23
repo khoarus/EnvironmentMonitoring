@@ -24,7 +24,8 @@ module.exports = function(app) {
         } else {
             res.render('login');
         }
-
+        var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        console.log('Remote client connected: ' + ip);
     });
 
     app.get('/login', (req, res) => {
