@@ -41,7 +41,7 @@ function getEndpoint(id) {
                                 <div class="panel-heading">' + this.DeviceName + '</div>\
                                 <div class="panel-body">\
                                     <div class="canvas-wrapper">\
-                                        <canvas id="device' + this.IdDevice + '" width="600" height="200"></canvas>\
+                                        <div id="device' + this.IdDevice + '" style="min-width: 310px; height: 400px; margin: 0 auto"></div>\
                                     </div>\
                                 </div>\
                             </div>\
