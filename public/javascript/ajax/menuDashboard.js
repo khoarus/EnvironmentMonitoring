@@ -6,9 +6,9 @@ $(getEndpoint(id_endpoint));
 setInterval(function(){ 
     getEndpoint(id_endpoint);
 
- }, 10000);
+ }, 20000);
 
-// 10 giay se goi mot lan
+// 20 giay se goi mot lan
 
 
 function getEndpoint(id) {
