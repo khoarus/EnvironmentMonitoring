@@ -7,7 +7,12 @@ module.exports = (app, router) => {
 
     //Welcom page
     router.get("/welcome", (req, res) => {
-        res.json({ message: "Welcome to Environment Monitoring API", version: "1.0", StatusCode: res.statusCode });
+        res.json({
+            message: "Welcome to Environment Monitoring API",
+            version: "1.0",
+            StatusCode: res.statusCode
+        });
+        console.log(req.session.Result);
 
     });
 
@@ -315,6 +320,7 @@ module.exports = (app, router) => {
     router.route('/values/push').get((req, res) => {
         var device = req.query.devicecode;
         var value = req.query.value;
+        console.log(device);
         if (!device || !value) {
             res.status(400).send({
                 message: "Required fields is needed to create value",

@@ -1,5 +1,6 @@
 var users = require('./models/users');
 module.exports = function(app) {
+
     app.get('/', (req, res) => {
         var idlogged = null;
         if (req.session && req.session.result) {
@@ -8,8 +9,7 @@ module.exports = function(app) {
             users.getUserById(idlogged, (result) => {
                 if (result) {
                     res.render('index', {
-                        title: 'Dashboard',
-                        //pageHeader: 'Dashboard'
+                        title: 'Dashboard'
                     });
                 } else {
                     res.render('login');
@@ -325,7 +325,7 @@ module.exports = function(app) {
                         return;
                     }
                     res.render('endpointDetail', {
-                        title: 'Thông tin chi tiết',
+                        title: 'Thông tin chi tiết'
                     });
                 } else {
                     res.redirect('/login');
@@ -347,7 +347,7 @@ module.exports = function(app) {
                         return;
                     }
                     res.render('endpointEdit', {
-                        title: 'Chỉnh sửa thiết bị',
+                        title: 'Chỉnh sửa thiết bị'
                     });
                 } else {
                     res.redirect('/login');
