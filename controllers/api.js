@@ -113,7 +113,7 @@ module.exports = (app, router) => {
             });
             return;
         }
-        devices.getAllDevice((result) => {
+        devices.getAllDevice(endpointcode, (result) => {
             if (result !== null) {
                 res.json({
                     Result: result,
@@ -367,7 +367,7 @@ module.exports = (app, router) => {
     });
 
     //Endpoints
-    router.route('/endpoints/fetch/:id').get((req, res) => {
+    router.route('/endpoints/fetch').get((req, res) => {
         var userid = req.query.userid;
         var endpointid = req.query.endpointid;
         if (!userid || !endpointid) {

@@ -13,7 +13,7 @@ function Device() {
     };
 
     this.getAllDevice = function(idendpoint, callback) {
-        db.connection.query("SELECT * FROM devicetbl D WHERE D.id_endpoint = ? LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id ORDER BY V.time DESC LIMIT 1 ", idEndPoint, (err, result) => {
+        db.connection.query("SELECT * FROM devicetbl D LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id WHERE D.id_endpoint = ? ORDER BY V.time DESC LIMIT 1 ", idendpoint, (err, result) => {
             if (err)
                 throw err;
             if (result && result.length > 0) {
