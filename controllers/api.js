@@ -238,7 +238,6 @@ module.exports = (app, router) => {
 
     //Values
 
-    //Fetch specific value
     router.route('/values/fetch/:deviceid').get((req, res) => {
         var idDevice = req.params.deviceid;
         if (!idDevice) {
@@ -255,9 +254,9 @@ module.exports = (app, router) => {
                     StatusCode: 200
                 });
             } else {
-                res.status(404).send({
+                res.status(200).send({
                     message: "This device don't have any values",
-                    StatusCode: 404
+                    StatusCode: 200
                 });
             }
         });
