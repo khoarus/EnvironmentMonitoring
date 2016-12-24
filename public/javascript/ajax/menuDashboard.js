@@ -1,5 +1,6 @@
 
 var id_endpoint = 0 ;
+
 $(getEndpoint(id_endpoint));
 
 setInterval(function(){ 
@@ -71,7 +72,7 @@ function getEndpoint(id) {
                         </div>\
                     </div>\
                 ');
-                fetchValueByDeviceId(this.id_device);
+                fetchValueByDeviceId(this.id_device,id_endpoint);
             });
             
         });

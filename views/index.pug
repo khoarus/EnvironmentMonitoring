@@ -34,21 +34,34 @@ block content
 
         var values = [];
         var times = [];
-       
-        function fetchValueByDeviceId(id) {
+        var info_endpoint = {};
+
+
+           function getInfoEndPointByID(id_endpoint) {
+                  var URI = "/core/api/v1/devices/fetchAll?endpointcode=" + id_endpoint;
+                    $.getJSON(URI, function(json) {
+                    json.Result.forEach((item) => {
+                    info_endpoint = item;
+                    });
+                      setTimeout(function(){
+                        setData();
+                      },0);
+                });
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+
+        function fetchValueByDeviceId(id,id_endpoint) {
           var URI = "/core/api/v1/values/fetch/" + id;
           $.getJSON(URI, function(json) {
-           
+           values = [];//clear value old.
             json.Result.forEach((item) => {
               values.push(item.Value);
               var temp = new Date(item.Time);
               var timeFormated = temp.getDay() + "/" + temp.getMonth() + "/" + temp.getYear() + "-" + temp.getHours() + ":" + temp.getMinutes() + ":" + temp.getSeconds();
               times.push(timeFormated);
             });
-
-                setTimeout(function(){
-                 setData();
-                },0);
+            getInfoEndPointByID(id_endpoint);                                                       
+              
           });
         };
       
@@ -65,7 +78,7 @@ block content
               },
                 yAxis: {
                     title: {
-                        text: 'Temperature (°C)'
+                        text: info_endpoint.unit
                     },
                     plotLines: [{
                         value: 0,
@@ -74,7 +87,7 @@ block content
                     }],
                 },
               tooltip: {
-                valueSuffix: '°C'
+                valueSuffix: info_endpoint.unit
               },
               legend: {
                   layout: 'vertical',
