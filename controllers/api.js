@@ -119,7 +119,7 @@ module.exports = (app, router) => {
                     StatusCode: 200
                 });
             } else {
-                res.status(404).send({ message: "Error! Not Found Device with ID: " + id, StatusCode: 404 });
+                res.status(404).send({ message: "Error! Not Found Device ", StatusCode: 404 });
             }
         });
     });
