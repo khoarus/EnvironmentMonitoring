@@ -5,9 +5,9 @@ $(getEndpoint(id_endpoint));
 setInterval(function(){ 
     getEndpoint(id_endpoint);
 
- }, 5000);
+ }, 10000);
 
-// 5 giay se goi mot lan
+// 10 giay se goi mot lan
 
 
 function getEndpoint(id) {
@@ -51,8 +51,7 @@ function getEndpoint(id) {
         API = "core/api/v1/devices/fetchAll?endpointcode=" + id_endpoint;
 
         $.getJSON(API, function(data) {
-            // codansole.log(data);
-            
+            // codansole.log(data);            
             $.each(data.Result, function() {
                 $('#dashboard').html("");
                  if(this.value === null) {
