@@ -41,6 +41,7 @@ block content
         function fetchValueByDeviceId(id) {
           var URI = "/core/api/v1/values/fetch/"+id;
           $.getJSON(URI, function(json) {
+           
             json.Result.forEach((item) => {
               values.push(item.Value);
               var temp = new Date(item.Time);
@@ -49,9 +50,9 @@ block content
             });
 
                 setTimeout(function(){
-                  setData();
+                 setData();
                   
-                },1000);
+                },0);
           });
         };
       
