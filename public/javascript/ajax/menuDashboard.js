@@ -6,7 +6,7 @@ $(getEndpoint(id_endpoint));
 setInterval(function(){ 
     getEndpoint(id_endpoint);
 
- }, 4000);
+ }, 20000);
 
 // 20 giay se goi mot lan
 
@@ -49,20 +49,19 @@ function getEndpoint(id) {
     } else {
         id_endpoint = id;
         // API = "/core/api/v1/devices/fetch/"+id;
-        API = "core/api/v1/devices/fetchAll?endpointcode=" + id_endpoint;
-
+        API = "/core/api/v1/devices/fetch?endpointcode=" + id_endpoint;
+                                                                                                                                                                                                                                                                                                                
         $.getJSON(API, function(data) {
+              $('#dashboard').html("");
             // codansole.log(data);            
             $.each(data.Result, function() {
-                $('#dashboard').html("");
-                  
                 $('#dashboard').append('\
                     <div class="row">\
                         <div class="col-lg-12">\
                             <div class="panel panel-default">\
                                 <div class="panel-body">\
                                     <div class="canvas-wrapper">\
-                                        <div id="container + "this.id_device" + " style="min-width: 310px; height: 400px; margin: 0 auto"></div>\
+                                        <div id="container' +this.id_device  +'" style="min-width: 310px; height: 400px; margin: 0 auto"></div>\
                                     </div>\
                                 </div>\
                             </div>\

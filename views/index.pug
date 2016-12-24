@@ -32,7 +32,7 @@ block content
       
       script.
 
-        var values = [];
+       
         var times = [];
         var info_endpoint = {};
 
@@ -43,35 +43,34 @@ block content
                     json.Result.forEach((item) => {
                     info_endpoint = item;
                     });
-                      setTimeout(function(){
-                        setData();
-                      },0);
+                    
                 });
         }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 
 
         function fetchValueByDeviceId(id,id_endpoint) {
 
-          var URI = "/core/api/v1/values/fetch/" + id;
+          var URI = "/core/api/v1/devices/fetchAll?endpointcode=" + id_endpoint;
 
 
           $.getJSON(URI, function(json) {
-           values = [];//clear value old.
-           if(json.StatusCode == 200)
-            {
+           var values = [];//clear value old.
+          
  
             json.Result.forEach((item) => {
-              values.push(item.Value);
-              var temp = new Date(item.Time);
-              var timeFormated = temp.getDay() + "/" + temp.getMonth() + "/" + temp.getYear() + "-" + temp.getHours() + ":" + temp.getMinutes() + ":" + temp.getSeconds();
-              times.push(timeFormated);
-            });
-           }else if(json.StatusCode  == 404)//khong co gia tri tra ve
-           {
-            //KHONG LAM GI CA
-           }                                                                                                                                                                                                                                                                                                                                      
-            getInfoEndPointByID(id_endpoint);                                                       
+
+              if(item.id_device === id)
+              {
+              values.push(item.value);
               
+              var timeFormated = item.time;
+              times.push(timeFormated);
+              }
+            });
+             getInfoEndPointByID(id_endpoint);                                                       
+                setTimeout(function(){
+                        setData(id,values);
+                   },0);
           }).error(function() { 
                //khogn ton tai du lieu
               
@@ -79,9 +78,9 @@ block content
         };
       
         //- alert(JSON.stringify(values));
-        function setData(id){
+        function setData(id,values){
 
-          Highcharts.chart('container', {
+          Highcharts.chart('container'+id, {
               title: {
                   text: '',
                   x: -20 //center
