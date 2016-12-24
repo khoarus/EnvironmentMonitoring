@@ -51,8 +51,7 @@ block content
 
 
         function fetchValueByDeviceId(id,id_endpoint) {
-        //-   var URI = "/core/api/v1/values/fetch/" + id;
-            var URI = "/core/api/v1/values/fetch/6";
+            var URI = "/core/api/v1/values/fetch/" + id;
           $.getJSON(URI, function(json) {
            values = [];//clear value old.
             json.Result.forEach((item) => {
