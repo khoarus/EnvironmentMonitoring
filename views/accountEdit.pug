@@ -11,17 +11,17 @@ block content
       .panel.panel-default
         .panel-heading Edit Profile
         .panel-body
-          form(role='form')
+          form(role='form', action='/users/', method='post')
             #inputs
               .form-group
                 label(for='lastName') Họ đệm
-                input#lastName.form-control(type='text', placeholder='Họ đệm', value='Nguyễn Văn')
+                input#lastName.form-control(type='text', placeholder='Họ đệm', name='lastname', value='Nguyễn Văn')
               .form-group
                 label(for='firstName') Tên
-                input#firstName.form-control(type='text', placeholder='Tên', value='A')
+                input#firstName.form-control(type='text', placeholder='Tên', value='A', name='firstname',)
               .form-group
                 label(for='username') Tên tài khoản
-                input#username.form-control(pattern='.{6,16}', type='text', placeholder='Tên tài khoản', value='hoangbaovu')
+                input#username.form-control(type='text', placeholder='Tên tài khoản', value='hoangbaovu', name='username',)
               .form-group.role
                 label.label(for='role') Chức vụ
                 input#1(type='radio', name='name', checked='')
@@ -30,10 +30,10 @@ block content
                 label(for='2') Admin
               .form-group
                 label(for='password') Mật khẩu
-                input#password.form-control(type='password', placeholder='Mật khẩu')
+                input#password.form-control(type='password', name='password', placeholder='Mật khẩu')
               .form-group
                 label(for='password-repeat') Nhập lại mật khẩu
-                input#password-repeat.form-control(type='password', placeholder='Nhập lại mật khẩu')
+                input#password-repeat.form-control(type='password', name='repeat', placeholder='Nhập lại mật khẩu')
                 span#message
             // /#input
             #actions
