@@ -12,7 +12,7 @@ module.exports = (app, router) => {
             version: "1.0",
             StatusCode: res.statusCode
         });
-        console.log(req.session.Result);
+
 
     });
 
@@ -381,7 +381,7 @@ module.exports = (app, router) => {
 
     //Endpoints
     router.route('/endpoints/fetch').get((req, res) => {
-        var userid = req.query.userid;
+        var userid = global.IDUser;
         var endpointid = req.query.endpointid;
         if (!userid || !endpointid) {
             res.status(400).send({
@@ -406,7 +406,7 @@ module.exports = (app, router) => {
     });
 
     router.route('/endpoints/fetch/users/:userid').get((req, res) => {
-        var userid = req.params.userid;
+        var userid = global.IDUser;
         if (!userid) {
             res.status(400).send({
                 message: "Required User ID need to get endpoints!",
@@ -433,7 +433,7 @@ module.exports = (app, router) => {
         var name = req.query.endpointName;
         var description = req.query.description;
         var address = req.query.address;
-        var userid = req.query.userId;
+        var userid = global.IDUser;
         if ((!name || name == "") || (!description || description == "") || (!address || address == "") || !userid) {
             res.status(400).send({
                 message: "Required fields not null or empty",

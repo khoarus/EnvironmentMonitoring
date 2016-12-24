@@ -1,6 +1,6 @@
 var users = require('./models/users');
 module.exports = function(app) {
-
+    global.IDUser = null;
     app.get('/', (req, res) => {
         var idlogged = null;
         if (req.session && req.session.result) {
@@ -48,6 +48,7 @@ module.exports = function(app) {
                 console.log("Logged successfully for: \n" + JSON.stringify(result[0]));
                 if (result && status === true) {
                     req.session.result = result;
+                    global.IDUser = result[0].ID;
                     res.redirect('/');
                 } else {
                     res.render("login", { error: "Sai tên đăng nhập hoặc mật khẩu" });
