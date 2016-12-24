@@ -16,7 +16,7 @@ block content
             .panel-heading Device 1
             .panel-body
               .canvas-wrapper
-                canvas#myChart.myChart(height='200', width='600')
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     .row
         .col-lg-12
           .panel.panel-default
@@ -26,79 +26,70 @@ block content
                 canvas#myChart2.myChart(height='200', width='600')
 
     block scripts
-     
+      script(src="https://code.highcharts.com/highcharts.js")
+      script(src="https://code.highcharts.com/modules/exporting.js")
+      
       script.
-         
-      script.
-           
-            alert("true");
-          
 
-        
-        //-   var values = [];
-        //-   var times = [];
-        //-   isrender = true;
-        //-   fetchValueByDeviceId(4);
-        //-   function fetchValueByDeviceId(id) {
-        //-     var URI = "core/api/v1/values/fetch/" + id;
-        //-     $.getJSON(URI, function(json) {
-        //-       json.Result.forEach((item) => {
-        //-         values.push(item.Value);
-        //-         var temp = new Date(item.Time);
-        //-         var timeFormated = temp.getDay() + "/" + temp.getMonth() + "/" + temp.getYear() + "-" + temp.getHours() + ":" + temp.getMinutes() + ":" + temp.getSeconds();
-        //-         times.push(timeFormated);
-        //-       });
-        //-     });
-        //-   };
+        var values = [];
+        var times = [];
+        isrender = true;
+        fetchValueByDeviceId(4);
+        function fetchValueByDeviceId(id) {
+          var URI = "core/api/v1/values/fetch/" + id;
+          $.getJSON(URI, function(json) {
+            json.Result.forEach((item) => {
+              values.push(item.Value);
+              var temp = new Date(item.Time);
+              var timeFormated = temp.getDay() + "/" + temp.getMonth() + "/" + temp.getYear() + "-" + temp.getHours() + ":" + temp.getMinutes() + ":" + temp.getSeconds();
+              times.push(timeFormated);
+            });
 
-        //-  var ctx = document.getElementById("myChart");
-        //-   var data = [65, 59, 80, 95, 56, 55, 40, 67, 45, 12, 44, -20]
-        //-   var HighlightRange = {
-        //-         begin: 80,
-        //-         end: 10,
-        //-   }
+                setTimeout(function(){
+                  setData();
 
-        //-   var myChart = new Chart(ctx, {
-        //-     type: 'line',
-        //-     data: {
-        //-       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        //-       datasets: [{
-        //-           fill: false,
-        //-           lineTension: 0.1,
-        //-           backgroundColor: "rgba(178,0,0,0.4)",
-        //-           borderColor: "rgba(178,0,0,1)",
-        //-           borderCapStyle: 'butt',
-        //-           borderDash: [],
-        //-           borderDashOffset: 0.0,
-        //-           borderJoinStyle: 'miter',
-        //-           pointBorderColor: "rgba(178,0,0,1)",
-        //-           pointBackgroundColor: "#fff",
-        //-           pointBorderWidth: 1,
-        //-           pointHoverRadius: 5,
-        //-           pointHoverBackgroundColor: "rgba(178,0,0,1)",
-        //-           pointHoverBorderColor: "rgba(220,220,220,1)",
-        //-           pointHoverBorderWidth: 2,
-        //-           pointRadius: 1,
-        //-           pointHitRadius: 10,
-        //-           label: "Nhiệt độ",
-        //-           data: data,
-        //-           spanGaps: false,
-        //-       }],
-        //-       // This, if it exists at all, defines the highlight region.
-        //-       yHighlightRange : HighlightRange
-        //-     },
-        //-     options: {
-        //-       scales: {
-        //-         yAxes: [{
-        //-           ticks: {
-        //-             beginAtZero:false
-        //-           },
-        //-           scaleLabel: {
-        //-             display: true,
-        //-             labelString: '*c'
-        //-           }
-        //-         }]
-        //-       }
-        //-     }
-        //-   });
-        
+                },1000);
+          });
+        };
+      
+        //- alert(JSON.stringify(values));
+        function setData(){
+
+          Highcharts.chart('container', {
+              title: {
+                  text: 'Monthly Average Temperature',
+                  x: -20 //center
+              },
+              subtitle: {
+                  text: 'Source: WorldClimate.com',
+                  x: -20
+              },
+              xAxis: {
+                  categories: times
+              },
+              yAxis: {
+                  title: {
+                      text: 'Temperature (°C)'
+                  },
+                  plotLines: [{
+                      value: 0,
+                      width: 1,
+                      color: '#808080'
+                  }]
+              },
+              tooltip: {
+                  valueSuffix: '°C'
+              },
+              legend: {
+                  layout: 'vertical',
+                  align: 'right',
+                  verticalAlign: 'middle',
+                  borderWidth: 0
+              },
+              series: [{
+                  name: 'Tokyo',
+                  data: values
+              }]
+          });
+        }
+      
