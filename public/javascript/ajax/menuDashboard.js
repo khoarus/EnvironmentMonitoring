@@ -6,7 +6,7 @@ $(getEndpoint(id_endpoint));
 setInterval(function(){ 
     getEndpoint(id_endpoint);
 
- }, 20000);
+ }, 4000);
 
 // 20 giay se goi mot lan
 
@@ -14,7 +14,7 @@ setInterval(function(){
 function getEndpoint(id) {
     var API = "";
     if (id == 0) {
-        API = "/core/api/v1/endpoints/fetch/users/1";
+        API = "/core/api/v1/endpoints/fetch/users";
         var firsttab = true;
         $.getJSON(API, function(data) {
 
@@ -55,10 +55,7 @@ function getEndpoint(id) {
             // codansole.log(data);            
             $.each(data.Result, function() {
                 $('#dashboard').html("");
-                 if(this.value === null) {
-                   $('#dashboard').html("");
-                   $('#dashboard').append('<span>Thiết bị chưa có dữ liệu...</span>');
-                  }
+                  
                 $('#dashboard').append('\
                     <div class="row">\
                         <div class="col-lg-12">\
@@ -75,6 +72,8 @@ function getEndpoint(id) {
                 fetchValueByDeviceId(this.id_device,id_endpoint);
             });
             
-        });
+        }).error(function() { 
+            $('#dashboard').html("");
+         });
     }
 }

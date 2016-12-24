@@ -51,18 +51,28 @@ block content
 
 
         function fetchValueByDeviceId(id,id_endpoint) {
-            var URI = "/core/api/v1/values/fetch/" + id;
+
+          var URI = "/core/api/v1/values/fetch/" + id;
+
+
           $.getJSON(URI, function(json) {
            values = [];//clear value old.
+           if(json.StatusCode == 200)
+            {
+ 
             json.Result.forEach((item) => {
               values.push(item.Value);
               var temp = new Date(item.Time);
               var timeFormated = temp.getDay() + "/" + temp.getMonth() + "/" + temp.getYear() + "-" + temp.getHours() + ":" + temp.getMinutes() + ":" + temp.getSeconds();
               times.push(timeFormated);
             });
+           }else if(json.StatusCode  == 404)//khong co gia tri tra ve
+           {
+            //KHONG LAM GI CA
+           }                                                                                                                                                                                                                                                                                                                                      
             getInfoEndPointByID(id_endpoint);                                                       
               
-          });
+          }).error(function() { alert("error"); });
         };
       
         //- alert(JSON.stringify(values));
