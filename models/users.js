@@ -69,9 +69,9 @@ function User() {
         db.connection.query("UPDATE userstbl User SET FirstName = ?, LastName = ?, Username = ?, Password = ?, id_role = ? WHERE IdUser = ?", [firstname, lastname, username, password, id_role, userId], (err, result) => {
             if (err) console.log(err);
             if (result.affectedRows > 0)
-                callback(result);
+                callback(true);
             else
-                callback(null);
+                callback(false);
         });
     };
 

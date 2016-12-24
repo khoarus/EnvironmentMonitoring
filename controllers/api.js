@@ -80,9 +80,27 @@ module.exports = (app, router) => {
         var password = req.query.password;
         var firstname = req.query.firstname;
         var lastname = req.query.lastname;
-        /*users.updateUserInformation(, (result) => {
-
-        });*/
+        var id = global.IDUser || req.query.id
+        if (!id || !firstname || !lastname || !username) {
+            res.status(400).send({
+                message: "Required fields is not null",
+                StatusCode: 400
+            });
+            return;
+        }
+        users.updateUserInformation(id, firstname, lastname, username, password, (result) => {
+            if (result === true) {
+                res.json({
+                    message: "Update user information successfully",
+                    StatusCode: 200
+                });
+            } else {
+                res.status(400).send({
+                    message: "FAILED",
+                    StatusCode: 400
+                });
+            }
+        });
     });
 
     //Get all users
