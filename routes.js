@@ -45,7 +45,7 @@ module.exports = function(app) {
             res.render("login", { error: 'Tên đăng nhập hoặc mật khẩu không được bỏ trống!' });
         } else {
             users.login(username, password, (result, status) => {
-                console.log("Logged successfully for: \n" + JSON.stringify(result));
+                console.log("Logged successfully for: \n" + JSON.stringify(result[0]));
                 if (result && status === true) {
                     req.session.result = result;
                     res.redirect('/');
