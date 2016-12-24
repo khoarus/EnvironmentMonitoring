@@ -55,7 +55,7 @@ function getEndpoint(id) {
             $.each(data.Result, function() {
                 $('#dashboard').html("");
                  if(this.value === null) {
-                  $('#dashboard').html("");
+                   $('#dashboard').html("");
                    $('#dashboard').append('<span>Thiết bị chưa có dữ liệu...</span>');
                   }
                 $('#dashboard').append('\
