@@ -254,7 +254,7 @@ module.exports = (app, router) => {
                     StatusCode: 200
                 });
             } else {
-                res.json({
+                res.status(404).send({
                     Result: result,
                     StatusCode: 404
                 });
