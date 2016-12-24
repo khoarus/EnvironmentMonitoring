@@ -3,10 +3,11 @@ function Device() {
     var db = require("../controllers/database");
 
     this.getDevice = function(idendpoint, idDevice, callback) {
-        db.connection.query("SELECT * FROM devicetbl D WHERE D.id_endpoint = ? AND D.id = ? LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id ORDER BY V.time DESC LIMIT 1", idendpoint, idDevice, (err, result) => {
+        console.log(idendpoint + ":" + idDevice);
+        db.connection.query("SELECT * FROM devicetbl D LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id WHERE D.id_endpoint = ? AND D.id = ? ORDER BY V.time DESC LIMIT 1 ", [idendpoint, idDevice], (err, result) => {
             console.log(result);
             if (err)
-                throw err;
+                console.log("loi");
             if (result) {
                 callback(result);
             } else callback(null);
