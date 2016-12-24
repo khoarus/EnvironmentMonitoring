@@ -16,7 +16,7 @@ function EndPoint() {
         });
     };
     this.getEndPoints = (id_user, callback) => {
-        db.connection.query("SELECT E.id ID, E.name, E.description Description, E.address Address, E.id_user OwnerID, U.username OwnerName FROM endpointtbl E LEFT JOIN userstbl U ON E.id_user = U.IdUser   WHERE E.id_user = ?", id_user, (err, result) => {
+        db.connection.query("SELECT E.id ID, E.name, E.description Description, E.address Address, E.id_user OwnerID, U.username OwnerName FROM endpointtbl E LEFT JOIN userstbl U ON E.id_user = U.IdUser WHERE E.id_user = ?", id_user, (err, result) => {
             if (err) throw err;
 
             if (result.length > 0) {
@@ -27,8 +27,8 @@ function EndPoint() {
 
         });
     };
-    this.getEndPointById = (IdEndPoint, callback) => {
-        db.connection.query("SELECT E.id ID, E.name, E.description Description, E.address Address, E.id_user OwnerID FROM endpointtbl E LEFT JOIN userstbl U ON U.IdUser = E.id_user WHERE E.id = ?", IdEndPoint, (err, result) => {
+    this.getEndPointById = (Iduser, IdEndPoint, callback) => {
+        db.connection.query("SELECT E.id ID, E.name, E.description Description, E.address Address, E.id_user OwnerID FROM endpointtbl E LEFT JOIN userstbl U ON U.IdUser = E.id_user WHERE E.id_user = ? AND E.id = ? ", [Iduser, IdEndPoint], (err, result) => {
             if (err) throw err;
             if (result.length > 0) {
                 callback(result);

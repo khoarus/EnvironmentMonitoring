@@ -88,9 +88,10 @@ module.exports = (app, router) => {
     //Devices
 
     //Get device by ID
-    router.route('/devices/fetch/:id/').get((req, res) => {
-        var id = req.params.id;
-        devices.getDevice(id, (result) => {
+    router.route('/devices/fetch').get((req, res) => {
+        var endpointcode = req.query.endpointCode;
+        var devicecode = req.query.devicecode;
+        devices.getDevice(endpointcode, devicecode, (result) => {
             if (result !== null) {
                 res.json({
                     Result: result,
@@ -103,7 +104,15 @@ module.exports = (app, router) => {
     });
 
     //Get all devices
-    router.route('/devices/fetch').get((req, res) => {
+    router.route('/devices/fetchAll').get((req, res) => {
+        var endpointcode = req.query.endpointcode;
+        if (!endpointcode) {
+            res.status(400).send({
+                message: "Parameters is not null",
+                StatusCode: 400
+            });
+            return;
+        }
         devices.getAllDevice((result) => {
             if (result !== null) {
                 res.json({
@@ -359,10 +368,16 @@ module.exports = (app, router) => {
 
     //Endpoints
     router.route('/endpoints/fetch/:id').get((req, res) => {
-
-        var id = req.params.id;
-        console.log('id = ' + id);
-        endpoints.getEndPointById(id, (result) => {
+        var userid = req.query.userid;
+        var endpointid = req.query.endpointid;
+        if (!userid || !endpointid) {
+            res.status(400).send({
+                message: "Required device ID is needed to fetch endpoint",
+                StatusCode: 400
+            });
+            return;
+        }
+        endpoints.getEndPointById(userid, endpointid, (result) => {
             if (result) {
                 res.json({
                     Result: result.length,
