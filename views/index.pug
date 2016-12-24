@@ -34,19 +34,8 @@ block content
 
        
         var times = [];
-        var info_endpoint = {};
-
-
-           function getInfoEndPointByID(id_endpoint) {
-                  var URI = "/core/api/v1/devices/fetchAll?endpointcode=" + id_endpoint;
-                    $.getJSON(URI, function(json) {
-                    json.Result.forEach((item) => {
-                    info_endpoint = item;
-                    });
-                    
-                });
-        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-
+       
+ 
 
         function fetchValueByDeviceId(id,id_endpoint) {
 
@@ -55,21 +44,21 @@ block content
 
           $.getJSON(URI, function(json) {
            var values = [];//clear value old.
-          
+           var info_endpoint = {};
  
             json.Result.forEach((item) => {
 
               if(item.id_device === id)
               {
               values.push(item.value);
-              
               var timeFormated = item.time;
               times.push(timeFormated);
+              info_endpoint = item;
               }
             });
-             getInfoEndPointByID(id_endpoint);                                                       
+                                                            
                 setTimeout(function(){
-                        setData(id,values);
+                        setData(id,values,info_endpoint);
                    },0);
           }).error(function() { 
                //khogn ton tai du lieu
@@ -78,7 +67,7 @@ block content
         };
       
         //- alert(JSON.stringify(values));
-        function setData(id,values){
+        function setData(id,values,info_endpoint){
 
           Highcharts.chart('container'+id, {
               title: {
