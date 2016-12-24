@@ -10,13 +10,13 @@ block content
     
     #dashboard
 
-    .row
-        .col-lg-12
-          .panel.panel-default
-            .panel-heading Device 1
-            .panel-body
-              .canvas-wrapper
-                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    //- .row
+    //-     .col-lg-12
+    //-       .panel.panel-default
+    //-         .panel-heading Device 1
+    //-         .panel-body
+    //-           .canvas-wrapper
+    //-             <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     //- .row
     //-     .col-lg-12
     //-       .panel.panel-default
@@ -34,10 +34,12 @@ block content
 
         var values = [];
         var times = [];
-        isrender = true;
-        fetchValueByDeviceId(4);
+        //- var deviceName = this.;
+       
+      
+       
         function fetchValueByDeviceId(id) {
-          var URI = "core/api/v1/values/fetch/" + id;
+          var URI = "/core/api/v1/values/fetch/"+id;
           $.getJSON(URI, function(json) {
             json.Result.forEach((item) => {
               values.push(item.Value);
@@ -48,17 +50,17 @@ block content
 
                 setTimeout(function(){
                   setData();
-
+                  
                 },1000);
           });
         };
       
         //- alert(JSON.stringify(values));
-        function setData(){
+        function setData(id){
 
           Highcharts.chart('container', {
               title: {
-                  text: 'Monthly Average Temperature',
+                  text: '',
                   x: -20 //center
               },
               subtitle: {

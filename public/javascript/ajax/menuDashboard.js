@@ -4,15 +4,26 @@ function getEndpoint(id) {
     var API = "";
     if (id == 0) {
         API = "/core/api/v1/endpoints/fetch/users/1";
+        var firsttab = true;
         $.getJSON(API, function(data) {
 
             $.each(data.Result, function() {
-
-                $('.nav-tabs').append('\
-                <li class="menu-db">\
-                    <a onclick="getEndpoint(' + this.ID + ')" >' + this.name + '</a>\
-                </li>\
-            ');
+                if(firsttab)
+                {
+                    $('.nav-tabs').append('\
+                    <li class="menu-db active">\
+                        <a onclick="getEndpoint(' + this.ID + ')" >' + this.name + '</a>\
+                    </li>\
+                   ');
+                   getEndpoint(this.ID);
+                   firsttab = false;
+                }else{
+                    $('.nav-tabs').append('\
+                    <li class="menu-db ">\
+                        <a onclick="getEndpoint(' + this.ID + ')" >' + this.name + '</a>\
+                    </li>\
+                   ');
+                }
 
             });
 
@@ -26,11 +37,10 @@ function getEndpoint(id) {
         });
     } else {
         // API = "/core/api/v1/devices/fetch/"+id;
-        API = "/core/api/v1/devices/fetch/";
+        API = "core/api/v1/devices/fetchAll?endpointcode="+id;
 
         $.getJSON(API, function(data) {
-            // console.log(data);
-
+            // codansole.log(data);
             $.each(data.Result, function() {
                 $('#dashboard').html("");
 
@@ -41,14 +51,16 @@ function getEndpoint(id) {
                                 <div class="panel-heading">' + this.DeviceName + '</div>\
                                 <div class="panel-body">\
                                     <div class="canvas-wrapper">\
-                                        <div id="device' + this.IdDevice + '" style="min-width: 310px; height: 400px; margin: 0 auto"></div>\
+                                        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>\
                                     </div>\
                                 </div>\
                             </div>\
                         </div>\
                     </div>\
                 ');
+                fetchValueByDeviceId(this.id_device);
             });
+            
         });
     }
 }
