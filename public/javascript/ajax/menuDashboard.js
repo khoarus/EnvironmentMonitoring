@@ -72,7 +72,7 @@ function getEndpoint(id) {
             });
             
         }).error(function() { 
-            $('#dashboard').html("");
+        //    alert("Loi");
          });
     }
 }
