@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var API = "/core/api/v1/endpoints/fetch/" + iduser;
+    var API = "core/api/v1/endpoints/fetch/users/1" + iduser;
 
     $.getJSON(API, function(data) {
 

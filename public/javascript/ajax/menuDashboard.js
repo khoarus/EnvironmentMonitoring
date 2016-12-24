@@ -1,13 +1,14 @@
 
 var id_endpoint = 0 ;
+
 $(getEndpoint(id_endpoint));
 
 setInterval(function(){ 
     getEndpoint(id_endpoint);
 
- }, 10000);
+ }, 20000);
 
-// 10 giay se goi mot lan
+// 20 giay se goi mot lan
 
 
 function getEndpoint(id) {
@@ -71,7 +72,7 @@ function getEndpoint(id) {
                         </div>\
                     </div>\
                 ');
-                fetchValueByDeviceId(this.id_device);
+                fetchValueByDeviceId(this.id_device,id_endpoint);
             });
             
         });
