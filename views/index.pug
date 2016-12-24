@@ -36,7 +36,7 @@ block content
         var times = [];
        
         function fetchValueByDeviceId(id) {
-          var URI = "/core/api/v1/values/fetch/"+id;
+          var URI = "/core/api/v1/values/fetch/" + id;
           $.getJSON(URI, function(json) {
            
             json.Result.forEach((item) => {
@@ -48,7 +48,6 @@ block content
 
                 setTimeout(function(){
                  setData();
-                  
                 },0);
           });
         };
@@ -57,9 +56,6 @@ block content
         function setData(id){
 
           Highcharts.chart('container', {
-                chart: {
-                    type: 'spline'
-                },
               title: {
                   text: '',
                   x: -20 //center
@@ -76,10 +72,6 @@ block content
                         width: 1,
                         color: '#808080'
                     }],
-                    dateTimeLabelFormats : {
-                        hour: '%I %p',
-                        minute: '%I:%M %p'
-                    },
                 },
               tooltip: {
                 valueSuffix: '°C'
