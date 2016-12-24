@@ -3,7 +3,7 @@ function Device() {
     var db = require("../controllers/database");
 
     this.getDevice = function(idDevice, callback) {
-        db.connection.query("SELECT D.id IdDevice, D.name DeviceName, D.description Description, D.unit Unit, D.id_endpoint IDEndPoint, D.minthreshold Min, D.maxthreshold Max, E.name EndPointName FROM devicetbl D LEFT JOIN endpointtbl E ON E.id = D.id_endpoint WHERE D.id = ?", idDevice, (err, result) => {
+        db.connection.query("SELECT * FROM devicetbl D WHERE D.id = ? LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id ORDER BY V.time DESC LIMIT 1", idDevice, (err, result) => {
             if (err)
                 throw err;
             if (result) {
@@ -12,7 +12,7 @@ function Device() {
         });
     };
     this.getAllDevice = function(callback) {
-        db.connection.query("SELECT D.id IdDevice, D.name DeviceName, D.description Description, D.unit, D.id_endpoint IDEndPoint, D.minthreshold Min, D.maxthreshold Max, E.name EndPointName FROM devicetbl D LEFT JOIN endpointtbl E ON E.id = D.id_endpoint ", (err, result) => {
+        db.connection.query("SELECT * FROM devicetbl D LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id ORDER BY V.time DESC LIMIT 1 ", (err, result) => {
             if (err)
                 throw err;
             if (result && result.length > 0) {
