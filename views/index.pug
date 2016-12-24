@@ -57,25 +57,32 @@ block content
         function setData(id){
 
           Highcharts.chart('container', {
+                chart: {
+                    type: 'spline'
+                },
               title: {
                   text: '',
                   x: -20 //center
               },
               xAxis: {
-                  categories: times
+                  categories: times,
               },
-              yAxis: {
-                  title: {
-                      text: ''
-                  },
-                  plotLines: [{
-                      value: 0,
-                      width: 1,
-                      color: '#808080'
-                  }]
-              },
+                yAxis: {
+                    title: {
+                        text: 'Temperature (°C)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }],
+                    dateTimeLabelFormats : {
+                        hour: '%I %p',
+                        minute: '%I:%M %p'
+                    },
+                },
               tooltip: {
-                  valueSuffix: ''
+                valueSuffix: '°C'
               },
               legend: {
                   layout: 'vertical',
@@ -88,5 +95,6 @@ block content
                   data: values
               }]
           });
+
         }
       
