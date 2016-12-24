@@ -254,8 +254,8 @@ module.exports = (app, router) => {
                     StatusCode: 200
                 });
             } else {
-                res.status(200).send({
-                    message: "This device don't have any values",
+                res.json({
+                    Result: result,
                     StatusCode: 200
                 });
             }
