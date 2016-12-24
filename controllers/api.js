@@ -405,7 +405,7 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/endpoints/fetch/users/:userid').get((req, res) => {
+    router.route('/endpoints/fetch/users/').get((req, res) => {
         var userid = global.IDUser;
         if (!userid) {
             res.status(400).send({
