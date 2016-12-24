@@ -91,7 +91,6 @@ module.exports = (app, router) => {
     router.route('/devices/fetch').get((req, res) => {
         var endpointcode = req.query.endpointcode;
         var devicecode = req.query.devicecode;
-        console.log(devicecode + ": " + endpointcode);
         if (!endpointcode || !devicecode) {
             res.status(400).send({
                 message: "Required fields needed to get specific device",
@@ -99,7 +98,6 @@ module.exports = (app, router) => {
             });
             return;
         }
-        console.log(devicecode + ": " + endpointcode);
         devices.getDevice(endpointcode, devicecode, (result) => {
             if (result !== null) {
                 res.json({
