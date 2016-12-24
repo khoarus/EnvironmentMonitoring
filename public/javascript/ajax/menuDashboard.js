@@ -8,7 +8,6 @@ function getEndpoint(id) {
 
             $.each(data.Result, function() {
 
-                alert(JSON.stringify(data.Result));
                 $('.nav-tabs').append('\
                 <li class="menu-db">\
                     <a onclick="getEndpoint(' + this.ID + ')" >' + this.name + '</a>\
