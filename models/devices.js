@@ -16,7 +16,7 @@ function Device() {
     this.getAllDevice = function(idendpoint, callback) {
         db.connection.query("SELECT *,D.id as id_device FROM devicetbl D LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id WHERE D.id_endpoint = ? ORDER BY V.time DESC  ", idendpoint, (err, result) => {
             if (err)
-                throw err;
+                throw err; //day akl ủmk
             if (result && result.length > 0) {
                 callback(result);
             } else {
