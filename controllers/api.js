@@ -75,6 +75,15 @@ module.exports = (app, router) => {
             }
         });
     });
+    router.route('/users/update').put((req, res) => {
+        var username = req.query.username;
+        var password = req.query.password;
+        var firstname = req.query.firstname;
+        var lastname = req.query.lastname;
+        /*users.updateUserInformation(, (result) => {
+
+        });*/
+    });
 
     //Get all users
     router.route('/users/').get((req, res) => {
@@ -96,7 +105,6 @@ module.exports = (app, router) => {
     router.route('/devices/fetch').get((req, res) => {
         var endpointcode = req.query.endpointcode;
         var usercode = global.IDUser;
-        console.log(usercode + "-" + endpointcode);
         if (!endpointcode || !usercode) {
             res.status(400).send({
                 message: "Required fields needed to get specific device",
@@ -320,7 +328,6 @@ module.exports = (app, router) => {
     router.route('/values/push').get((req, res) => {
         var device = req.query.devicecode;
         var value = req.query.value;
-        console.log(device);
         if (!device || !value) {
             res.status(400).send({
                 message: "Required fields is needed to create value",
