@@ -34,9 +34,6 @@ block content
 
         var values = [];
         var times = [];
-        //- var deviceName = this.;
-       
-      
        
         function fetchValueByDeviceId(id) {
           var URI = "/core/api/v1/values/fetch/"+id;
@@ -64,16 +61,12 @@ block content
                   text: '',
                   x: -20 //center
               },
-              subtitle: {
-                  text: 'Source: WorldClimate.com',
-                  x: -20
-              },
               xAxis: {
                   categories: times
               },
               yAxis: {
                   title: {
-                      text: 'Temperature (°C)'
+                      text: ''
                   },
                   plotLines: [{
                       value: 0,
@@ -82,7 +75,7 @@ block content
                   }]
               },
               tooltip: {
-                  valueSuffix: '°C'
+                  valueSuffix: ''
               },
               legend: {
                   layout: 'vertical',
@@ -91,7 +84,7 @@ block content
                   borderWidth: 0
               },
               series: [{
-                  name: 'Tokyo',
+                  name: 'Device',
                   data: values
               }]
           });
