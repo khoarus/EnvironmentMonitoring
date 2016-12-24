@@ -3,28 +3,18 @@ $(function() {
     var url = window.location.pathname;
     var id = url.substring(url.lastIndexOf('/') + 1);
 
-    var API = "/core/api/v1/users" + id;
+    var API = "/core/api/v1/users/" + id;
 
-    alert(id);
+    // alert(API);
 
-    function editForm(){
+    $.getJSON(API, function(data){
+        // alert(JSON.stringify(data));
+        var lastName    = data.Result[0].LastName;
+        var firstName   = data.Result[0].FirstName;
+        var username    = data.Result[0].Username;
 
-        var users = {
-            lastName : $("lastName").val,
-            firstName : $("firstName").val,
-            username : $("username").val,
-            password : $("password").val,
-            passwordRepeat : $("password-repeat").val,
-        }
-
-
-        $.ajax({
-            type: "POST",
-            url:  "update",
-            data: users,
-            success: function(result) {
-                $('')
-            }
-        });
-    }
+        $("#lastName").val(lastName);
+        $("#firstName").val(firstName);
+        $("#username").val(username);
+    });
 });

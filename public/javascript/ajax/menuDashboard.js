@@ -62,7 +62,7 @@ function getEndpoint(id) {
                             <div class="panel panel-default">\
                                 <div class="panel-body">\
                                     <div class="canvas-wrapper">\
-                                        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>\
+                                        <div id="container + "this.id_device" + " style="min-width: 310px; height: 400px; margin: 0 auto"></div>\
                                     </div>\
                                 </div>\
                             </div>\
