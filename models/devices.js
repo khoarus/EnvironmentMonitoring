@@ -2,10 +2,11 @@ function Device() {
 
     var db = require("../controllers/database");
 
-    this.getDevice = function(idendpoint, idDevice, callback) {
-        db.connection.query("SELECT * FROM devicetbl D LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id WHERE D.id_endpoint = ? AND D.id = ? ORDER BY V.time DESC LIMIT 1 ", [idendpoint, idDevice], (err, result) => {
+    this.getDevice = function(idendpoint, iduser, callback) {
+        // db.connection.query("SELECT * FROM devicetbl D LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id WHERE D.id_endpoint = ? AND D.id = ? ORDER BY V.time DESC ", [idendpoint, idDevice], (err, result) => {
+        db.connection.query("select *,D.id as 'id_device',D.name as 'name_device',D.description as 'description_device' from devicetbl D LEFT JOIN endpointtbl E  ON E.id = D.id_endpoint WHERE E.id_user = ? AND E.id = ? ", [iduser, idendpoint], (err, result) => {
             if (err)
-                console.log("loi");
+                console.log("loi"); //de do cho anh quoc
             if (result && result.length > 0) {
                 callback(result);
             } else callback(null);
@@ -13,7 +14,7 @@ function Device() {
     };
 
     this.getAllDevice = function(idendpoint, callback) {
-        db.connection.query("SELECT *,D.id as id_device FROM devicetbl D LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id WHERE D.id_endpoint = ? ORDER BY V.time DESC LIMIT 1  ", idendpoint, (err, result) => {
+        db.connection.query("SELECT *,D.id as id_device FROM devicetbl D LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id WHERE D.id_endpoint = ? ORDER BY V.time DESC  ", idendpoint, (err, result) => {
             if (err)
                 throw err;
             if (result && result.length > 0) {
