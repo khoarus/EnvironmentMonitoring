@@ -365,7 +365,7 @@ module.exports = (app, router) => {
         endpoints.getEndPointById(id, (result) => {
             if (result) {
                 res.json({
-                    Result: result,
+                    Result: result.length,
                     StatusCode: 200
                 });
             } else {
@@ -377,7 +377,7 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/endpoints/fetch/:userid').get((req, res) => {
+    router.route('/endpoints/fetch/users/:userid').get((req, res) => {
         var userid = req.params.userid;
         if (!userid) {
             res.status(400).send({
