@@ -3,7 +3,7 @@ function Device() {
     var db = require("../controllers/database");
 
     this.getDevice = function(idDevice, callback) {
-        db.connection.query("SELECT * FROM devicetbl D WHERE D.id = ? LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id ORDER BY V.time DESC LIMIT 1", idDevice, (err, result) => {
+        db.connection.query("SELECT * FROM devicetbl D WHERE D.id_endpoint = ? AND D.id = ? LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id ORDER BY V.time DESC LIMIT 1", idendpoint, idDevice, (err, result) => {
             if (err)
                 throw err;
             if (result) {
@@ -11,13 +11,16 @@ function Device() {
             } else callback(null);
         });
     };
-    this.getAllDevice = function(callback) {
-        db.connection.query("SELECT * FROM devicetbl D LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id ORDER BY V.time DESC LIMIT 1 ", (err, result) => {
+
+    this.getAllDevice = function(idendpoint, callback) {
+        db.connection.query("SELECT * FROM devicetbl D WHERE D.id_endpoint = ? LEFT JOIN valuetbl V ON D.id = V.id_device LEFT JOIN endpointtbl E ON D.id_endpoint = E.id ORDER BY V.time DESC LIMIT 1 ", idEndPoint, (err, result) => {
             if (err)
                 throw err;
             if (result && result.length > 0) {
                 callback(result);
-            } else callback(null);
+            } else {
+                callback(null);
+            }
         });
     };
     this.addDevice = function(idEndPoint, name, description, unit, minthreshold, maxthreshold, callback) {
