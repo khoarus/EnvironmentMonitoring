@@ -432,6 +432,7 @@ module.exports = (app, router) => {
 
     router.route('/endpoints/fetch/users/').get((req, res) => {
         var userid = global.IDUser;
+        console.log(userid);
         if (!userid) {
             res.status(400).send({
                 message: "Required User ID need to get endpoints!",
@@ -446,8 +447,8 @@ module.exports = (app, router) => {
                     StatusCode: 200
                 });
             } else {
-                res.status(404).send({
-                    message: "Didn't find any device",
+                res.status(200).send({
+                    Result: result,
                     StatusCode: 404
                 });
             }
