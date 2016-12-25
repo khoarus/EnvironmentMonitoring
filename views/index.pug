@@ -40,12 +40,18 @@ block content
         function fetchValueByDeviceId(id,id_endpoint) {
 
           var URI = "/core/api/v1/devices/fetchAll?endpointcode=" + id_endpoint;
-
-
           $.getJSON(URI, function(json) {
            var values = [];//clear value old.
            var info_endpoint = {};
- 
+
+
+             
+            json.Result.sort(function(a,b){
+            var c = new Date(a.time);
+            var d = new Date(b.time);
+            return c-d;
+            });
+
             json.Result.forEach((item) => {
 
               if(item.id_device === id)
@@ -56,10 +62,12 @@ block content
               info_endpoint = item;
               }
             });
-                                                            
-                setTimeout(function(){
-                        setData(id,values,info_endpoint);
-                   },0);
+            values
+
+
+            setTimeout(function(){
+              setData(id,values,info_endpoint);
+            },0);
           }).error(function() { 
                //khogn ton tai du lieu
               

@@ -1,7 +1,12 @@
 
 var id_endpoint = 0 ;
 
-$(getEndpoint(id_endpoint));
+
+$(document).ready(function(){
+getEndpoint(id_endpoint);
+});
+
+
 
 setInterval(function(){ 
     getEndpoint(id_endpoint);
