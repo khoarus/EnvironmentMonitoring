@@ -9,7 +9,8 @@ module.exports = function(app) {
             users.getUserById(idlogged, (result) => {
                 if (result) {
                     res.render('index', {
-                        title: 'Dashboard'
+                        title: 'Dashboard',
+                        username: req.session.result[0].username
                     });
                 } else {
                     res.render('login');

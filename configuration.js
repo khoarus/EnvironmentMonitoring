@@ -9,8 +9,9 @@ module.exports = function(app) {
     app.engine('pug', pug.renderFile, (filepath, options, callback) => {
         fs.readFile(filepath, (err, content) => {
             if (err) return callback(err);
-            var rendered = content.toString().replace("#{title}", options.message).replace("#{error}", options.message);
-            return callback(null, rendered);
+            var name = content.toString().replace("#{title}", options.message).replace("#{username}", options.message);
+
+            return callback(null, name);
         });
     });
 
