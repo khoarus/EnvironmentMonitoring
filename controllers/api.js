@@ -430,7 +430,7 @@ module.exports = (app, router) => {
         });
     });
 
-    router.route('/endpoints/fetch/users/').get((req, res) => {
+    router.route('/endpoints/fetch/users').get((req, res) => {
         var userid = global.IDUser;
         console.log(userid);
         if (!userid) {
